@@ -10,8 +10,6 @@ use App\Models\Player;
 use App\Models\Admin;
 
 use Twig\Environment;
-use Twig\Extension\DebugExtension;
-use Twig\Extensions\DateExtension;
 use Twig\Loader\FilesystemLoader;
 
 use Exception;
@@ -58,16 +56,15 @@ class View
                 'debug' => Config::debug
             ));
           
-            $twig->addExtension(new DebugExtension());
-            $twig->addExtension(new DateExtension());
 
             $twig->addGlobal('site', Config::site);
             $twig->addGlobal('client', Config::client);
             $twig->addGlobal('publickey', \App\Models\Core::settings()->recaptcha_publickey ?? null);
             $twig->addGlobal('csrf_token', csrf_token());
 
-            $twig->addGlobal('locale', Locale::get('website/' . (isset($args['page']) ? $args['page'] : null), true));
-            $twig->addGlobal('locale_base', Locale::get('website/base', true));
+            $language = request()->player->lang ?? \App\Models\Core::settings()->default_lang;
+            $twig->addGlobal('locale', Locale::get('website/' . (isset($args['page']) ? $args['page'] : null), true, $language));
+            $twig->addGlobal('locale_base', Locale::get('website/base', true, $language));
           
             $twig->addGlobal('online_count', \App\Models\Core::getOnlineCount());
 
