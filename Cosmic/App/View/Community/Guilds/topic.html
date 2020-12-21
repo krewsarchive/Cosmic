@@ -44,7 +44,7 @@
                       <div style="background: url({{site.fpath}}/avatarimage?figure={{post.author.look}}&amp;head_direction=3&amp;headonly=1) no-repeat center; width: 48px; height: 62px;"></div>
                    </div>
                 </div>
-                <div class="hidden-sm hidden-xs" style="text-align: left;"><strong>{{locale.topic_since}}</strong> {{post.author.account_created|time_diff}}</div>
+                <div class="hidden-sm hidden-xs" style="text-align: left;"><strong>{{locale.topic_since}}</strong> {{post.author.account_created}}</div>
                 <div class="hidden-sm hidden-xs" style="text-align: left;"><strong>{{locale.topic_posts}}</strong> {{data.requests.ctickets}}</div>
                 <div style="text-align: right;"><img src="/assets/images/web/pages/forum/{% if player.online %}online.gif{% else %}offline.gif{% endif %}"></div>
              </div>
