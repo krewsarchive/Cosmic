@@ -63,7 +63,7 @@ class View
             $twig->addGlobal('csrf_token', csrf_token());
 
             $twig->addGlobal('locale', Locale::get('website/' . (isset($args['page']) ? $args['page'] : null), true));
-            $twig->addGlobal('locale_base', Locale::get('website/base', true, $language));
+            $twig->addGlobal('locale_base', Locale::get('website/base', true));
           
             $twig->addGlobal('online_count', \App\Models\Core::getOnlineCount());
 
