@@ -62,8 +62,7 @@ class View
             $twig->addGlobal('publickey', \App\Models\Core::settings()->recaptcha_publickey ?? null);
             $twig->addGlobal('csrf_token', csrf_token());
 
-            $language = request()->player->lang ?? \App\Models\Core::settings()->default_lang;
-            $twig->addGlobal('locale', Locale::get('website/' . (isset($args['page']) ? $args['page'] : null), true, $language));
+            $twig->addGlobal('locale', Locale::get('website/' . (isset($args['page']) ? $args['page'] : null), true));
             $twig->addGlobal('locale_base', Locale::get('website/base', true, $language));
           
             $twig->addGlobal('online_count', \App\Models\Core::getOnlineCount());
