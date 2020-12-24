@@ -82,6 +82,7 @@ class Topic {
       
         $topic    = Guild::getTopicById(input('topic_id'));
         $totalPages = ceil(count(Guild::getPostsById($topic->id)) / 10);
+        $guild_id = input('guild_id');
       
         if (request()->player === null) {
             response()->json(["status" => "error", "message" => Locale::get('core/notification/something_wrong')]);
