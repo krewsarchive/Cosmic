@@ -114,15 +114,16 @@ class Search
     public function permission()
     {
         $role_id = (int) filter_var($this->sub_url, FILTER_SANITIZE_NUMBER_INT);
-        $permission_id = explode("&", $this->url, 2)[0];
-      
+        $role = (int) explode("&", $this->url, 2)[0];
+        $permission_id = (int) explode("&", $this->url, 2)[0];
+    
         if(empty($role_id)) {
-            response()->json(['id' => "none", 'text' => 'Where are you searching for?']);
+            $permission_id = null;
         }
 
         $rankObject = Permission::getPermissions($permission_id);
         foreach($rankObject as $rank) {
-            if(!Permission::permissionExists($role_id, $rank->id)) {
+            if(!Permission::permissionExists($role, $rank->id)) {
                 $this->paths[] = array('id' => $rank->id, 'text' => $rank->permission);
             }
         }
