@@ -36,7 +36,7 @@ class Password
         $data = array(
             'player_id'     => $player_id,
             'email'         => $email,
-            'ip_address'    => request()->getIp(),
+            'ip_address'    => getIpAddress(),
             'token'         => $hashed_token,
             'timestamp'     => time() + 7200
         );
