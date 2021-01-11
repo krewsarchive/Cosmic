@@ -93,7 +93,7 @@ class Requests
         $this->data->subject = input('subject');
         $this->data->message = Helper::filterString(input('message'));
 
-        Help::createTicket($this->data, request()->player->id, request()->getIp());
+        Help::createTicket($this->data, request()->player->id, getIpAddress());
         response()->json(["status" => "success", "message" => Locale::get('help/ticket_created'), "replacepage" => "help/requests/view"]);
     }
 
