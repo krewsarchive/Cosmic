@@ -45,6 +45,10 @@ function response(): Response
 
 function getIpAddress()
 {
+    if(Router::Request()->getHeaders()['remote-addr'] === NULL) {
+        return Router::Request()->getHeaders()['http-x-forwarded_for'];
+    }   
+  
     return Router::Request()->getHeaders()['remote-addr'];
 }
 
