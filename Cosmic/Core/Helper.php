@@ -43,6 +43,11 @@ function response(): Response
     return Router::response();
 }
 
+function getIpAddress()
+{
+    return Router::Request()->getHeaders()['remote-addr'];
+}
+
 /**
  * @return \Pecee\Http\Request
  */
