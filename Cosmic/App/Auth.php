@@ -21,11 +21,11 @@ class Auth
         self::banCheck($player);
 
         if (in_array('housekeeping', array_column(Permission::get($player->rank), 'permission'))) {
-            Log::addStaffLog('-1', 'Staff logged in: ' . request()->getIp(), $player->id, 'LOGIN');
+            Log::addStaffLog('-1', 'Staff logged in: ' . getIpAddress(), $player->id, 'LOGIN');
         }
 
         Session::set(['player_id' => $player->id, 'ip_address' => request()->getIp(), 'agent' => $_SERVER['HTTP_USER_AGENT']]);
-        Player::update($player->id, ['ip_current' => request()->getIp(), 'last_online' => time()]);
+        Player::update($player->id, ['ip_current' => getIpAddress(), 'last_online' => time()]);
 
         return $player;
     }
@@ -33,7 +33,7 @@ class Auth
     public static function banCheck($player)
     {
         $account = Ban::getBanByUserId($player->id);
-        $ip_address = Ban::getBanByUserIp(request()->getIp());
+        $ip_address = Ban::getBanByUserIp(getIpAddress());
 
         if($account || $ip_address) {
             $ban = $account ?? $ip_address;
