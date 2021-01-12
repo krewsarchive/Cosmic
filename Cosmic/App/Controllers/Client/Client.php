@@ -73,7 +73,7 @@ class Client
             $user->deleteMembership();
         }
 
-        View::renderTemplate('Client/client.html', [
+        View::renderTemplate('Client/nitro.html', [
             'title' => Locale::get('core/title/hotel'),
             'room' => explode("=", url()->getOriginalUrl())[1] ?? null,
             'data'  => $this->data,

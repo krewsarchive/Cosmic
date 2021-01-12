@@ -45,7 +45,7 @@ function response(): Response
 
 function getIpAddress()
 {
-    if(isset(Router::Request()->getHeaders()['http-x-forwarded_for']) !== NULL) {
+    if(isset(Router::Request()->getHeaders()['http-x-forwarded_for']) && Router::Request()->getHeaders()['http-x-forwarded_for'] !== NULL) {
         return Router::Request()->getHeaders()['http-x-forwarded_for']; 
     }
   
