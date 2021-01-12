@@ -1,9 +1,10 @@
+
 <!DOCTYPE HTML>
 <html>
    <head>
       <title>Hotel - {{hotelname}} Hotel</title>
       <link rel="icon" href="{{path}}/assets/images/favicon.ico">
-      <link rel="stylesheet" href="{{path}}/nitro/{{nitro_styles}}">
+      <link rel="stylesheet" href="{{path}}/nitro/{{client.nitro_styles}}">
    </head>
    </head>
    <body>
@@ -14,9 +15,9 @@
              sso: '{{data.auth_ticket}}'
          };
       </script>
-      <script src="{{path}}/nitro/{{nitro_runtime}}" defer></script>
-      <script src="{{path}}/nitro/{{nitro_polyfills}}" defer></script>
-      <script src="{{path}}/nitro/{{nitro_vendor}}" defer></script>
-      <script src="{{path}}/nitro/{{nitro_main}}" defer></script>
+      <script src="{{path}}/nitro/{{client.nitro_runtime}}" defer></script>
+      <script src="{{path}}/nitro/{{client.nitro_polyfills}}" defer></script>
+      <script src="{{path}}/nitro/{{client.nitro_vendor}}" defer></script>
+      <script src="{{path}}/nitro/{{client.nitro_main}}" defer></script>
    </body>
 </html>
