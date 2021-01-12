@@ -45,8 +45,8 @@ function response(): Response
 
 function getIpAddress()
 {
-    if(isset(Router::Request()->getHeaders()['http-x-forwarded_for']) && Router::Request()->getHeaders()['http-x-forwarded_for'] !== NULL) {
-        return Router::Request()->getHeaders()['http-x-forwarded_for']; 
+    if(isset(Router::Request()->getHeaders()['http-x-http_x_forwarded_for']) && Router::Request()->getHeaders()['http_x_forwarded_for'] !== NULL) {
+        return Router::Request()->getHeaders()['http_x_forwarded_for']; 
     }
   
     return Router::Request()->getHeaders()['remote-addr']; 
