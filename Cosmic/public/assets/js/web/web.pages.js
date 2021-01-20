@@ -56,7 +56,10 @@ function WebHotelManagerInterface() {
                     History.pushState(null, Site.name + '- Krews Vote', 'hotel');
                 } else {
                     if (container.find(".client-frame").length === 0)
-                        container.prepend('<iframe class="client-frame" src="/client?' + argument + '"></iframe>');
+                      
+                    Web.ajax_manager.get("/api/ssoTicket", function(result) {
+                      container.prepend('<iframe class="client-frame" src="' + Client.nitro_assets_url + '/?sso=' + result.ticket + '"></iframe>');
+                    })
 
                     body.addClass("hotel-visible");
 
