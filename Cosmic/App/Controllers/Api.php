@@ -121,7 +121,10 @@ class Api
             ]);
         }
       
-        return $this->generateSso(request()->player);
+        $ssoticket = $this->generateSso(request()->player);
+        if(!empty($ssoticket)) {
+            response()->json(["status" => "success",  "ticket" => $ssoticket]);
+        }
     }
   
     public function login()
