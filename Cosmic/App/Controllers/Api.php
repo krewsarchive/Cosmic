@@ -106,6 +106,24 @@ class Api
         response()->json($this->callback);
     }
   
+    private function generateSso($player)
+    {
+        $auth_ticket = Token::authTicket($player->id);
+        Player::update($player->id, ["auth_ticket" => $auth_ticket]);
+        return $auth_ticket;
+    }
+  
+    public function ssoTicket()
+    {
+        if(!request()->player) {
+            response()->json([
+                'error' => 'Required login',
+            ]);
+        }
+      
+        return $this->generateSso(request()->player);
+    }
+  
     public function login()
     {
         $_POST = json_decode(file_get_contents('php://input'), true);
@@ -116,9 +134,7 @@ class Api
             return response()->json(['message' => 'wrong password']);
         }
       
-        $auth_ticket = Token::authTicket($player->id);
-        Player::update($player->id, ["auth_ticket" => $auth_ticket]);
-        $_SESSION['auth_ticket'] = $auth_ticket;
+        $_SESSION['auth_ticket'] = $this->generateSso();
       
         $this->callback = [
           [
