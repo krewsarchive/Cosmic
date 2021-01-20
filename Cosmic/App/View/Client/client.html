@@ -4,7 +4,6 @@
    <head>
       <title>Hotel - {{hotelname}} Hotel</title>
       <link rel="icon" href="{{client.nitro_assets_url}}/assets/images/favicon.ico">
-      <link rel="stylesheet" href="{{client.nitro_assets_url}}/{{client.nitro_styles}}">
    </head>
    </head>
    <body>
@@ -15,6 +14,7 @@
              sso: '{{data.auth_ticket}}'
          };
       </script>
+      <script src="{{client.nitro_assets_url}}/{{client.nitro_styles}}" defer></script>
       <script src="{{client.nitro_assets_url}}/{{client.nitro_runtime}}" defer></script>
       <script src="{{client.nitro_assets_url}}/{{client.nitro_polyfills}}" defer></script>
       <script src="{{client.nitro_assets_url}}/{{client.nitro_vendor}}" defer></script>
