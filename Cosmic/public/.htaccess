@@ -1,6 +1,8 @@
 RewriteEngine On
 SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 
+Header add Access-Control-Allow-Origin "*"
+
 RewriteRule ^habbo-imaging/avatarimage$ habbo-imaging/avatarimage.php [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
