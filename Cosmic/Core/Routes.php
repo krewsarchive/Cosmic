@@ -76,9 +76,7 @@ class Routes extends Router
             Router::group(['middleware' => LoggedInMiddleware::class, 'exceptionHandler' => ExceptionHandler::class], function () {
 
                 Router::get('/logout', 'Home\Login@logout');
-                Router::get('/hotel', 'Client\Client@hotel');
-                Router::get('/client', 'Client\Client@client');
-
+  
                 Router::get('/settings', 'Settings\Preferences@index');
                 Router::get('/settings/email', 'Settings\Email@index');
                 Router::get('/settings/password', 'Settings\Password@index');
