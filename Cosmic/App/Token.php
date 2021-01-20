@@ -32,6 +32,6 @@ class Token
 
     public static function authTicket($player_id)
     {
-        return sha1(substr(md5(rand(-10000, 10000)), 0, 6).substr(md5(rand(-20, 10000)), 0, 10).$player_id).'-'.md5($player_id);
+        return sha1(substr(md5(rand(-10000, 10000)), 0, 6).substr(md5(rand(-20, 10000)), 0, 10).$player_id).''.md5($player_id);
     }
 }
