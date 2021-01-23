@@ -13,12 +13,7 @@ class Config
     
     const client = array(
       'client_radio'                => 'https://21253.live.streamtheworld.com/WEB16_AAC.aac',
-      'nitro_assets_url'            => 'https://assets.circinus.dev',
-      'nitro_runtime'               => 'runtime.js',
-      'nitro_polyfills'             => 'polyfills.js',
-      'nitro_vendor'                => 'vendor.js',
-      'nitro_main'                  => 'main.js',
-      'nitro_styles'                => 'styles.js'
+      'nitro_assets_url'            => 'https://assets.circinus.dev'
     );
   
     /**
