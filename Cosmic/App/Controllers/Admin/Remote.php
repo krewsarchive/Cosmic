@@ -283,9 +283,13 @@ class Remote
     protected function getChatLogs($player_id)
     {
         $this->data->chatlogs = Admin::getChatLogs($player_id);
-      
+        
         foreach ($this->data->chatlogs as $logs) {
-          
+            
+            if(!isset($logs->user_to_id)) {
+               $logs->user_to_id = "deleted";   
+            }
+            
             $logs->message = Helper::filterString($logs->message);
             $logs->timestamp = date("d-m-Y H:i:s", $logs->timestamp);
           
