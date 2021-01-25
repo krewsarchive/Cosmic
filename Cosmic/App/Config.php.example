@@ -12,8 +12,8 @@ class Config
     /* Example external_base: = 'gordon/PRODUCTION-201904011212-888653470' */
     
     const client = array(
-      'client_radio'                => 'https://21253.live.streamtheworld.com/WEB16_AAC.aac',
-      'nitro_assets_url'            => 'https://assets.circinus.dev'
+      'client_radio' => 'https://21253.live.streamtheworld.com/WEB16_AAC.aac',
+      'nitro_path'   => 'https://assets.circinus.dev'
     );
   
     /**
