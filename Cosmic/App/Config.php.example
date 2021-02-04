@@ -24,6 +24,7 @@ class Config
 
     const site = array(
       'domain'      => 'cosmicproject.online',
+      'cpath'       => 'https://client.circinus.dev/assets',
       'fpath'       => 'https://habbo.com.br/habbo-imaging',
       'shortname'   => 'Cosmic',
       'sitename'    => 'Cosmic'
