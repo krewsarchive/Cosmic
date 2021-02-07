@@ -29,7 +29,7 @@ class Vpn
     public function ban()
     {
         $player = input()->post('id')->value;
-        $reader = new Reader(__DIR__. Config::vpnLocation);
+        $reader = new Reader(__DIR__. '/../../' . Config::vpnLocation);
 
         try {
 
