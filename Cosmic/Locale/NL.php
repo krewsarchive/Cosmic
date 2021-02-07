@@ -632,6 +632,10 @@ $GLOBALS['language'] = array (
             )
         )
     ),
+    'asn' => array(
+        'login'                     => 'Inloggen met door jouw gekozen VPN is niet toegestaan!',
+        'registered'                => 'Registeren met een verbannen VPN is niet toegestaan!'
+    ),
     'login' => array (
         'invalid_password'          => 'Onjuist wachtwoord.',
         'invalid_pincode'           => 'Deze pincode komt niet overeen met die van deze '. Config::site['shortname'] . '!',
