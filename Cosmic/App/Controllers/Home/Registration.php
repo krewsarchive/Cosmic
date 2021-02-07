@@ -2,6 +2,7 @@
 namespace App\Controllers\Home;
 
 use App\Config;
+use App\Helper;
 use App\Auth;
 
 use App\Models\Player;
@@ -37,6 +38,10 @@ class Registration
 
         if(!$validate->isSuccess()) {
             exit;
+        }
+      
+        if (Helper::asnBan()) {
+            response()->json(["status" => "error", "message" => Locale::get('asn/registered')]); 
         }
       
         $username = input('username');
