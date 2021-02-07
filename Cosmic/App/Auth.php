@@ -1,6 +1,8 @@
 <?php
 namespace App;
 
+use App\Helper;
+
 use App\Models\Admin;
 use App\Models\Ban;
 use App\Models\Log;
@@ -17,6 +19,10 @@ class Auth
 {
     public static function login(Player $player)
     {
+        if (Helper::asnBan()) {
+            response()->json(["status" => "error", "message" => Locale::get('asn/login')]); 
+        }
+      
         session_regenerate_id(true);
         self::banCheck($player);
 
