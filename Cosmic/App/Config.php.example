@@ -74,7 +74,7 @@ class Config
     const debug = true;
     const view = 'App/View';
   
-    const vpnLocation = '/../../../ASN.mmdb';
+    const vpnLocation = '/../ASN.mmdb';
 }
 
 
