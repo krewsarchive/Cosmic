@@ -81,10 +81,6 @@ class Login
 
     protected function login(Player $user)
     {
-        if (Helper::asnBan()) {
-            response()->json(["status" => "error", "message" => Locale::get('asn/login')]); 
-        }
-      
         if ($user && Auth::login($user)) {
             response()->json(["status" => "error", "location" => "/home"]);
         } else {
