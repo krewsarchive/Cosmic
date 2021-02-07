@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use App\Models\Ban;
 use App\Config;
 
 use App\Models\Permission;
@@ -9,10 +10,16 @@ use App\Models\Guild;
 
 use Jenssegers\Date\Date;
 
+use GeoIp2\Database\Reader;
+use GeoIp2\Exception\AddressNotFoundException;
+use MaxMind\Db\Reader\InvalidDatabaseException;
+
 use stdClass;
 
 class Helper
 {
+    public static $record = null;
+  
     public static function filterString($string)
     {
         return htmlentities($string, ENT_QUOTES, 'UTF-8');
@@ -150,5 +157,22 @@ class Helper
     public static function slug($slug)
     {
         return explode('-', $slug)[0];
+    }
+  
+    public static function asnBan() {
+        $reader = new Reader(__DIR__. Config::vpnLocation);
+
+        try {
+            static::$record = $reader->asn(getIpAddress());
+        } catch (AddressNotFoundException $e) {
+        } catch (InvalidDatabaseException $e) {
+        }
+
+        if (static::$record) {
+            $asn = Ban::getNetworkBanByAsn(static::$record->autonomousSystemNumber);
+            if ($asn) {
+                return $asn;
+            }
+        }
     }
 }
