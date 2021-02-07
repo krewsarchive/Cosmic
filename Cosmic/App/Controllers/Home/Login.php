@@ -4,6 +4,7 @@ namespace App\Controllers\Home;
 use App\Auth;
 use App\Config;
 use App\Core;
+use App\Helper;
 use App\Hash;
 
 use App\Models\Player;
@@ -80,6 +81,10 @@ class Login
 
     protected function login(Player $user)
     {
+        if (Helper::asnBan()) {
+            response()->json(["status" => "error", "message" => Locale::get('asn/login')]); 
+        }
+      
         if ($user && Auth::login($user)) {
             response()->json(["status" => "error", "location" => "/home"]);
         } else {
