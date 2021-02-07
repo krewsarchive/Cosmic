@@ -39,11 +39,7 @@ class Registration
         if(!$validate->isSuccess()) {
             exit;
         }
-      
-        if (Helper::asnBan()) {
-            response()->json(["status" => "error", "message" => Locale::get('asn/registered')]); 
-        }
-      
+
         $username = input('username');
 
         $settings = Core::settings();
