@@ -45,15 +45,11 @@ function response(): Response
 
 function getIpAddress()
 {
-     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
-        }
+    if(isset(Router::Request()->getHeaders()['http_x_forwarded_for']) && Router::Request()->getHeaders()['http_x_forwarded_for'] !== NULL) {
+        return Router::Request()->getHeaders()['http_x_forwarded_for']; 
+    }
 
-        return $ip;
+    return Router::Request()->getHeaders()['remote-addr']; 
 }
 
 /**
