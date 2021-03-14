@@ -195,6 +195,14 @@ class Community
                 ->join('users', 'users_settings.user_id', '=', 'users.id')
                 ->join('website_permissions_ranks', 'users.rank', '=', 'website_permissions_ranks.rank_id')->whereNot('website_permissions_ranks.permission_id', '!=', 27)->limit($limit)->get();
     }
+    
+    public static function getOnlineTime($limit = 6)
+    {
+        return QueryBuilder::table('users_achievements')->select('users_achievements.*')
+                ->join('users', 'users_achievements.user_id', '=', 'users.id')
+                ->where('users_achievements.achievement_name', 'AllTimeHotelPresence')
+                ->orderBy('progress', 'desc')->limit($limit)->get();
+    }
 
     public static function getCredits($limit = 10)
     {
