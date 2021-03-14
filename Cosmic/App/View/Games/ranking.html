@@ -90,5 +90,25 @@
                     </tbody>
                 </table>
             </article>
+                
+            <article class="default-section ranking-container">
+                <table class="default-table ranking-content">
+                    <thead>
+                    <tr>
+                        <th colspan="2">{{site.shortname}}{{locale.username}}</th>
+                        <th>Online as Hours</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for online in online %}
+                    <tr>
+                        <td><img src="{{site.fpath}}/avatarimage?figure={{online.player.look}}&gesture=sml&headonly=1" alt="{{online.player.look}}" class="pixelated"></td>
+                        <td><a href="/profile/{{online.player.username}}">{{online.player.username}}</a></td>
+                        <td><span>{{ online.progress // 60|round }}h</span></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </article>
         </div>
 {% endblock %}
