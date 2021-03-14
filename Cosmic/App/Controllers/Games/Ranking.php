@@ -45,12 +45,19 @@ class Ranking
             $item->player = Player::getDataById($item->user_id, array('username', 'look'));
         }
         
+        $onlinetime = Community::getOnlineTime(6);
+        foreach ($onlinetime as $item) 
+        {
+            $item->player = Player::getDataById($item->user_id, array('username', 'look'));
+        }
+        
         View::renderTemplate('Games/ranking.html', [
             'title' => Locale::get('core/title/games/ranking'),
             'page'  => 'games_ranking',
             'achievements' => $achievements,
             'credits' => $credits,
             'respects' => $respectreceived,
+            'online' => $onlinetime,
             'currencys'  => $currencys
         ]);
     }
