@@ -494,7 +494,7 @@ class Admin
   
     public static function getCatalogPages()
     {
-        return QueryBuilder::table('catalog_pages')->orderby('id', 'desc')->get();
+        return QueryBuilder::table('catalog_pages')->orderby('caption', 'asc')->get();
     }
 
     public static function getCatalogPagesById($id)
@@ -543,9 +543,9 @@ class Admin
         $lastItemCatalog = QueryBuilder::table('catalog_items')->orderBy('id', 'desc')->limit(1)->first();
         
         $furnidata = self::getFurnitureById($furni_id);
-        if(!empty($furnidata)) {
+        if(!empty($furni_id)) {
             QueryBuilder::table('items_base')->where('id', $furni_id)->update($object['items_base']);
-            return QueryBuilder::table('catalog_items')->where('id', $furni_id)->update($object['catalog_items']);
+            return QueryBuilder::table('catalog_items')->where('item_ids', $furni_id)->update($object['catalog_items']);
         } else {
           
             $object['catalog_items']['item_ids'] = $lastItemBase->id + 1;
@@ -553,7 +553,7 @@ class Admin
             $object['items_base']['id'] = $lastItemBase->id + 1;
           
             QueryBuilder::table('items_base')->insert($object['items_base']);
-            return QueryBuilder::table('catalog_items')->insert($object['catalog_items']); 
+            QueryBuilder::table('catalog_items')->insert($object['catalog_items']); 
         }
     }
 

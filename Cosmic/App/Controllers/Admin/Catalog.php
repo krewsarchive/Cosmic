@@ -3,6 +3,7 @@ namespace App\Controllers\Admin;
 
 use App\Config;
 use App\Models\Admin;
+use App\Models\Core;
 
 use Core\View;
 
@@ -94,7 +95,7 @@ class Catalog
         }
           
         $furni_id = input()->post('furniture_id')->value ?? null;
-      
+ 
         if($query = Admin::updateFurniture(array(
             'items_base' => array(
                 'sprite_id'               => input()->post('sprite_id')->value,
@@ -139,16 +140,16 @@ class Catalog
         $this->data->itemsids = Admin::getCatalogItemsByItemIds(input()->post('post')->value);
         $this->data->furniture = Admin::getFurnitureById(input()->post('post')->value);
 
-        echo Json::raw($this->data);
+        response()->json(["data" => $this->data]);
     }
   
     public function getCatalogItemsByItemId()
     {
         $itemsids = Admin::getCatalogItemsByPageId(input()->post('id')->value);
         foreach($itemsids as $item) {
-            $getCurrencys = array_flip(Config::currencys);
+            $getCurrency = array_search($item->points_type, array_column(Core::getCurrencys(), 'type'));
             $item->club_only = ($item->club_only == 0) ? 'No' : 'Yes';
-            $item->cost_points = ($item->points_type != 0) ? $item->cost_points . ' (' . ucfirst($getCurrencys[$item->points_type]) . ')' : 0;
+            $item->cost_points = ($item->points_type != 0) ? $item->cost_points . ' (' . ucfirst(Core::getCurrencys()[$getCurrency]->currency) . ')' : '';
         }
       
         echo Json::filter($itemsids, 'desc', 'id');
@@ -162,8 +163,7 @@ class Catalog
         }
       
         $this->data->items = Admin::getCatalogItemsByPageId(input()->post('post')->value);
-      
-        echo Json::raw($this->data);
+        response()->json(["data" => $this->data]);
     }
   
     public function getCatalogPages()
@@ -178,7 +178,8 @@ class Catalog
             $row->enabled = $row->enabled ? 'Yes' : 'No';
             $row->visible = $row->visible ? 'Yes' : 'No';
         }
-        echo Json::raw($pages);
+      
+        response()->json($pages);
     }
   
     public function view()

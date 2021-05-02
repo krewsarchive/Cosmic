@@ -374,6 +374,7 @@ INSERT INTO `website_permissions` VALUES (26, 'housekeeping_config', 'Player can
 INSERT INTO `website_permissions` VALUES (27, 'website_invisible_staff', 'Hide rank from staff page at website');
 INSERT INTO `website_permissions` VALUES (28, 'website_extra_rank', '');
 INSERT INTO `website_permissions` VALUES (29, 'housekeeping_website_badgerequest', 'Player is able to accept new badge requests');
+INSERT INTO `website_permissions` VALUES (30, 'housekeeping_server_catalog', 'Player is able to manage catalog');
 
 
 -- ----------------------------
@@ -421,6 +422,7 @@ INSERT INTO `website_permissions_ranks` VALUES (26, 26, 7);
 INSERT INTO `website_permissions_ranks` VALUES (27, 27, 1);
 INSERT INTO `website_permissions_ranks` VALUES (28, 27, 2);
 INSERT INTO `website_permissions_ranks` VALUES (29, 29, 7);
+INSERT INTO `website_permissions_ranks` VALUES (30, 30, 7);
 
 
 -- ----------------------------
@@ -1573,6 +1575,5 @@ ALTER TABLE users ADD extra_rank int(2) NULL DEFAULT NULL;
 ALTER TABLE users MODIFY mail VARCHAR(500);
 ALTER TABLE users ADD template enum('light','dark') NULL DEFAULT 'light';
 ALTER TABLE bans MODIFY COLUMN machine_id varchar(255)NOT NULL DEFAULT '';
-
 
 SET FOREIGN_KEY_CHECKS = 1;

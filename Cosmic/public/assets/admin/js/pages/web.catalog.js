@@ -131,8 +131,9 @@ var catalog = function() {
             this.ajax_manager = new WebPostInterface.init();
 
             self.ajax_manager.post("/housekeeping/api/catalog/getcatalogbypageid", {post: id}, function (result) {
+                result = result.data;
                 $("#eCatalogPage").show();
-
+                
                 $("[name=catid]").val(result.page.id);
                 $("[name=caption]").val(result.page.caption);
                 $("[name=page_teaser]").val(result.page.page_teaser);
@@ -265,7 +266,7 @@ var catalog = function() {
             this.ajax_manager = new WebPostInterface.init();
 
             self.ajax_manager.post("/housekeeping/api/catalog/getFurnitureById", {post: id}, function (result) {
-              
+                result = result.data;
                 $("#itemForm [name=additem]").html("Edit Item");
               
                 $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -316,5 +317,5 @@ var catalog = function() {
 }();
 
 jQuery(document).ready(function() {
-    //catalog.init();
+    catalog.init();
 });
