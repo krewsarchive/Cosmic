@@ -517,7 +517,41 @@ class Admin
         return QueryBuilder::table('items_base')->find($id);
     }
   
-    public static function updateCatalogPages($catid, $caption, $page_teaser, $page_headline, $parent_id, $page_layout, $visible, $enabled) 
+    public static function getPageFromParentId($data = '*')
+    {
+        return QueryBuilder::table('catalog_pages')->select($data)->orderBy('order_num', 'asc')->get();
+    }
+  
+    public static function updateParent($id, $new_parent)
+    {
+        return QueryBuilder::table('catalog_pages')->where('id', $id)->update(['parent_id' => $new_parent]);
+    }
+  
+    public static function getAllParent($ids)
+    {
+        return QueryBuilder::query("SELECT id from catalog_pages WHERE id IN ($ids)")->get();
+    }
+  
+    public static function getParents($id)
+    {
+        return QueryBuilder::table('catalog_pages')->where('parent_id', $id)->get();
+    }
+  
+    public static function deleteParent($id)
+    {
+        return QueryBuilder::table('catalog_pages')->where('id', $id)->delete();
+    }
+  
+    public static function UpdateOrderNumFromParent($ids)
+    {
+        return QueryBuilder::query("UPDATE catalog_pages SET order_num = '' WHERE id IN ($ids)")->get();
+    }
+  
+    public static function UpdateNewOrderNumFromParent($id, $pos)
+    {
+        return QueryBuilder::table('catalog_pages')->where('id', $id)->update(['order_num' => $pos]);
+    }
+    public static function updateCatalogPages($catid, $caption, $page_teaser, $page_headline, $parent_id, $page_layout, $visible, $enabled, $create) 
     {
         $data = array(
             'caption' => $caption,
@@ -526,14 +560,22 @@ class Admin
             'parent_id' => $parent_id,
             'page_layout' => $page_layout,
             'visible' => $visible,
-            'enabled' => $enabled
+            'enabled' => $enabled,
         );
       
-        $catalogue = self::getCatalogPagesById($catid);
-        if($catalogue) {
+        if($create === 0) {
             return QueryBuilder::table('catalog_pages')->where('id', $catid)->update($data);
         }
       
+        $data = array(
+            'caption' => $caption,
+            'page_teaser' => $page_teaser,
+            'page_headline' => $page_headline,
+            'parent_id' => $catid,
+            'page_layout' => $page_layout,
+            'visible' => $visible,
+            'enabled' => $enabled,
+        );
         return QueryBuilder::table('catalog_pages')->insert($data);
     }
   

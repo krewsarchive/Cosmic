@@ -27,7 +27,7 @@ class Catalog
             'parent_id'   => 'required',
             'page_layout' => 'required',
             'visible'     => 'numeric|pattern:^(?:1OR0)$',
-            'enabled'     => 'numeric|pattern:^(?:1OR0)$'
+            'enabled'     => 'numeric|pattern:^(?:1OR0)$',
         ]);
 
         if (!$validate->isSuccess()) {
@@ -39,20 +39,15 @@ class Catalog
         $caption = input()->post('caption')->value;
         $page_headline = input()->post('page_headline')->value;
         $page_teaser = input()->post('page_teaser')->value;
-        $parent_id = input()->post('parent_id')->value;
+        $parent_id = (input()->post('parent_id')->value == '1') ? '-1' : input()->post('parent_id')->value;
         $page_layout = input()->post('page_layout')->value;
         $visible = input()->post('visible')->value;
         $enabled = input()->post('enabled')->value;
-      
+        $create = input()->post('create')->value;
+
         $catalogue = Admin::getCatalogPagesById(input()->post('catid')->value);
       
-        $query = Admin::updateCatalogPages($catid, $caption, $page_teaser, $page_headline, $parent_id, $page_layout, $visible, $enabled);
-      
-        if($query) {
-            if(Config::apiEnabled) {
-                HotelApi::execute('updatecatalog');
-            }
-        }
+        $query = Admin::updateCatalogPages($catid, $caption, $page_teaser, $page_headline, $parent_id, $page_layout, $visible, $enabled, $create);
       
         echo '{"status":"success","message":"Item is successfully editted!"}';
         exit;
@@ -135,6 +130,94 @@ class Catalog
         exit;
     }
   
+    public function move()
+    {
+        $validate = request()->validator->validate([
+            'old_position'  => 'required|numeric',
+            'new_position'  => 'required|numeric',
+            'old_parent'    => 'required|numeric',
+            'parent'        => 'required|numeric',
+            'id'            => 'required|numeric',
+            'positions'     => 'required'
+        ]);
+      
+        if (!$validate->isSuccess()) {
+            echo '{"status":"error","message":"Fill in all fields!"}';
+            exit;
+        }
+          
+        $old_position = input()->post('old_position')->value;
+        $new_position = input()->post('new_position')->value;
+        $old_parent = input()->post('old_parent')->value;
+        $new_parent = input()->post('parent')->value;
+        $children = input()->post('children')->value;
+        $positions = input()->post('positions')->value;
+        $id = input()->post('id')->value;
+
+        if($old_parent !== $new_parent) {
+            Admin::updateParent($id, $new_parent);
+        }
+      
+        $query = Admin::UpdateOrderNumFromParent($positions);
+        $array = explode(',', $positions);
+
+        $i = 0;
+        foreach($array as $pos) {
+            $query = Admin::UpdateNewOrderNumFromParent($pos, $i);
+            $i++;
+        }
+      
+        echo '{"status":"success","message":"Folder is succesfully moved"}';
+    }
+  
+    public function deleteparent()
+    {
+        $validate = request()->validator->validate([
+            'id'  => 'required|numeric'
+        ]);
+      
+        if (!$validate->isSuccess()) {
+            echo '{"status":"error","message":"Fill in all fields!"}';
+            exit;
+        }
+      
+        $id = input()->post('id')->value;
+      
+        if(!Admin::getAllParent($id)) {
+            echo '{"status":"error","message":"Page not found"}';
+            exit;
+        }
+      
+        if(Admin::deleteParent($id)) {
+            $parents = Admin::getParents($id);
+            foreach($parents as $parent) {
+                Admin::deleteParent($parent->id);
+            }
+        }
+      
+        echo '{"status":"success","message":"Folder is succesfully deleted"}';
+    }
+  
+    public function tree() 
+    {
+        $frontpage = Admin::getPageFromParentId();
+      
+        foreach($frontpage as $page) 
+        {
+            $parentid = $page->parent_id;
+            if($parentid == '-1' || $parentid == '0') $parentid = "#";
+          
+            $data[] = [
+               "id" => $page->id,
+               "parent" => ($page->parent_id == '-1') ? $parentid : $page->parent_id,
+               "text" => $page->caption,
+               "icon" => "fa fa-folder icon-lg m--font-default"
+            ];
+        }
+      
+        response()->json(["data" => $data]);
+    }
+  
     public function getFurnitureById()
     {
         $this->data->itemsids = Admin::getCatalogItemsByItemIds(input()->post('post')->value);
@@ -159,7 +242,7 @@ class Catalog
     {
         $this->data->page = Admin::getCatalogPagesById(input()->post('post')->value);
         if(isset($this->data->page->parent_id)) {
-            $this->data->page->parent = Admin::getCatalogPagesById($this->data->page->parent_id);
+            $this->data->page->parent = Admin::getCatalogPagesById($this->data->page->parent_id) ?? 0;
         }
       
         $this->data->items = Admin::getCatalogItemsByPageId(input()->post('post')->value);

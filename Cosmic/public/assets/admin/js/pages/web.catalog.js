@@ -1,6 +1,30 @@
 var catalog = function() {
+  
+    function getSiblings(nodeID, parent) 
+    {
+        var tree = $('#kt_tree_6').jstree(true),
+        parentNode = tree.get_node(parent),
+        aChildren = parentNode.children,
+        aSiblings = [];
 
+        aChildren.forEach(function(c){
+            aSiblings.push(c);
+        });
+      
+        return aSiblings;
+    }
+  
     return {
+        getFormData: function(str)
+        {
+            var postData = new FormData();
+            $.each(str, function(i, val) {
+                postData.append(val.name, val.value);
+            });
+          
+            return postData;
+        },
+      
         init: function() {
 
             $(".goBackWizard").unbind().click(function() {
@@ -37,6 +61,8 @@ var catalog = function() {
         initDatatable: function (jsonObj) {
             $(".addCatalogPage").html("Add page");
 
+            catalog.treeViewRequest();
+          
             $(".addCatalogPage").unbind().click(function() {
                 catalog.addPage();
             });
@@ -119,6 +145,125 @@ var catalog = function() {
             datatableCatalogPage();
         },
 
+        treeViewRequest: function () {
+            $.ajax({
+                url: '/housekeeping/catalog/get/tree',
+                type: "get",
+                headers: {
+                    "Authorization": 'housekeeping_permissions'
+                },
+                dataType: 'json',
+                beforeSend: function() {
+                    blockPageInterface.init();
+                },
+                success: function(data) {
+                    catalog.catalogTree(data.data);
+                }
+            });
+        },
+      
+        catalogTree: function (json) {
+            var self = this;
+            this.ajax_manager = new WebPostInterface.init();
+            
+            $("#kt_tree_6").jstree({
+                core: {
+                    themes: {
+                        responsive: !1
+                    },
+                    multiple: false,
+                    check_callback: true,
+                    data: json
+                },
+                types: {
+                    default: {
+                        icon: "fa fa-folder kt-font-brand"
+                    },
+                    file: {
+                        icon: "fa fa-file  kt-font-brand"
+                    },
+                    '#': {
+                        "valid_children" : []
+                    },
+                    branch: {
+                        "valid_children" : ["leaf"]
+                    },
+                    leaf : {
+                        "valid_children" : []
+                    }
+                },
+                state: {
+                    key: "demo3"
+                },
+                plugins: ["dnd", "changed", "types"]
+            });
+          
+            $('#kt_tree_6').on("select_node.jstree", function (e, data) { 
+                  $('#parentFirst').modal('show');
+                	$('#parentLabel').html(data.node.text);
+              
+                  catalog.editCatalog(data.node.id, json);
+              
+                  $(".createFolder").unbind().click(function() {
+                      $("#parentLabel").html("Create page for " + data.node.text);
+                      $('#formParent').trigger("reset");  
+                      $('.saveChanges').hide(); 
+                      $('.createFolder').html('Save');
+                      $('.createFolder').addClass('saveFolder');
+                      $('#formParent [name=create]').val('1');
+                      $('#groupParent').hide();
+                    
+                      $(".saveFolder").unbind().click(function() {
+                          var form = $('#formParent').serializeArray();
+                        
+                          self.ajax_manager.post("/housekeeping/api/catalog/request", catalog.getFormData(form), function (result) {
+                              if(result.status == "success") {
+                                  $('#kt_tree_6').jstree("destroy");
+                                  catalog.treeViewRequest();
+                              }
+                          });
+                      });
+             
+                  });
+              
+                  $(".viewItems").unbind().click(function() {
+                      catalog.createItemList(data.node.id, json);
+                  });
+              
+            });
+          
+            $('#confirm-delete').on('show.bs.modal', function(e) {
+                $(".modal-title").html("Delete " + $("#parentLabel").text());
+                $(".btn-ok").html("Delete");
+
+                $('#parentFirst').modal('hide');
+                $(".btn-ok").click(function () {
+                    self.ajax_manager.post("/housekeeping/api/catalog/deleteparent", {id: $('#formParent [name=catid]').val()}, function (result) {
+
+                    });
+                });
+            });
+          
+           $("#kt_tree_6").bind("move_node.jstree", function (e, data) {
+                $("#orderSave").show();
+             
+                var aSiblings = getSiblings(data.node.id, data.parent);
+
+                var states = {
+                    old_position: data.old_position,
+                    new_position: data.position,
+                    old_parent: data.old_parent,
+                    parent: data.parent,
+                    id: data.node.id,
+                    children: data.node.children,
+                    positions: aSiblings
+                };
+           
+                self.ajax_manager.post("/housekeeping/api/catalog/move", states , function (result) {
+                });
+            });
+        },
+      
         addPage: function () {
             $('#catalogForm').trigger("reset");
             $("#eCatalogPage").show();
@@ -129,45 +274,64 @@ var catalog = function() {
         editCatalog: function (id, jsonObj) {
             var self = this;
             this.ajax_manager = new WebPostInterface.init();
-
+      
             self.ajax_manager.post("/housekeeping/api/catalog/getcatalogbypageid", {post: id}, function (result) {
+              
+                if($('#formParent [name=create]').val() == '1') {
+                    $('.saveChanges').show(); 
+                    $('.createFolder').html('Create Folder');
+                    $('.createFolder').removeClass('saveFolder');
+                    $('#formParent [name=create]').val('0');
+                    $('#groupParent').show();
+                }
+              
                 result = result.data;
-                $("#eCatalogPage").show();
                 
                 $("[name=catid]").val(result.page.id);
+                $("[name=min_rank]").val(result.page.min_rank);
+                $("[name=club_only]").val(result.page.club_only);
                 $("[name=caption]").val(result.page.caption);
                 $("[name=page_teaser]").val(result.page.page_teaser);
                 $("[name=page_headline]").val(result.page.page_headline);
                 $("[name=page_images]").val(result.page.page_images);
-                $("#eCatalogPage [name=object]").val('edit');
 
                 for (var i = 0; i < jsonObj.length; i++){
                     var parent_page = jsonObj[i];
-                    $("[name=parent_id]").append(new Option(parent_page.caption, parent_page.id));
+                    $("[name=parent_id]").append(new Option(parent_page.text, parent_page.id));
                 }
-
-                $("#selectPage option[value='" + result.page.parent.id + "']").prop('selected', true);
-                $("#pagelayout option[value='" + result.page.page_layout + "']").prop('selected', true);
+                
+                $("#parentFirst option[value='" + result.page.parent.id + "']").prop('selected', true);
+                $("#parentFirst option[value='" + result.page.page_layout + "']").prop('selected', true);
                 $("#enabled option[value='" + result.page.enabled + "']").prop('selected', true);
                 $("#visible option[value='" + result.page.visible + "']").prop('selected', true);
 
-                $("#selectPage").select2();
+                $("#parentCatalog").select2();
 
-                catalog.createItemList(result.page.id, jsonObj);
+                $(".saveParent").click(function() {
+                    var form = $('#formParent').serializeArray();
+
+                    self.ajax_manager.post("/housekeeping/api/catalog/request", catalog.getFormData(form), function (result) {
+                        if(result.status == "success") {
+                            $("#parentFirst").close();
+                        }
+                    });
+                });
+             
             });
         },
 
         createItemList: function (id, jsonObj) {
-
+            $("#kt_datatable_catalog_itemlist").KTDatatable("destroy")
             $(".addItem").html("Add item");
 
             $(".addItem").unbind().click(function() {
                 catalog.addItem(jsonObj);
             });
+          
+            $("#catalogList").show();
+            $("#parentFirst").modal("hide");
 
             $(".kt-portlet__head-title").html("Items");
-            $("#kt_datatable_catalog").KTDatatable("destroy");
-            $("#kt_datatable_catalog").attr("id","kt_datatable_catalog_itemlist");
 
             var datatableCatalogItemPage = function () {
 
@@ -264,7 +428,7 @@ var catalog = function() {
         editItem: function(id, jsonObj) {
             var self = this;
             this.ajax_manager = new WebPostInterface.init();
-
+            console.log(jsonObj)
             self.ajax_manager.post("/housekeeping/api/catalog/getFurnitureById", {post: id}, function (result) {
                 result = result.data;
                 $("#itemForm [name=additem]").html("Edit Item");
@@ -285,7 +449,7 @@ var catalog = function() {
               
                 for (var o = 0; o < jsonObj.length; o++){
                     var pages = jsonObj[o];
-                    $("[name=page_id]").append(new Option(pages.caption, pages.id));
+                    $("[name=page_id]").append(new Option(pages.text, pages.id));
                 }
 
                 $("[name=allow_stack] option[value='" + result.furniture.allow_stack  + "']").prop('selected', true);
