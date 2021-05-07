@@ -124,10 +124,16 @@ class Catalog
             )
         ), $furni_id));
 
-        HotelApi::execute('updatecatalog');
 
         echo '{"status":"success","message":"Item is successfully editted!"}';
         exit;
+    }
+  
+    public function executeRcon() 
+    {
+        if(HotelApi::execute('updatecatalog')) {
+            echo '{"status":"success","message":"Catalog !"}';
+        }
     }
   
     public function move()
@@ -182,11 +188,6 @@ class Catalog
         }
       
         $id = input()->post('id')->value;
-      
-        if(!Admin::getAllParent($id)) {
-            echo '{"status":"error","message":"Page not found"}';
-            exit;
-        }
       
         if(Admin::deleteParent($id)) {
             $parents = Admin::getParents($id);

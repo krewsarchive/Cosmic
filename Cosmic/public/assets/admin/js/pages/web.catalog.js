@@ -15,6 +15,15 @@ var catalog = function() {
     }
   
     return {
+      
+        executeRcon: function()
+        {
+              var self = this;
+              this.ajax_manager = new WebPostInterface.init();
+          
+              self.ajax_manager.post("/housekeeping/api/catalog/executercon", {});
+        },
+      
         getFormData: function(str)
         {
             var postData = new FormData();
@@ -29,6 +38,11 @@ var catalog = function() {
 
             $(".goBackWizard").unbind().click(function() {
                 catalog.goBack();
+            });
+          
+            $(".executeRcon").unbind().click(function() {
+                console.log(1)
+                catalog.executeRcon();
             });
 
             $.ajax({
