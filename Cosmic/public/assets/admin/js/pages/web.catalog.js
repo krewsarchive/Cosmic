@@ -314,8 +314,14 @@ var catalog = function() {
                     $("[name=parent_id]").append(new Option(parent_page.text, parent_page.id));
                 }
                 
-                $("#parentFirst option[value='" + result.page.parent.id + "']").prop('selected', true);
-                $("#parentFirst option[value='" + result.page.page_layout + "']").prop('selected', true);
+                if(result.page.parent_id == "-1") {
+                    result.page.id = 1;
+                    $("#parentCatalog option[value='" + result.page.id + "']").prop('selected', true);
+                }else{
+                    $("#parentCatalog option[value='" + result.page.parent_id + "']").prop('selected', true);
+                }
+
+                $("#pagelayout option[value='" + result.page.page_layout + "']").prop('selected', true);
                 $("#enabled option[value='" + result.page.enabled + "']").prop('selected', true);
                 $("#visible option[value='" + result.page.visible + "']").prop('selected', true);
 

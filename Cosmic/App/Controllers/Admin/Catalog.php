@@ -46,7 +46,6 @@ class Catalog
         $create = input()->post('create')->value;
 
         $catalogue = Admin::getCatalogPagesById(input()->post('catid')->value);
-      
         $query = Admin::updateCatalogPages($catid, $caption, $page_teaser, $page_headline, $parent_id, $page_layout, $visible, $enabled, $create);
       
         echo '{"status":"success","message":"Item is successfully editted!"}';

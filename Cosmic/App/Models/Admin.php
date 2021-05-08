@@ -562,21 +562,12 @@ class Admin
             'visible' => $visible,
             'enabled' => $enabled,
         );
-      
-        if($create === "0") {
+        
+        if($create === "0" || $create === "") {  
             return QueryBuilder::table('catalog_pages')->where('id', $catid)->update($data);
+        } else {
+             return QueryBuilder::table('catalog_pages')->insert($data);
         }
-
-        $data = array(
-            'caption' => $caption,
-            'page_teaser' => $page_teaser,
-            'page_headline' => $page_headline,
-            'parent_id' => $catid,
-            'page_layout' => $page_layout,
-            'visible' => $visible,
-            'enabled' => $enabled,
-        );
-        return QueryBuilder::table('catalog_pages')->insert($data);
     }
   
     public static function updateFurniture($object, $furni_id)
