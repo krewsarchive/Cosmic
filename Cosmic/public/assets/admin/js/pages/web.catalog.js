@@ -253,7 +253,7 @@ var catalog = function() {
                 $('#parentFirst').modal('hide');
                 $(".btn-ok").click(function () {
                     self.ajax_manager.post("/housekeeping/api/catalog/deleteparent", {id: $('#formParent [name=catid]').val()}, function (result) {
-
+                        catalog.treeViewRequest();
                     });
                 });
             });

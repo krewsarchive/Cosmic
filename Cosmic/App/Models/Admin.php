@@ -563,10 +563,10 @@ class Admin
             'enabled' => $enabled,
         );
       
-        if($create === 0) {
+        if($create === "0") {
             return QueryBuilder::table('catalog_pages')->where('id', $catid)->update($data);
         }
-      
+
         $data = array(
             'caption' => $caption,
             'page_teaser' => $page_teaser,
