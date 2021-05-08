@@ -153,6 +153,7 @@ class Routes extends Router
           
             Router::get('/', 'Dashboard@view');
             Router::get('/permissions/get/commands', 'Permissions@getpermissioncommands');
+            Router::get('/catalog/get/tree', 'Catalog@tree');
 
             /**
              *  Controller views
