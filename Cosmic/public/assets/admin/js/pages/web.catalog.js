@@ -333,7 +333,6 @@ var catalog = function() {
 
                     self.ajax_manager.post("/housekeeping/api/catalog/request", catalog.getFormData(form), function (result) {
                         if(result.status == "success") {
-                            $("#parentFirst").close();
                             $('#kt_tree_6').jstree("destroy");
                             catalog.treeViewRequest();
                         }
