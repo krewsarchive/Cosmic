@@ -276,11 +276,11 @@
    </script>
 
    {% if block('jsfile') is defined  %}
-   <script src="/assets/admin/js/pages/web.{{ block('jsfile')|lower }}.js?v=5"></script>
+   <script src="/assets/admin/js/pages/web.{{ block('jsfile')|lower }}.js?v={{date().timestamp}}"></script>
    {% endif %}
-  <link href="/assets/admin/css/jstree.bundle.css" rel="stylesheet" type="text/css" />
-  <script src="/assets/admin/js/jstree.bundle.js"></script>
-  <script src="/assets/admin/js/init.js" type="text/javascript"></script>
+    <link href="https://preview.keenthemes.com/metronic/theme/html/demo4/dist/assets/plugins/custom/jstree/jstree.bundle.css?v=7.2.7" rel="stylesheet" type="text/css" />
+    <script src="https://preview.keenthemes.com/metronic/theme/html/demo4/dist/assets/plugins/custom/jstree/jstree.bundle.js?v=7.2.7"></script>
+   <script src="/assets/admin/js/init.js" type="text/javascript"></script>
 
    <script>if (window.module) module = window.module;</script>
 </body>

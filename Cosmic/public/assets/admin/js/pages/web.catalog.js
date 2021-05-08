@@ -321,7 +321,7 @@ var catalog = function() {
 
                 $("#parentCatalog").select2();
 
-                $(".saveParent").click(function() {
+                $(".saveChanges").click(function() {
                     var form = $('#formParent').serializeArray();
 
                     self.ajax_manager.post("/housekeeping/api/catalog/request", catalog.getFormData(form), function (result) {
