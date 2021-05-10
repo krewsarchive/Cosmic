@@ -7,7 +7,6 @@
         "rakit/validation": "^1.2",
         "swiftmailer/swiftmailer": "^6.0",
         "jenssegers/date": "^3.3.1",
-        "pecee/simple-router": "4.2.0.6",
         "ext-curl": "*",
         "ext-pdo": "*",
         "ext-json": "*",
@@ -16,7 +15,8 @@
         "geoip2/geoip2":"~2.0",
         "sonata-project/google-authenticator": "^2.2",
         "symfony/dotenv": "^5.0",
-        "calcinai/php-imagick": "^0.1.2"
+        "calcinai/php-imagick": "^0.1.2",
+        "pecee/simple-router": "^4.3"
     },
     "autoload": {
         "psr-4": {

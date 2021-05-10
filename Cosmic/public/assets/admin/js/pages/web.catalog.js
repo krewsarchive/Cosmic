@@ -330,10 +330,12 @@ var catalog = function() {
 
                 $(".saveChanges").click(function() {
                     var form = $('#formParent').serializeArray();
-
+                    id = result.page.id
+                    var vat = $("[name=caption]").val();
                     self.ajax_manager.post("/housekeeping/api/catalog/request", catalog.getFormData(form), function (result) {
                         if(result.status == "success") {
-                            $('#kt_tree_6').jstree("destroy");
+                          console.log(id)
+                          $("#kt_tree_6 #" + id).val(vat);
                             catalog.treeViewRequest();
                         }
                     });

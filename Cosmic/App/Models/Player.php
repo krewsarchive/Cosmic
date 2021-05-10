@@ -108,8 +108,8 @@ class Player
             'account_day_of_birth' => strtotime($data->birthdate_day . '-' . $data->birthdate_month . '-' . $data->birthdate_year),
             'gender' => $data->gender == 'male' ? 'M' : 'F',
             'last_login' => time(),
-            'ip_register' => getIpAddress(),
-            'ip_current' => getIpAddress()
+            'ip_register' => request()->getIp(),
+            'ip_current' => request()->getIp()
         );
 
         $user_id = QueryBuilder::table('users')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->insert($data);
