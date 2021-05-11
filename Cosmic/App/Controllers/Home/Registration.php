@@ -79,7 +79,7 @@ class Registration
           
             $referral = Player::getDataByUsername($playerData->referral);
           
-            if(!empty($referral) && Player::checkMaxIp(getIpAddress()) == 0) {
+            if(!empty($referral) && Player::checkMaxIp(request()->getIp()) == 0) {
                 $referral_days = strtotime('-' . $settings->referral_acc_create_days . ' days');
                 $referralSignup = Player::getReferral($referral->id, request()->getIp());
                 
