@@ -45,8 +45,8 @@ class Registration
         $settings = Core::settings();
         $playerData = (object)input()->all();
         $playerData->figure = input('figure');
-        $getMaxIp = Player::checkMaxIp(response()->getIpAdgetIp());
-        
+        $getMrequestPlayer::checkMaxIp(request()->getIp());
+     get
         if (Player::exists($username)) {
             response()->json(["status" => "error", "message" => Locale::get('register/username_exists')]);
         }
