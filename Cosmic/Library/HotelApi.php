@@ -30,7 +30,7 @@ class HotelApi
 
         $result = socket_connect($socket, $apiSettings->rcon_api_host, $apiSettings->rcon_api_port);
         if ($result === false) {
-            return Json::encode(["status" => "error", "message" => "socket_connect() failed.\nReason: " . socket_strerror(socket_last_error()) . ""]);
+            return false;
         }
 
         if(socket_write($socket, $data, strlen($data)) === false){

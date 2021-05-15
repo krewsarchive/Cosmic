@@ -16,7 +16,8 @@
         "sonata-project/google-authenticator": "^2.2",
         "symfony/dotenv": "^5.0",
         "calcinai/php-imagick": "^0.1.2",
-        "pecee/simple-router": "^4.3"
+        "pecee/simple-router": "^4.3",
+        "paypal/paypal-checkout-sdk": "1.0.1"
     },
     "autoload": {
         "psr-4": {

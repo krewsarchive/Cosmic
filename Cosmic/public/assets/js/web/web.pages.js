@@ -1190,6 +1190,89 @@ function WebPageShopInterface(main_page) {
             theme: "web"
         });
 
+        page_container.find(".offer-content").click(function() {
+            $("#editor").css("height", "320px");
+          
+            page_container.find(".offers-container").css({"width": "50%", "margin-left": "150px"});
+            page_container.find(".offer-container").css({"margin-left": "70px"});
+          
+            var orderId = $(this).data("id");
+            var amount = $(this).data("amount");
+            var currency = $(this).data("type");
+
+            page_container.find(".offer-container").hide();
+            page_container.find("#offer-" + orderId).show();
+            page_container.find(".aside-title-content").html(amount + ' ' + currency);
+          
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return fetch('/shop/paypal/create/order', {
+                        method: 'post',
+                        headers: {
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({orderId: orderId})
+                    }).then(function(res) {
+                        return res.json();
+                    }).then(function(orderData) {
+                        $(".payment-loader").show();
+                        $(".offers-container").hide();
+                        return orderData.id;
+                    });
+                },
+                onError: function (err) {
+                  $(".payment-decline").show();
+                  $(".payment-loader").hide();
+                  
+                  Web.ajax_manager.post("/shop/paypal/status", {
+                      status: 'FAILED',
+                      orderId: data.orderID
+                  });
+                  
+                  Web.notifications_manager.create("error", err, 'Error..');
+                },
+                onCancel: function(data) {
+                    $(".payment-decline").show();
+                    $(".payment-loader").hide();
+                  
+                     Web.ajax_manager.post("/shop/paypal/status", {
+                        status: 'CANCELD',
+                        orderId: data.orderID
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return fetch('/shop/paypal/captureOrder', {
+                        method: 'post',
+                        headers: {
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({orderId: data.orderID, offerId: orderId})
+                    }).then(function(res) {
+                        return res.json();
+                    }).then(function(orderData) {
+         
+                        var errorDetail = Array.isArray(orderData.details) && orderData.details[0];
+
+                        if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
+                            return actions.restart(); 
+                        }
+
+                        if (errorDetail) {
+                            Web.notifications_manager.create("error", 'Sorry, your transaction could not be processed.', 'Error..');
+                        }
+
+                        Web.ajax_manager.post("/shop/paypal/confirm", {
+                            orderId: orderData.id
+                        });
+                      
+                        $(".payment-accept").show();
+                    });
+                }
+            }).render('.offers-container');
+        });
+
         page_container.find(".selectric").change(function() {
             Web.pages_manager.load("shop/" + page_container.find(".filter-content .selectric").val() + "/lang");
         });

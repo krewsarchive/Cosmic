@@ -61,15 +61,13 @@ class Log
         return QueryBuilder::table('website_helptool_logs')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->insert($data);
     }
 
-    public static function addPurchaseLog(int $player_id, String $data, $language)
+    public static function addPurchaseLog($player_id, $order_id)
     {
         $data = array(
-            'user_id' => $player_id,
-            'data'      => $data,
-            'lang'      => $language,
-            'timestamp' => time()
+            'user_id'   => $player_id,
+            'order_id'  => $order_id
         );
 
-        return QueryBuilder::table('website_shop_purchases')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->insert($data);
+        return QueryBuilder::table('website_paypal_logs')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->insert($data);
     }
 }

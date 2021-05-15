@@ -15,10 +15,22 @@
             <div class="filter-container">
             </div>
 
+         <div class="aside-content" style="text-align: center">
+                <div class="payment-accept" style="padding-left: 10px;display:none">
+                    Je aankoopmunten zijn toegevoegd aan je account. Mocht er iets zijn misgegaan neem dan contact op via onze helptool. <br /><br />
+                    <img src="/assets/images/web/pages/shop/credits-success.png">
+                </div>
+                <div class="payment-decline" style="padding-left: 10px;display:none">
+                    De aankoop is geannuleerd. Lukt het niet om aankoop te doen? Neem dan contact op via onze helptool. <br /><br />
+                    <img src="/assets/images/web/pages/shop/credits-error.png">
+                </div>
+                <img class="payment-loader" style="display: none;" src="/assets/images/loader.gif">
+            </div>
+          
             <div class="offers-container">
                 {% for offer in data.shop %}
-                <div class="offer-container">
-                    <a href="/shop/offers/{{offer.offer_id}}" class="offer-content pixelated">
+                <div class="offer-container" id="offer-{{offer.id}}">
+                    <a href="#" data-id="{{offer.id}}" data-amount="{{offer.amount}}" data-type="{{offer.currency}}" class="offer-content pixelated">
                         <div class="offer-label">{{offer.currency}}</div>
                         {% if offer.amount >= 500 %}<div class="offer-label"></div>{% endif %}
                         <div class="offer-value"><br>{{offer.amount}}</div>

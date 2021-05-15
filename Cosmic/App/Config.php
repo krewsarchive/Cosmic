@@ -23,7 +23,7 @@ class Config
      */
 
     const site = array(
-      'domain'      => 'cosmicproject.online',
+      'domain'      => 'https://cosmicproject.online',
       'cpath'       => 'https://client.circinus.dev/assets',
       'fpath'       => 'https://habbo.com.br/habbo-imaging',
       'shortname'   => 'Cosmic',
@@ -69,9 +69,10 @@ class Config
     );
   
     /* DONT CHANGE  */
-  
+    const paypal_client_id = "AZgKBttgOzrm8jk92EdsdgqSqOeIa3bTUCORltU_uzRHiiuQhrZadQVawjIW0c0WlgP091aCBPNXrI9q";
+    const paypal_secret_id = "EHdmOYyk8cZvAxi8IMcKn4bsAFHizM3tHokRUiyL6gswAPdtER2B5CkppiyMJKLf6cjQpMCRXX41gV-r";
     const apiEnabled = true;
-    const debug = true;
+    const debug = false;
     const view = 'App/View';
   
     const vpnLocation = '/../ASN.mmdb';
