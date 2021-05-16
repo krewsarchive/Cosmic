@@ -548,7 +548,8 @@ $GLOBALS['language'] = array (
             'click_here'        => 'Click here',
             'to_login'          => 'to log in.',
             'store'             => 'Store',
-            'desc'              => 'Here you can buy credits for real money, with this you can buy exclusive items in our catalogue'
+            'desc'              => 'Here you can buy credits for real money, with this you can buy exclusive items in our catalogue',
+            'get'               => 'You earn',
         ),
         'games_ranking' => array(
             'title'             => 'Highscores',

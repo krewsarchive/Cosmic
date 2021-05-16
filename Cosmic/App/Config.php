@@ -69,10 +69,12 @@ class Config
     );
   
     /* DONT CHANGE  */
-    const paypal_client_id = "AZgKBttgOzrm8jk92EdsdgqSqOeIa3bTUCORltU_uzRHiiuQhrZadQVawjIW0c0WlgP091aCBPNXrI9q";
-    const paypal_secret_id = "EHdmOYyk8cZvAxi8IMcKn4bsAFHizM3tHokRUiyL6gswAPdtER2B5CkppiyMJKLf6cjQpMCRXX41gV-r";
+    const paypal_client_id  = "AZgKBttgOzrm8jk92EdsdgqSqOeIa3bTUCORltU_uzRHiiuQhrZadQVawjIW0c0WlgP091aCBPNXrI9q";
+    const paypal_secret_id  = "EHdmOYyk8cZvAxi8IMcKn4bsAFHizM3tHokRUiyL6gswAPdtER2B5CkppiyMJKLf6cjQpMCRXX41gV-r";
+    const paypal_currency   = 'EUR';
+  
     const apiEnabled = true;
-    const debug = false;
+    const debug = true;
     const view = 'App/View';
   
     const vpnLocation = '/../ASN.mmdb';

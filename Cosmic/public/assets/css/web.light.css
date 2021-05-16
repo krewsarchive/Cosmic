@@ -19,7 +19,7 @@
 .btn {
     text-decoration: none;
     display: inline-block;
-    padding: 6px 12px;
+    padding: 6px 12px;purse-container
     margin-bottom: 0;
     font-size: 14px;h
     font-weight: 400;
@@ -3635,11 +3635,11 @@ input:-webkit-autofill {
     background-color: #8c4e41;
 }
 
-.page-container[data-page="shop"] .shop-purses .purse-container.club:before,
-.page-container[data-page="shop_history"] .shop-purses .purse-container.club:before,
-.page-container[data-page="shop_club"] .shop-purses .purse-container.club:before {
-    background-image: url(../images/hotel/purses/club-icon.png);
-    background-color: #8b2608;
+.page-container[data-page="shop"] .shop-purses .purse-container.duckets:before,
+.page-container[data-page="shop_history"] .shop-purses .purse-container.duckets:before,
+.page-container[data-page="shop_club"] .shop-purses .purse-container.duckets:before {
+    background-image: url(../images/hotel/purses/0-icon.png);
+    background-color: rgb(160 99 150);
 }
 
 .page-container[data-page="shop_offers"] .shop-offer .offer-payment .payment-image {

@@ -22,7 +22,7 @@ use stdClass;
 
 class Offers
 {
-    public function createOrder()
+    public function createorder()
     {     
         $validate = request()->validator->validate([
             'orderId'  => 'required'
@@ -57,7 +57,7 @@ class Offers
         }
     }
   
-    public static function captureOrder()
+    public static function captureorder()
     {     
         $validate = request()->validator->validate([
             'orderId' => 'required',
@@ -122,6 +122,21 @@ class Offers
         Shop::update(input('orderId'), input('status'), 'status');
         response()->json(["status" => "success", "error" => "Order changed to: " . input('status')]);
     }
+  
+    public function vip($offer)
+    {
+        $data = json_decode($offer);
+      
+        foreach($data as $key => $value) {
+            if(is_array($value)) {
+                foreach($value as $badge => $key) {
+                    HotelApi::execute($key, ['user_id' => request()->player->id, $key]);
+                }
+            } else {
+                HotelApi::execute($key, ['user_id' => request()->player->id, $value]);
+            }
+        }
+    }
 
     public function validate()
     {
@@ -143,8 +158,12 @@ class Offers
         } else if ($order->status == 'COMPLETED' && $order->delivered == "NO") {
             $offer = Shop::getOfferById($order->offer_id);
           
-            if(!HotelApi::execute('givepoints', ['user_id' => request()->player->id, 'points' => $offer->amount, 'type' => $offer->currency_type])) {
-                Shop::updateCurrency(request()->player->id, $offer->amount, $offer->currency_type);
+            if($offer->currency_type == 'vip') {
+                $this->vip($offer->data);
+            } else {
+                if(!HotelApi::execute('givepoints', ['user_id' => request()->player->id, 'points' => $offer->amount, 'type' => $offer->currency_type])) {
+                    Shop::updateCurrency(request()->player->id, $offer->amount, $offer->currency_type);
+                }
             }
           
             Shop::update(input('orderId'), "YES", 'delivered');

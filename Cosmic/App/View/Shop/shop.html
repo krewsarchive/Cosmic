@@ -15,7 +15,7 @@
             <div class="filter-container">
             </div>
 
-         <div class="aside-content" style="text-align: center">
+            <div class="aside-content" style="text-align: center">
                 <div class="payment-accept" style="padding-left: 10px;display:none">
                     Je aankoopmunten zijn toegevoegd aan je account. Mocht er iets zijn misgegaan neem dan contact op via onze helptool. <br /><br />
                     <img src="/assets/images/web/pages/shop/credits-success.png">
@@ -30,12 +30,12 @@
             <div class="offers-container">
                 {% for offer in data.shop %}
                 <div class="offer-container" id="offer-{{offer.id}}">
-                    <a href="#" data-id="{{offer.id}}" data-amount="{{offer.amount}}" data-type="{{offer.currency}}" class="offer-content pixelated">
+                    <a href="#" data-id="{{offer.id}}" data-amount="{{offer.amount}}" data-description="{{offer.description}}" data-type="{{offer.currency}}" class="offer-content pixelated">
                         <div class="offer-label">{{offer.currency}}</div>
                         {% if offer.amount >= 500 %}<div class="offer-label"></div>{% endif %}
                         <div class="offer-value"><br>{{offer.amount}}</div>
                         <div class="offer-amount">€{{offer.price}}</div>
-                        <div class="credits-sprite credits-sprite-shop_icon_1" style="background-image: url(/assets/images/web/pages/shop/{{offer.image}}?)"></div>
+                        <div class="credits-sprite credits-sprite-shop_icon_1" style="{% if offer.currency == "VIP"%}margin: 10px;{% endif %}background-image: url(/assets/images/web/pages/shop/{{offer.image}}?)"></div>
                     </a>
                 </div>
                 {% endfor %}
@@ -50,11 +50,9 @@
     <div class="right-side">
         <div class="shop-purses">
             {% for value in data.currencys %}
-                {% if value.type != 0 %}
                 <div class="purse-container {{value.currency}}">
                    {{value.amount}}
                 </div> 
-                {% endif %}
             {% endfor %}
         </div>
         <aside class="default-section">

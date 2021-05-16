@@ -1199,14 +1199,17 @@ function WebPageShopInterface(main_page) {
             var orderId = $(this).data("id");
             var amount = $(this).data("amount");
             var currency = $(this).data("type");
-
+            var description = $(this).data("description");
+          
             page_container.find(".offer-container").hide();
             page_container.find("#offer-" + orderId).show();
-            page_container.find(".aside-title-content").html(amount + ' ' + currency);
+            page_container.find(".left-side .aside-title-content").html(amount + ' ' + currency);
           
+            page_container.find(".right-side .aside-content").html(description);
+            
             paypal.Buttons({
                 createOrder: function(data, actions) {
-                    return fetch('/shop/paypal/create/order', {
+                    return fetch('/shop/offers/createorder', {
                         method: 'post',
                         headers: {
                           'Accept': 'application/json',
@@ -1225,7 +1228,7 @@ function WebPageShopInterface(main_page) {
                   $(".payment-decline").show();
                   $(".payment-loader").hide();
                   
-                  Web.ajax_manager.post("/shop/paypal/status", {
+                  Web.ajax_manager.post("/shop/offers/status", {
                       status: 'FAILED',
                       orderId: data.orderID
                   });
@@ -1236,13 +1239,13 @@ function WebPageShopInterface(main_page) {
                     $(".payment-decline").show();
                     $(".payment-loader").hide();
                   
-                     Web.ajax_manager.post("/shop/paypal/status", {
+                     Web.ajax_manager.post("/shop/offers/status", {
                         status: 'CANCELD',
                         orderId: data.orderID
                     });
                 },
                 onApprove: function(data, actions) {
-                    return fetch('/shop/paypal/captureOrder', {
+                    return fetch('/shop/offers/captureorder', {
                         method: 'post',
                         headers: {
                           'Accept': 'application/json',
@@ -1263,11 +1266,15 @@ function WebPageShopInterface(main_page) {
                             Web.notifications_manager.create("error", 'Sorry, your transaction could not be processed.', 'Error..');
                         }
 
-                        Web.ajax_manager.post("/shop/paypal/confirm", {
+                        Web.ajax_manager.post("/shop/offers/validate", {
                             orderId: orderData.id
                         });
                       
                         $(".payment-accept").show();
+                        $(".payment-loader").hide();
+                        
+                        var myAudio = new Audio('/assets/images/cash.mp3');
+                        myAudio.play();
                     });
                 }
             }).render('.offers-container');

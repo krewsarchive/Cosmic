@@ -481,9 +481,13 @@ class Admin
 
     public static function getOffers()
     {
-        return QueryBuilder::table('website_shop_offers')->get();
+        return QueryBuilder::table('website_paypal_offers')->get();
     }
     
+    public static function removeOffer($id)
+    {
+        return QueryBuilder::table('website_paypal_offers')->where('id', $id)->delete();
+    }
     /*
      * Catalog queries
      */
@@ -760,30 +764,13 @@ class Admin
         return QueryBuilder::table('website_forum_categories')->where('id', $id)->delete();
     }
   
-    public static function offerCreate($currencys, $amount, $price, $offer_id, $private_key)
-    {
-        $data = array(
-            'currency'        => $currencys,
-            'amount'          => $amount,
-            'price'           => $price,
-            'offer_id'        => $offer_id,
-            'private_key'     => $private_key
-        );
-      
-        return QueryBuilder::table('website_shop_offers')->insert($data);
-    } 
-  
-   public static function offerEdit($id, $currencys, $amount, $price, $offer_id, $private_key)
+   public static function offerEdit($data, $id = null)
    {
-        $data = array(
-            'currency'        => $currencys,
-            'amount'          => $amount,
-            'price'           => $price,
-            'offer_id'        => $offer_id,
-            'private_key'     => $private_key
-        );
-      
-        return QueryBuilder::table('website_shop_offers')->where('id', $id)->update($data);
+        if(!is_null($id)) {
+            return QueryBuilder::table('website_paypal_offers')->where('id', $id)->update($data);
+        }
+     
+        return QueryBuilder::table('website_paypal_offers')->insert($data);
     }
   
     public static function getValueCategoryById($id)

@@ -15,31 +15,87 @@ var shop = function() {
             $("#goBack").unbind().click(function () {
                 shop.goBack();
             });
+
+            $(".addVip").click(function () {
+                shop.editOffer(null, 'vip');
+            });
+            
         },
       
-        editOffer: function (id) {
+        editOffer: function (id, type) {
             var self = this;
             this.ajax_manager = new WebPostInterface.init();
           
             $("#offerManage").show();
             $("#offers").hide();
-          
+         
+            var data = {
+                id: 99,
+                text: 'VIP'
+            };
+
             if(id != null) {
                 self.ajax_manager.post("/housekeeping/api/shop/getofferbyid", {post: id}, function (result) {
+                    result = result.data;
                     $('[name=shopId]').val(result.id);
+                    $('[name=vip]').val(1);
                   
-                    $("[name=currencys] option[value='" + result.currency + "']").prop('selected', true);
+                    $("[name=currencys] option[value='" + result.currency_type + "']").prop('selected', true);
                     $("[name=lang] option[value='" + result.lang + "']").prop('selected', true);
                   
                     $('[name=amount]').val(result.amount);
                     $('[name=price]').val(result.price);
-                    $('[name=private_key]').val(result.private_key);
-                    $('[name=offer_id]').val(result.offer_id);
+                    $('.currencyTag').text(result.currency);
+                  
+                
+                    if(result.currency_type == 'vip') {
+                        $(".hideVip").hide();
+                        $(".offerName").html("Modify Offer");
+                        if(result.data != '') {
+                            var data = JSON.parse(result.data)
+                            document.getElementById("json").innerHTML = JSON.stringify(data, undefined, 2);
+                            var array = $("#json").html();
+                            $('[name=data]').val(array);
+                            $('#jsoneditor').html("");
+                            $('.data').show();
+                            const container = document.getElementById("jsoneditor")
+                            const options = {};
+                            editor = new JSONEditor(container, options)
+                            editor.set(data)
+                            
+                             $(".offerName").click(function () {
+                                $("[name=json]").val(JSON.stringify(editor.get()))
+                            });
+                        }
+                        $('.data').show();
+                    } else {
+                        $('.data').hide();
+                        $(".hideVip").show();
+                    }
                 });
-            } else {
-                $('[name=shopId]').val(0);
+            } else {  
+                if(type == 'vip') {
+                    $(".hideVip").hide();
+                    $('.data').show();
+                    $('[name=vip]').val(1);
+                    $('.data').show();
+                    $('#jsoneditor').html("");
+                    const container = document.getElementById("jsoneditor")
+                    const options = {};
+                    editor = new JSONEditor(container, options)
+
+                } else {
+                    $('.data').hide();
+                    $(".hideVip").show();
+                    $('[name=vip]').val("");
+                }
+              
+                $('[name=json]').val("");
+                $(".offerName").html("Create Offer");
+                $('[name=shopId]').val("");
                 $('[name=amount]').val("")
                 $('[name=price]').val("");
+                $('[name=data]').val("");
                 $('[name=private_key]').val("");
                 $('[name=offer_id]').val("");    
             }
@@ -90,18 +146,20 @@ var shop = function() {
                         width: 75,
                         sortable: "desc"
                     }, {
-                        field: "currency",
+                        field: "currency_type",
                         title: "Currency",
+                        template: function(data) {
+                            if(data.data != null)  {
+                                return 'VIP'
+                            }
+                            return data.currency_type;
+                        }
                     }, {
                         field: "amount",
                         title: "Amount"
                     }, {
                         field: "price",
                         title: "Price"
-                    }, {
-                        field: "lang",
-                        title: "Language",
-                        sortable: "desc"
                     }, {
                         field: "Action",
                         title: "Action",
@@ -139,13 +197,27 @@ var shop = function() {
             });
 
             datatableShop();
+        },
+      
+        deleteOffer: function(id) {
+            var self = this;
+            this.ajax_manager = new WebPostInterface.init();
+
+            self.ajax_manager.post("/housekeeping/api/shop/remove", {
+                post: id
+            }, function(result) {
+                if (result.status == "success") {
+                    $("#kt_datatable_shop").KTDatatable("reload");
+                }
+            });
         }
     }
 }();
 
 jQuery(document).ready(function() {
     shop.init();
-  
+ 
+    
     $('.targetCurrency').select2({
         placeholder: 'Select a currency',
         width: '85%',

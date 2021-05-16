@@ -75,7 +75,6 @@ class Routes extends Router
 
                 parent::get('/', 'Home\Index@index')->setName('index.home');
                 parent::get('/home', 'Home\Index@index');
-                parent::get('/paypal/create', 'Shop\Paypal@createOrder');
                 parent::get('/lost', 'Home\Lost@index')->setName('lost');
                 parent::get('/disconnect', 'Home\Lost@index')->setName('index.home');
                 parent::get('/games/ranking', 'Games\Ranking@index'); 
@@ -114,7 +113,6 @@ class Routes extends Router
                 parent::group(['middleware' => LoggedInMiddleware::class, 'exceptionHandler' => ExceptionHandler::class], function () {
 
                     parent::get('/logout', 'Home\Login@logout');
-
                     parent::get('/settings', 'Settings\Preferences@index');
                     parent::get('/settings/email', 'Settings\Email@index');
                     parent::get('/settings/password', 'Settings\Password@index');
@@ -129,10 +127,6 @@ class Routes extends Router
                     parent::get('/shop/{lang}/lang', 'Shop\Shop@index');
                   
                     parent::get('/shop/order/view/{orderId}', 'Shop\History@order');
-                    parent::post('/shop/paypal/create/order', 'Shop\Offers@createOrder')->addMiddleware(ValidateMiddleWare::class);
-                    parent::post('/shop/paypal/captureOrder', 'Shop\Offers@captureOrder')->addMiddleware(ValidateMiddleWare::class);
-                    parent::post('/shop/paypal/confirm', 'Shop\Offers@validate')->addMiddleware(ValidateMiddleWare::class);
-                    parent::post('/shop/paypal/status', 'Shop\Offers@status')->addMiddleware(ValidateMiddleWare::class);
 
                     parent::get('/help/requests/view', 'Help\Requests@index');
                     parent::get('/help/requests/new', 'Help\Ticket@index');

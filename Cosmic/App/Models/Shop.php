@@ -53,6 +53,10 @@ class Shop
         return QueryBuilder::table('website_paypal_payments')->where('order_id', $order_id)->update($data);
     }
    
+    public static function getVipDescription($orderid)
+    {
+        return QueryBuilder::table('website_paypal_vip')->where('order_id', $orderid)->first();
+    }
   
     public static function updateCurrency($player, $amount, $type) 
     {
