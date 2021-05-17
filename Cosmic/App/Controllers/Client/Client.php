@@ -29,7 +29,7 @@ class Client
     {
         $this->data = new stdClass();
     
-        $reader = new Reader(__DIR__. Config::vpnLocation);
+        $reader = new Reader(__DIR__. '/../../' .Config::vpnLocation);
 
         try {
             $this->record = $reader->asn(request()->getIp());
@@ -73,7 +73,7 @@ class Client
             $user->deleteMembership();
         }
 
-        View::renderTemplate('Client/nitro.html', [
+        View::renderTemplate('Client/client.html', [
             'title' => Locale::get('core/title/hotel'),
             'room' => explode("=", url()->getOriginalUrl())[1] ?? null,
             'data'  => $this->data,

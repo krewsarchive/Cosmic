@@ -40,11 +40,20 @@ function WebHotelManagerInterface() {
         }
       
         var argument = arguments;
-
         var body = $("body");
 
-        body.find(".header-container .header-content .account-container .account-buttons .hotel-button").text(Locale.web_hotel_backto);
-
+        if(argument == '/=beta' || argument == 'hotel=beta') {
+            body.find(".header-container .header-content .account-container .account-buttons .nitroButton").text(Locale.web_hotel_backto);
+            if(container.find('iframe').attr('class') != 'client-frame nitro')
+            body.find(".header-container .header-content .account-container .account-buttons .flashButton").text("TO " + Site.name);
+            container.find("iframe").remove();
+        }  else {
+            body.find(".header-container .header-content .account-container .account-buttons .flashButton").text(Locale.web_hotel_backto);
+            if(container.find('iframe').attr('class') != 'client-frame flash')
+            body.find(".header-container .header-content .account-container .account-buttons .nitroButton").text("TO " + Site.name);
+            container.find("iframe").remove();
+        }
+      
         if (!body.hasClass("hotel-visible")) {
             Web.ajax_manager.get("/api/vote", function(result) {
 
@@ -56,10 +65,14 @@ function WebHotelManagerInterface() {
                     History.pushState(null, Site.name + '- Krews Vote', 'hotel');
                 } else {
                     if (container.find(".client-frame").length === 0)
-                      
-                    Web.ajax_manager.get("/api/ssoTicket", function(result) {
-                      container.prepend('<iframe class="client-frame" src="' + Client.nitro_path + '/?sso=' + result.ticket + '"></iframe>');
-                    })
+
+                    if(argument == '/=beta' || argument == 'hotel=beta') {  
+                        Web.ajax_manager.get("/api/ssoTicket", function(result) {
+                            container.prepend('<iframe class="client-frame nitro" src="' + Client.nitro_path + '/?sso=' + result.ticket + '"></iframe>');
+                        });
+                    } else {
+                        container.prepend('<iframe class="client-frame flash" src="/client?' + argument + '"></iframe>');
+                    }
 
                     body.addClass("hotel-visible");
 
