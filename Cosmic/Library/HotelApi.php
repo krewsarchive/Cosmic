@@ -8,7 +8,21 @@ use Library\Json;
 
 class HotelApi
 { 
-    public static function execute($param, $data = null)
+    public static function flatten($array, $prefix = '')
+    {
+        $result = array();
+        foreach($array as $key=>$value) {
+            if(is_array($value)) {
+                $result = $result + self::flatten($value);
+            }
+            else {
+                $result[$prefix . $key] = $value;
+            }
+        }
+        return $result;
+    }
+    
+    public static function execute($param, $data = null, $merge = false)
     {
         if(!Config::apiEnabled) {
             return Json::encode(["status" => "error", "message" => "Socket API has been disabled"]);
@@ -18,8 +32,7 @@ class HotelApi
             return Json::encode(["status" => "error", "message" => "Please enable sockets in your php.ini!"]);
         }
       
-        $data = json_encode(array('key' => $param, 'data' => $data));
-
+        $data = json_encode(array('key' => $param, 'data' => ($merge == true) ? self::flatten($data) : $data));
         $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
       
         if ($socket === false) {

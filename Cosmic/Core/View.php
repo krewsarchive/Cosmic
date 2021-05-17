@@ -58,7 +58,7 @@ class View
           
 
             $twig->addGlobal('site', Config::site); 
-            $twig->addGlobal('paypal_client_id', Config::paypal_client_id);
+            $twig->addGlobal('paypal', Config::paypal);
             $twig->addGlobal('client', Config::client);
             $twig->addGlobal('publickey', \App\Models\Core::settings()->recaptcha_publickey ?? null);
             $twig->addGlobal('csrf_token', csrf_token());

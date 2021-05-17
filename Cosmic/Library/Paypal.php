@@ -15,6 +15,6 @@ class Paypal
 
     public static function environment()
     {
-        return new SandboxEnvironment(Config::paypal_client_id, Config::paypal_secret_id);
+        return new SandboxEnvironment(Config::paypal["paypal_client_id"], Config::paypal["paypal_secret_id"]);
     }
 }

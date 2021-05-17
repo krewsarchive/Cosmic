@@ -100,7 +100,7 @@ class Offers
                         array(
                             'amount' =>
                                 array(
-                                    'currency_code' => $offer->currency,
+                                    'currency_code' => Config::paypal["paypal_currency"],
                                     'value' => $offer->price
                                 )
                         )
@@ -123,21 +123,6 @@ class Offers
         response()->json(["status" => "success", "error" => "Order changed to: " . input('status')]);
     }
   
-    public function vip($offer)
-    {
-        $data = json_decode($offer);
-      
-        foreach($data as $key => $value) {
-            if(is_array($value)) {
-                foreach($value as $badge => $key) {
-                    HotelApi::execute($key, ['user_id' => request()->player->id, $key]);
-                }
-            } else {
-                HotelApi::execute($key, ['user_id' => request()->player->id, $value]);
-            }
-        }
-    }
-
     public function validate()
     {
         $validate = request()->validator->validate([
@@ -156,14 +141,12 @@ class Offers
         if ($order->status != 'COMPLETED') {
             response()->json(["status" => "error", "loadpage" => '/shop/order/view/' . input('orderId'), "message" => "Order isn't ready yet, please check if your payment has been accepted"]);
         } else if ($order->status == 'COMPLETED' && $order->delivered == "NO") {
-            $offer = Shop::getOfferById($order->offer_id);
           
-            if($offer->currency_type == 'vip') {
-                $this->vip($offer->data);
-            } else {
-                if(!HotelApi::execute('givepoints', ['user_id' => request()->player->id, 'points' => $offer->amount, 'type' => $offer->currency_type])) {
-                    Shop::updateCurrency(request()->player->id, $offer->amount, $offer->currency_type);
-                }
+            $offer = Shop::getOfferById($order->offer_id);
+            $data = json_decode($offer->data, true);
+
+            foreach($data as $key => $value) {
+                HotelApi::execute($key, ['user_id' => request()->player->id, $value], true);
             }
           
             Shop::update(input('orderId'), "YES", 'delivered');

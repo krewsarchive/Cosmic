@@ -111,7 +111,7 @@ class Routes extends Router
                  */
 
                 parent::group(['middleware' => LoggedInMiddleware::class, 'exceptionHandler' => ExceptionHandler::class], function () {
-
+                
                     parent::get('/logout', 'Home\Login@logout');
                     parent::get('/settings', 'Settings\Preferences@index');
                     parent::get('/settings/email', 'Settings\Email@index');
@@ -124,7 +124,7 @@ class Routes extends Router
                     parent::get('/shop/club', 'Shop\Club@index');
                     parent::get('/shop/history', 'Shop\History@index');
                     parent::get('/shop/drawbadge', 'Shop\Drawbadge@index');
-                    parent::get('/shop/{lang}/lang', 'Shop\Shop@index');
+                    parent::get('/test', 'Shop\Offers@test');
                   
                     parent::get('/shop/order/view/{orderId}', 'Shop\History@order');
 

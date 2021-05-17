@@ -3339,6 +3339,7 @@ input:-webkit-autofill {
 
 .page-container[data-page="community_fansites"] .page-content .fansites-container .fansite-container {
     margin-bottom: 33px;
+    display: table-caption;
 }
 
 .page-container[data-page="community_fansites"] .page-content .fansites-container .fansite-container .fansite-content {
@@ -3448,10 +3449,7 @@ input:-webkit-autofill {
 }
 
 .page-container[data-page="shop"] .offers-container .offer-container .offer-content .credits-sprite {
-    float: left;
     background-repeat: no-repeat;
-    display: block;
-    margin: -5px -20px;
 }
 
 .page-container[data-page="shop"] .offers-container .offer-container .offer-content .credits-sprite-shop_icon_1 {
@@ -3583,8 +3581,9 @@ input:-webkit-autofill {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #1C1C1A;;
     padding: 0 5px 0 52px;
-    width: 150px;
+    width: 330px;
     height: 44px;
+    margin-bottom: 15px;
     line-height: 44px;
     overflow: hidden;
     white-space: nowrap;
@@ -3619,6 +3618,14 @@ input:-webkit-autofill {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: pixelated;
 }
+
+.page-container[data-page="shop"] .shop-purses .purse-container.credits:before,
+.page-container[data-page="shop_history"] .shop-purses .purse-container.credits:before,
+.page-container[data-page="shop_club"] .shop-purses .purse-container.credits:before {
+    background-image: url(../images/hotel/purses/credits-icon.png);
+    background-color: rgb(113 144 69);;
+}
+
 
 .page-container[data-page="shop"] .shop-purses .purse-container.diamonds:before,
 .page-container[data-page="shop_history"] .shop-purses .purse-container.diamonds:before,

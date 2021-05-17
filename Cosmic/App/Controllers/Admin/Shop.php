@@ -27,7 +27,9 @@ class Shop
     public function editcreate()
     {
         $validate = request()->validator->validate([
-            'price'     => 'required|numeric'
+            'title' => 'required',
+            'price' => 'required|numeric',
+            'json'  => 'required'
         ]);
       
         if(!$validate->isSuccess()) {
@@ -35,17 +37,13 @@ class Shop
         }
       
         $data = [
+            "title" => input('title'),
             "price" => input('price'),
-            "image" => input('image')
+            "image" => input('image'),
+            "data"  => trim(input('json')),
+            "description" => input('description')
         ];
       
-        if(input('vip') == '1') {
-            $result = Json::validate(input('json'));
-            if($result) {
-                $data += ["currency_type" => "vip", "data" => trim(input('json'))];
-            }
-        }
-              
         if (!empty(input('shopId'))) {
             $id = input('shopId');
         }
@@ -72,10 +70,6 @@ class Shop
     public function getOffers()
     {
         $offers = Admin::getOffers();
-        foreach($offers as $offer) {
-            $offer->currency_type = Core::getCurrencyByType($offer->currency_type)->currency;
-        }
-
         Json::filter($offers, 'desc', 'id');
     }
 
