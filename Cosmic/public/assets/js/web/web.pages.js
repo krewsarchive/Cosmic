@@ -57,12 +57,8 @@ function WebHotelManagerInterface() {
         if (!body.hasClass("hotel-visible")) {
             Web.ajax_manager.get("/api/vote", function(result) {
 
-                if (result.krews_list !== undefined && result.krews_list.status == 0) {
-                    container.prepend('<iframe class="client-frame" src="' + result.krews_api + '"></iframe>');
-                    body.addClass("hotel-visible");
-                    body.find(".client-buttons").hide();
-
-                    History.pushState(null, Site.name + '- Krews Vote', 'hotel');
+                if (result.status != "voted") {
+                    window.location.href = result.api;
                 } else {
                     if (container.find(".client-frame").length === 0)
 

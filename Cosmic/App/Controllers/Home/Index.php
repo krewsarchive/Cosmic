@@ -15,6 +15,7 @@ use stdClass;
 
 class Index
 {
+
     public function index()
     {       
         $news = Community::getNews(6);

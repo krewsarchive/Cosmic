@@ -47,6 +47,12 @@ class Api
                 "ssoToken" => $_SESSION['auth_ticket']
         ];
       
+        $user = Player::getDataById(request()->player->id);
+        if ($user->getMembership()) {
+            HotelApi::execute('setrank', ['user_id' => $user->id, 'rank' => $user->getMembership()->old_rank]);
+            $user->deleteMembership();
+        }
+      
         return response()->json($this->callback);
     }
   
@@ -170,36 +176,17 @@ class Api
   
     public function vote()
     {
-        if(isset($this->settings->krews_api_hotel_slug) && isset(request()->player->id))
-        {
-            if(!isset($_COOKIE['expires_at_seconds']) || $_COOKIE['expires_at_seconds'] < time()) 
-            {
-                $this->return_to = "https://list.krews.org";
-              
-                $this->krewsList = json_decode(@file_get_contents($this->return_to . "/api/votes/". $this->settings->krews_api_hotel_slug . "/validate?ip=" . request()->getIp()));
-                $this->api_param = $this->settings->krews_api_hotel_slug . "?username=" . request()->player->username;
+          $FindRetros = new \Library\FindRetros();
 
-                if($this->krewsList) {
-                    if($this->krewsList->status == 0 && !request()->isAjax()) {
-                        redirect($this->return_to . "/vote/" . $this->api_param);
-                    }
-
-                    if($this->krewsList->status == 0 && request()->isAjax()) {
-                        $this->callback = [
-                            'krews_list' => $this->krewsList,
-                            'krews_api'  => $this->return_to . "/vote/" . $this->api_param
-                        ];
-                    }
-
-                    if($this->krewsList->status == 1) {
-                        setcookie('expires_at_seconds', $this->krewsList->expires_at_seconds + time(), '/');
-                    }
-                } else {
-                    $this->callback == "not configurated";
-                }
-            }
-        }
-        response()->json($this->callback);
+          if($FindRetros->hasClientVoted()) {  
+              $this->callback = ["status" => "voted"];
+          } else {
+              $this->callback = [
+                  "status"  => 0,
+                  "api"     => $FindRetros->redirectClient()
+              ];
+          }
+          response()->json($this->callback ?? null);
     }
   
     public function krews()
