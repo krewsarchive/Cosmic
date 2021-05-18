@@ -20,7 +20,7 @@ class Shop
     public function remove()
     {
         $faq = Admin::removeOffer(input('post'));
-        Log::addStaffLog('-1', 'Offer removed: ' . intval(input()->post('post')->value), request()->player->id, 'offer');
+        Log::addStaffLog(input('post'), 'Offer removed: ' . intval(input()->post('post')->value), request()->player->id, 'offer');
         response()->json(["status" => "success", "message" => "Offer removed successfully!"]);
     }
   
@@ -49,7 +49,7 @@ class Shop
         }
 
         Admin::offerEdit($data, $id ?? null);
-        Log::addStaffLog('-1', 'Shop item ' . isset($id) ? "modafied" : "created" . '{' . "{$data}" . '}', request()->player->id, 'shop');
+        Log::addStaffLog($id ?? null, 'Shop item ' . isset($id) ? "modafied" : "created" . '{' . "{$data}" . '}', request()->player->id, 'shop');
         response()->json(["status" => "success", "message" => "Offer " . empty($id) ? "modafied" : "created"]);
     }
   

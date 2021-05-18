@@ -42,12 +42,21 @@ class Config
       "sitename"    => "Cosmic"
     ];
   
+    /**
+     * FindRetro's API, set enabled = true when you want to force vote.
+     */
+  
     const findRetros = [
         "pagename"    => "cosmic",
         "timeout"     => 2,
         "cloudflare"  => true,
+        "enabled"     => false,
         "api"         => "https://findretros.com/"
     ];
+  
+    /**
+     * Paypal API => SHOP
+     */
   
     const paypal = [
        "paypal_client_id"  => "AZgKBttgOzrm8jk92EdsdgqSqOeIa3bTUCORltU_uzRHiiuQhrZadQVawjIW0c0WlgP091aCBPNXrI9q",
@@ -57,7 +66,6 @@ class Config
       
     const language = "EN";
     const region = "Europe/Amsterdam";
-  
     const SECRET_TOKEN = "COSMIC-shdl3w5rvb4ef141spbed";
 
   
@@ -95,9 +103,7 @@ class Config
   
     /* DONT CHANGE  */
     const apiEnabled = true;
-    const debug = true;
-    const view = "App/View";
-  
+    const debug = false;
     const vpnLocation = "/../ASN.mmdb";
 }
 

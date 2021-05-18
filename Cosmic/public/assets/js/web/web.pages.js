@@ -57,7 +57,7 @@ function WebHotelManagerInterface() {
         if (!body.hasClass("hotel-visible")) {
             Web.ajax_manager.get("/api/vote", function(result) {
 
-                if (result.status != "voted") {
+                if (result.status != "voted" && Site.findretros === true) {
                     window.location.href = result.api;
                 } else {
                     if (container.find(".client-frame").length === 0)

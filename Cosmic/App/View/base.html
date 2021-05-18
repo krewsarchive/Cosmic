@@ -61,8 +61,6 @@
         client_radio: "{{client.client_radio}}",
         nitro_path: "{{client.nitro_path}}"   
     }
-    
-
     var User = {
         id: {{player.id}},
         username: "{{player.username}}",
@@ -72,11 +70,11 @@
 
     };
     {% endif %}
-
     var Configuration = {
         {% if publickey is not empty %}recaptcha_public: "{{publickey}}",{% endif %}
         revision: "{{revision}}2213",
         cache: "AEEA19MN001C",
+        findretros: {% if findretros.enabled %}true{% else %}false{% endif %}
     }
     </script>
 </head>
