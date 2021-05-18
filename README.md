@@ -63,37 +63,54 @@ location / {
 
 If you using cloudflare make sure you whitelist cloudflare ipadresses and set the correct header as response to Cosmic.
 
-Create file inside /etc/nginx named `cloudflare-real-ips.conf`
+Create file inside `/opt/scripts/` called `cloudflare-ip-whitelist-sync.sh`
+
+paste the following code inside of it
 ```
-set_real_ip_from 173.245.48.0/20;
-set_real_ip_from 103.21.244.0/22;
-set_real_ip_from 103.22.200.0/22;
-set_real_ip_from 103.31.4.0/22;
-set_real_ip_from 141.101.64.0/18;
-set_real_ip_from 108.162.192.0/18;
-set_real_ip_from 190.93.240.0/20;
-set_real_ip_from 188.114.96.0/20;
-set_real_ip_from 197.234.240.0/22;
-set_real_ip_from 198.41.128.0/17;
-set_real_ip_from 162.158.0.0/15;
-set_real_ip_from 172.64.0.0/13;
-set_real_ip_from 131.0.72.0/22;
-set_real_ip_from 104.16.0.0/13;
-set_real_ip_from 104.24.0.0/14;
-set_real_ip_from 2400:cb00::/32;
-set_real_ip_from 2606:4700::/32;
-set_real_ip_from 2803:f800::/32;
-set_real_ip_from 2405:b500::/32;
-set_real_ip_from 2405:8100::/32;
-set_real_ip_from 2a06:98c0::/29;
-set_real_ip_from 2c0f:f248::/32;
-real_ip_header CF-Connecting-IP;
+#!/bin/bash
+
+CLOUDFLARE_FILE_PATH=/etc/nginx/cloudflare
+
+echo "#Cloudflare" > $CLOUDFLARE_FILE_PATH;
+echo "" >> $CLOUDFLARE_FILE_PATH;
+
+echo "# - IPv4" >> $CLOUDFLARE_FILE_PATH;
+for i in `curl https://www.cloudflare.com/ips-v4`; do
+        echo "set_real_ip_from $i;" >> $CLOUDFLARE_FILE_PATH;
+done
+
+echo "" >> $CLOUDFLARE_FILE_PATH;
+echo "# - IPv6" >> $CLOUDFLARE_FILE_PATH;
+for i in `curl https://www.cloudflare.com/ips-v6`; do
+        echo "set_real_ip_from $i;" >> $CLOUDFLARE_FILE_PATH;
+done
+
+echo "" >> $CLOUDFLARE_FILE_PATH;
+echo "real_ip_header CF-Connecting-IP;" >> $CLOUDFLARE_FILE_PATH;
+
+#test configuration and reload nginx
+nginx -t && systemctl reload nginx
 ```
 
-Add the line below inside the tags `nginx.conf`
+give it execute permissions `sudo chmod +x /opt/scripts/cloudflare-ip-whitelist-sync.sh`
+
+run it by using this command `sudo sh /opt/scripts/cloudflare-ip-whitelist-sync.sh`
+
+Add the line below inside the tags `/etc/nginx/nginx.conf`
 ```
-http { include /etc/nginx/cloudflare-real-ips.conf }
+# inside the http block
+http { 
+   include /etc/nginx/cloudflare 
+   }
 ```
+
+create a cron job with the following details
+```
+# Auto sync ip addresses of Cloudflare and reload nginx
+30 2 * * * /opt/scripts/cloudflare-ip-whitelist-sync.sh >/dev/null 2>&1
+```
+
+restart nginx using `sudo systemctl restart nginx`
 
 ### Setting up Apache
 
