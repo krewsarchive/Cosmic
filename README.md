@@ -92,6 +92,10 @@ echo "real_ip_header CF-Connecting-IP;" >> $CLOUDFLARE_FILE_PATH;
 nginx -t && systemctl reload nginx
 ```
 
+give it execute permissions `sudo chmod +x /opt/scripts/cloudflare-ip-whitelist-sync.sh`
+
+run it by using this command `sudo sh /opt/scripts/cloudflare-ip-whitelist-sync.sh`
+
 Add the line below inside the tags `/etc/nginx/nginx.conf`
 ```
 # inside the http block
@@ -106,7 +110,7 @@ create a cron job with the following details
 30 2 * * * /opt/scripts/cloudflare-ip-whitelist-sync.sh >/dev/null 2>&1
 ```
 
-restart nginx using `systemctl restart nginx`
+restart nginx using `sudo systemctl restart nginx`
 
 ### Setting up Apache
 
