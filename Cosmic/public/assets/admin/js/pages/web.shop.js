@@ -76,6 +76,11 @@ var shop = function() {
                 $('[name=data]').val("");
                 $('[name=private_key]').val("");
                 $('[name=offer_id]').val("");
+
+                
+                $(".offerName").click(function() {
+                    $("[name=json]").val(JSON.stringify(editor.get()))
+                });
             }
         },
 
