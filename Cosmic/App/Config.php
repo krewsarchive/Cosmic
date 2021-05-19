@@ -50,7 +50,7 @@ class Config
         "pagename"    => "cosmic",
         "timeout"     => 2,
         "cloudflare"  => true,
-        "enabled"     => false,
+        "enabled"     => true,
         "api"         => "https://findretros.com/"
     ];
   

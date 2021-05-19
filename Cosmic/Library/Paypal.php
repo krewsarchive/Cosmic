@@ -4,7 +4,7 @@ namespace Library;
 use App\Config;
 
 use PayPalCheckoutSdk\Core\PayPalHttpClient;
-use PayPalCheckoutSdk\Core\SandboxEnvironment;
+use PayPalCheckoutSdk\Core\ProductionEnvironment;
 
 class Paypal
 {
@@ -15,6 +15,6 @@ class Paypal
 
     public static function environment()
     {
-        return new SandboxEnvironment(Config::paypal["paypal_client_id"], Config::paypal["paypal_secret_id"]);
+        return new ProductionEnvironment(Config::paypal["paypal_client_id"], Config::paypal["paypal_secret_id"]);
     }
 }
