@@ -4565,7 +4565,7 @@ input:-webkit-autofill {
 }
 
 .page-container[data-page="profile"] .profile-header {
-    background-image: url(https://habboo-a.akamaihd.net/c_images/web_promo/lpromo_winterpalace.png);
+    background-image: url(../images/web/pages/profile/headerprofile.png);
     background-position: center;
     height: 165px;
     position: relative;

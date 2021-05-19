@@ -44,14 +44,16 @@ function WebHotelManagerInterface() {
 
         if(argument == '/=beta' || argument == 'hotel=beta') {
             body.find(".header-container .header-content .account-container .account-buttons .nitroButton").text(Locale.web_hotel_backto);
-            if(container.find('iframe').attr('class') != 'client-frame nitro')
-            body.find(".header-container .header-content .account-container .account-buttons .flashButton").text("TO " + Site.name);
-            container.find("iframe").remove();
+            if(container.find('iframe').hasClass('nitro') != true) {
+                body.find(".header-container .header-content .account-container .account-buttons .flashButton").text("TO " + Site.name);
+                container.find("iframe").remove();
+            }
         }  else {
             body.find(".header-container .header-content .account-container .account-buttons .flashButton").text(Locale.web_hotel_backto);
-            if(container.find('iframe').attr('class') != 'client-frame flash')
-            body.find(".header-container .header-content .account-container .account-buttons .nitroButton").text("TO " + Site.name);
-            container.find("iframe").remove();
+            if(container.find('iframe').hasClass('flash') != true) {
+                body.find(".header-container .header-content .account-container .account-buttons .nitroButton").text("TO " + Site.name);
+                container.find("iframe").remove();
+            }
         }
       
         if (!body.hasClass("hotel-visible")) {
