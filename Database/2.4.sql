@@ -496,6 +496,7 @@ INSERT INTO `website_settings` VALUES ('available_profile_widgets', 'myhabbo;fri
 -- ----------------------------
 DROP TABLE IF EXISTS `website_settings_currencys`;
 CREATE TABLE `website_settings_currencys`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `currency` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `type` int(3) NULL DEFAULT NULL,
   `amount` int(12) NULL DEFAULT NULL
@@ -504,8 +505,8 @@ CREATE TABLE `website_settings_currencys`  (
 -- ----------------------------
 -- Records of website_settings_currencys
 -- ----------------------------
-INSERT INTO `website_settings_currencys` VALUES ('duckets', 0, 1000);
-INSERT INTO `website_settings_currencys` VALUES ('diamonds', 5, 1000);
+INSERT INTO `website_settings_currencys` VALUES ('1', 'duckets', 0, 1000);
+INSERT INTO `website_settings_currencys` VALUES ('2', 'diamonds', 5, 1000);
 
 
 -- ----------------------------
