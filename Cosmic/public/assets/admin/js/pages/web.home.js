@@ -33,12 +33,12 @@ var home = function() {
                         input: $("#search_LatestPlayers")
                     },
                     columns: [{
-                        field: "timestamp",
+                        field: "id",
                         title: "#",
                         type: "number",
                         width: 75,
                         template: function(data) {
-                            return '<span class="kt-font">' + data.timestamp + '</span>';
+                            return '<span class="kt-font">' + data.id + '</span>';
                         }
                     }, {
                         field: "username",
@@ -112,7 +112,7 @@ var home = function() {
                         type: "number",
                         width: 75,
                         template: function(data) {
-                            return '<span class="kt-font">' + data.id + '</span>';
+                            return '<span class="kt-font">' + data.user_id + '</span>';
                         }
                     }, {
                         field: "new_name",
