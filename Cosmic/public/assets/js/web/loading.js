@@ -32,7 +32,7 @@ function SiteLoadingInterface()
         this.loading_container = $(".loading-container");
 
         this.cache_id = Configuration.cache;
-
+    }
   
     this.load_file = function (file_id)
     {
