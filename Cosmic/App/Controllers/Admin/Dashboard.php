@@ -21,6 +21,7 @@ class Dashboard
         }
 
         foreach ($latest_users as $row) {
+            $row->id = $row->id;
             $row->last_login  = $row->online ? 'Online' : date("d-m-Y H:i:s", $row->last_login);
             $row->ip_current  = Helper::convertIp($row->ip_current);
             $row->ip_register = Helper::convertIp($row->ip_register);
