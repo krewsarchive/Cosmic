@@ -31,7 +31,12 @@ function SiteLoadingInterface()
         this.total_files = this.files.length;
         this.loading_container = $(".loading-container");
 
+<<<<<<< HEAD
         this.cache_id = Configuration.cache;
+=======
+        //this.cache_id = (new Date().getTime() + Math.floor((Math.random() * 10000) + 1)).toString(16);
+        this.cache_id = 'COSMICV2.4.1';
+>>>>>>> a23fecf59396e14c473f05c51b555866b7fd2593
     };
 
   
