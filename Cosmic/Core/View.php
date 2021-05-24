@@ -8,6 +8,7 @@ use App\Flash;
 use App\Models\Permission;
 use App\Models\Player;
 use App\Models\Admin;
+use App\Models\Core;
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -56,18 +57,22 @@ class View
                 'debug' => Config::debug
             ));
           
+            $settings = Core::settings();
+            
             $twig->addGlobal('site', Config::site); 
-            $twig->addGlobal('paypal', Config::paypal);
+            $twig->addGlobal('paypal_client_id', $settings->paypal_client_id);
+            $twig->addGlobal('paypal_currency', $settings->paypal_currency);
             $twig->addGlobal('client', Config::client);
             $twig->addGlobal('findretros', Config::findRetros);
+            $twig->addGlobal('cache_timestamp', $settings->cache_timestamp ?? null);
           
-            $twig->addGlobal('publickey', \App\Models\Core::settings()->recaptcha_publickey ?? null);
+            $twig->addGlobal('publickey', $settings->recaptcha_publickey ?? null);
 
             $twig->addGlobal('locale', Locale::get('website/' . (isset($args['page']) ? $args['page'] : null), true));
             $twig->addGlobal('locale_base', Locale::get('website/base', true));
           
             $twig->addGlobal('online_count', \App\Models\Core::getOnlineCount());
-
+ 
             if (request()->player !== null) {
 
                 $twig->addGlobal('player_currency', Player::getCurrencys(request()->player->id));

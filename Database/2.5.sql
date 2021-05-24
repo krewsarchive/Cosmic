@@ -488,6 +488,18 @@ INSERT INTO `website_settings` VALUES ('draw_badge_imaging', NULL);
 INSERT INTO `website_settings` VALUES ('draw_badge_currency', '5');
 INSERT INTO `website_settings` VALUES ('draw_badge_price', '1000');
 INSERT INTO `website_settings` VALUES ('available_profile_widgets', 'myhabbo;friends;rooms;groups;mybadges;note;photos');
+INSERT INTO `website_settings` VALUES ('cache_timestamp', '336fe37f95117bcf3f99c56aca3758d2');
+INSERT INTO `website_settings` VALUES ('findretros_enabled', 'false');
+INSERT INTO `website_settings` VALUES ('findretros_timeout', '2');
+INSERT INTO `website_settings` VALUES ('findretros_cloudflare', 'true');
+INSERT INTO `website_settings` VALUES ('findretros_api', 'https://findretros.com/');
+INSERT INTO `website_settings` VALUES ('findretros_pagename', 'cosmic');
+INSERT INTO `website_settings` VALUES ('paypal_secret_id', 'EHdmOYyk8cZvAxi8IMcKn4bsAFHizM3tHokRUiyL6gswAPdtER2B5CkppiyMJKLf6cjQpMCRXX41gV-r');
+INSERT INTO `website_settings` VALUES ('paypal_client_id', 'AZgKBttgOzrm8jk92EdsdgqSqOeIa3bTUCORltU_uzRHiiuQhrZadQVawjIW0c0WlgP091aCBPNXrI9q');
+INSERT INTO `website_settings` VALUES ('paypal_currency', 'USD');
+INSERT INTO `website_settings` VALUES ('paypal_sandbox_enabled', 'true');
+
+
 -- ----------------------------
 -- Table structure for website_settings_currencys
 -- ----------------------------

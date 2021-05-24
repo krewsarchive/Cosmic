@@ -311,14 +311,18 @@ jQuery(document).ready(function() {
     blockPageInterface.init();
     select2Interface.init();
 
+    var self = this;
+    this.ajax_manager = new WebPostInterface.init();
+
     $("#showOnlinePlayers").unbind().click(function () {
         showOnlinePlayers.init();
     });
   
+    $(".clearCache").unbind().click(function () {
+        self.ajax_manager.post("/housekeeping/api/dashboard/clearcache", {});
+   });
+  
     $(".maintenance").unbind().click(function () {
-        var self = this;
-        this.ajax_manager = new WebPostInterface.init();
-
         self.ajax_manager.post("/housekeeping/api/dashboard/maintenance", {});
    });
 });

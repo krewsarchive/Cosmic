@@ -31,14 +31,11 @@ class Settings
                 
                 $value = json_encode(input()->post('vip_gift_items'));
             }
-
-            if($column == "krews_api_hotel_slug") {
-                $value = \App\Helper::convertSlug($value);    
-            }
           
             Admin::saveSettings($column, $value);
         }
       
+
         response()->json(["status" => "success", "message" => "Saved!"]);
     }
   

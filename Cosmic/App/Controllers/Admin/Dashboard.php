@@ -58,6 +58,12 @@ class Dashboard
         $maintenance = Admin::saveSettings('maintenance', (Core::settings()->maintenance == "1") ? "0" : "1");
         response()->json(["status" => "success", "message" => "Maintenance updated"]);
     }
+  
+    public function clearcache()
+    {
+        Admin::saveSettings('cache_timestamp', md5(time()));
+        response()->json(["status" => "success", "message" => "Cache deleted!"]);
+    }
 
     public function view()
     {

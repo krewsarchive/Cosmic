@@ -1217,7 +1217,11 @@ function WebPageShopInterface(main_page) {
             page_container.find(".left-side .aside-title-content").html(amount + ' ' + currency);
           
             page_container.find(".right-side .aside-content").html(description);
-            
+
+            if (page_container.find(".paypal-buttons")[0]){
+                return;
+            }
+          
             paypal.Buttons({
                 createOrder: function(data, actions) {
                     return fetch('/shop/offers/createorder', {

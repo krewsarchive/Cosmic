@@ -2,14 +2,16 @@
 namespace Library;
 
 use App\Config;
+use App\Models\Core;
 
 class FindRetros {
     private $pageName, $callTimeout, $usingCloudFlare, $apiPath;
     function __construct() {
-        $this->pageName        = Config::findRetros['pagename'];
-        $this->requestTimeout  = Config::findRetros['timeout'];
-        $this->usingCloudFlare = Config::findRetros['cloudflare'];
-        $this->apiPath         = Config::findRetros['api'];
+        $core = new Core();
+        $this->pageName        = $core->settings()->findretros_pagename;
+        $this->requestTimeout  = $core->settings()->findretros_timeout;
+        $this->usingCloudFlare = $core->settings()->findretros_cloudflare;
+        $this->apiPath         = $core->settings()->findretros_api;
         if($this->usingCloudFlare) {
             if(isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
                 $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];

@@ -3339,7 +3339,7 @@ input:-webkit-autofill {
 
 .page-container[data-page="community_fansites"] .page-content .fansites-container .fansite-container {
     margin-bottom: 33px;
-    display: table-caption;
+    display: flex;
 }
 
 .page-container[data-page="community_fansites"] .page-content .fansites-container .fansite-container .fansite-content {

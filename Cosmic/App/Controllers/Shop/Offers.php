@@ -100,7 +100,7 @@ class Offers
                         array(
                             'amount' =>
                                 array(
-                                    'currency_code' => Config::paypal["paypal_currency"],
+                                    'currency_code' => Core::settings()->paypal_currency,
                                     'value' => $offer->price
                                 )
                         )

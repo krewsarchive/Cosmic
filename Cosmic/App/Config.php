@@ -41,28 +41,6 @@ class Config
       "shortname"   => "Cosmic",
       "sitename"    => "Cosmic"
     ];
-  
-    /**
-     * FindRetro's API, set enabled = true when you want to force vote.
-     */
-  
-    const findRetros = [
-        "pagename"    => "cosmic",
-        "timeout"     => 2,
-        "cloudflare"  => true,
-        "enabled"     => true,
-        "api"         => "https://findretros.com/"
-    ];
-  
-    /**
-     * Paypal API => SHOP
-     */
-  
-    const paypal = [
-       "paypal_client_id"  => "AZgKBttgOzrm8jk92EdsdgqSqOeIa3bTUCORltU_uzRHiiuQhrZadQVawjIW0c0WlgP091aCBPNXrI9q",
-       "paypal_secret_id"  => "EHdmOYyk8cZvAxi8IMcKn4bsAFHizM3tHokRUiyL6gswAPdtER2B5CkppiyMJKLf6cjQpMCRXX41gV-r",
-       "paypal_currency"   => "USD"
-    ];
       
     const language = "EN";
     const region = "Europe/Amsterdam";

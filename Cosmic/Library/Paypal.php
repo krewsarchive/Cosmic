@@ -2,19 +2,25 @@
 namespace Library;
 
 use App\Config;
+use App\Models\Core;
 
 use PayPalCheckoutSdk\Core\PayPalHttpClient;
-use PayPalCheckoutSdk\Core\ProductionEnvironment;
 
 class Paypal
 {
+    public static $environment;
+    
     public static function client()
     {
-        return new PayPalHttpClient(self::environment());
+        $boolean = filter_var(Core::settings()->paypal_sandbox_enabled, FILTER_VALIDATE_BOOLEAN); 
+        self::$environment = ($boolean) ? 'SandboxEnvironment' : 'ProductionEnvironment';
+        return new PayPalHttpClient(self::production());
     }
 
-    public static function environment()
+    public static function production()
     {
-        return new ProductionEnvironment(Config::paypal["paypal_client_id"], Config::paypal["paypal_secret_id"]);
+        $class = '\PayPalCheckoutSdk\Core\\' . self::$environment;
+        return new $class(Core::settings()->paypal_client_id, Core::settings()->paypal_secret_id);
     }
+  
 }

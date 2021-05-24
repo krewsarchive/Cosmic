@@ -37,36 +37,45 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
-
-                                                    <h3 class="kt-section__title">2. Krews API:</h3>
+                                                    <h3 class="kt-section__title">2. Findretros API:</h3>
                                                     <div class="kt-section__body">
                                                         <div class="form-group row">
-                                                            <label></label>
-                                                            <label class="col-lg-3 col-form-label">API useragent:</label>
+                                                            <label class="col-lg-3 col-form-label">API host:</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" name="krews_api_useragent" value="{{settings.krews_api_useragent}}" class="form-control">
-                                                              <span class="form-text text-muted"><a href="https://list.krews.org/" target="_blank">Krews #toplists</a> Regularly scans your hotel for information about your Hotel, we use this information to Score your hotel. Providing your online count is optional but highly recommended.</span>
+                                                                <input type="text" name="findretros_api" value="{{settings.findretros_api}}" class="form-control">
+                                                                <span class="form-text text-muted">Please fill in here the findretros API</span>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label class="col-lg-3 col-form-label">Hotel Slug:</label>
+                                                            <label class="col-lg-3 col-form-label">Pagename:</label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" name="krews_api_hotel_slug" value="{{settings.krews_api_hotel_slug}}" class="form-control">
-                                                                <span class="form-text text-muted">Fill in your krews hotel-slug, your Hotel Slug is a unique way for your hotel to be identified, this is unique to your hotel and used by our API.</span>
+                                                                <input type="text" name="findretros_pagename" value="{{settings.findretros_pagename}}" class="form-control">
+                                                                <span class="form-text text-muted">Please fill in here your findretros pagenamer</span>
                                                             </div>
-                                                        </div>                                                    
+                                                        </div>
                                                         <div class="form-group row">
-                                                            <label class="col-lg-3 col-form-label">Advanced statistics?:</label>
+                                                            <label class="col-lg-3 col-form-label">Timeout:</label>
                                                             <div class="col-lg-6">
-                                                                  <select name="krews_api_advanced_stats" class="form-control">
-                                                                      <option value="0"  {% if settings.krews_api_advanced_stats == 0 %}selected{% endif %}>No</option>
-                                                                      <option value="1"  {% if settings.krews_api_advanced_stats == 1 %}selected{% endif %}>Yes</option>
-                                                                  </select>
-                                                                  <span class="form-text text-muted">Advanced Statistics send additional data to Krews which may not be used for ranking your hotel but could be displayed within your Profile or a Global Statistics page.</span>
+                                                                <input type="number" name="findretros_timeout" value="{{settings.findretros_timeout}}" class="form-control">
+                                                                <span class="form-text text-muted">Timeout request through findretros</span>
+                                                            </div>
+                                                        </div>
+                                                         <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Cloudflare:</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" name="findretros_cloudflare" value="{{settings.findretros_cloudflare}}" class="form-control">
+                                                                <span class="form-text text-muted">Are you using cloudflare? (Checkbox for yes)</span>
+                                                            </div>
+                                                        </div>
+                                                         <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Enabled:</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" name="findretros_enabled" value="{{settings.findretros_enabled}}" class="form-control">
+                                                                <span class="form-text text-muted">Are you using Findretros? (True or False)</span>
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
 
                                                     <h3 class="kt-section__title">3. Recaptcha</h3>
@@ -83,6 +92,39 @@
                                                             <div class="col-lg-6">
                                                                 <input type="text" name="recaptcha_secretkey" value="{{settings.recaptcha_secretkey}}" class="form-control">
                                                                 <span class="form-text text-muted">Fill in here your privatekey</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                  
+                                                    <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+
+                                                    <h3 class="kt-section__title">4. Paypal API</h3>
+                                                    <div class="kt-section__body">
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Paypal Client ID:</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" name="paypal_client_id" value="{{settings.paypal_client_id}}" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Paypal Secret key:</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" name="paypal_secret_id" value="{{settings.paypal_secret_id}}" class="form-control">
+                                                                <span class="form-text text-muted">Fill in here your secret key</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Paypal currency:</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" name="paypal_currency" value="{{settings.paypal_currency}}" class="form-control">
+                                                                <span class="form-text text-muted">E.q (EUR, USD, AUS..)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">Paypal sandbox:</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" name="paypal_sandbox_enabled" value="{{settings.paypal_sandbox_enabled}}" class="form-control">
+                                                                <span class="form-text text-muted">Are you using Sandbox? (True or False)</span>
                                                             </div>
                                                         </div>
                                                     </div>
