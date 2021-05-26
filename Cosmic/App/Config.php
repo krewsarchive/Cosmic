@@ -81,7 +81,7 @@ class Config
   
     /* DONT CHANGE  */
     const apiEnabled = true;
-    const debug = true;
+    const debug = false;
     const vpnLocation = "/../ASN.mmdb";
 }
 
