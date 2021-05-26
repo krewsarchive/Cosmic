@@ -165,6 +165,12 @@
                                 <input type="text" name="referral" class="rounded-input blue-active" value="{{referral.username}}" readonly>
                             </div>
                             {% endif %}
+                            {% if publickey %}
+                            <div class="row">
+                                <h5>Recaptcha</h5>
+                                <div id="registration-recaptcha"></div>
+                            </div>
+                            {% endif %}
                         </div>
                         <div class="content-side" style="padding: 18px;">
                             <div class="aside-title-content" style="padding: 0px;padding-bottom: 15px;">{{locale.create_user}}</div>
@@ -203,12 +209,11 @@
                                     <span data-avatar="4"></span>
                                 </div>
                             </div>
+                            <input type="hidden" name="csrftoken" value="{{csrf_token}}">
                         </div>
                     </div>
-                     <input type="hidden" name="csrftoken" value="{{csrf_token}}">
                     <p style="text-align: center; margin-top: 30px; padding-bottom: 30px;"><button type="submit" class="rounded-button blue plain submit-form default-prevent" id="registration-recaptcha">{{locale.register}}</button></p>
                 </form>
             </article>
-
         </div>
 {% endblock %}

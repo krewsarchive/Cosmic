@@ -59,7 +59,9 @@ function WebHotelManagerInterface() {
         if (!body.hasClass("hotel-visible")) {
             Web.ajax_manager.get("/api/vote", function(result) {
 
+                console.log(Configuration.findretros)
                 if (result.status != "voted" && Configuration.findretros === true) {
+                    console.log(result.api)
                     window.location.href = result.api;
                 } else {
                     if (container.find(".client-frame").length === 0)
@@ -1059,26 +1061,13 @@ function WebPageRegistrationInterface(main_page) {
                 self.update_avatar($(this).attr("data-avatar"));
         });
 
-
-        if (Configuration.recaptcha_public)
-            var registration_holder = grecaptcha.render("registration-recaptcha", {
-                "sitekey": Configuration.recaptcha_public,
-                "size": "invisible",
-                "badge": "bottomright",
-                "callback": function(recaptchaToken) {
-                    page_container.find(".registration-form").removeClass("default-prevent").submit().addClass("default-prevent");
-                    grecaptcha.reset(registration_holder);
-                }
+        if (Configuration.recaptcha_public) {
+            grecaptcha.render('registration-recaptcha', {
+              'sitekey' : Configuration.recaptcha_public
             });
-
-        page_container.find(".registration-form").submit(function(event) {
-            if (!$(this).hasClass("default-prevent"))
-                return;
-
-            event.preventDefault();
-            grecaptcha.execute(registration_holder);
-        });
-    };
+        }
+      
+    }
 
     this.username_availability = function(username) {
         var page_container = this.main_page.get_page_container();
@@ -1212,6 +1201,8 @@ function WebPageShopInterface(main_page) {
             var currency = $(this).data("type");
             var description = $(this).data("description");
           
+            var csrftoken = page_container.find("[name=csrftoken]").val();
+            
             page_container.find(".offer-container").hide();
             page_container.find("#offer-" + orderId).show();
             page_container.find(".left-side .aside-title-content").html(amount + ' ' + currency);
@@ -1230,7 +1221,7 @@ function WebPageShopInterface(main_page) {
                           'Accept': 'application/json',
                           'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({orderId: orderId})
+                        body: JSON.stringify({orderId: orderId, csrftoken: csrftoken})
                     }).then(function(res) {
                         return res.json();
                     }).then(function(orderData) {

@@ -39,7 +39,7 @@ class Offers
         $offer = Shop::getOfferById(input('orderId'));
       
         if(!$offer) {
-            response()->json(["status" => "error", "message" => "Order type not found"]);
+            response()->json(["status" => "error", "result" => "offline", "message" => "Order type not found"]);
         }
       
         $request = new OrdersCreateRequest();

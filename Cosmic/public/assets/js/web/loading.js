@@ -31,7 +31,8 @@ function SiteLoadingInterface()
         this.total_files = this.files.length;
         this.loading_container = $(".loading-container");
 
-        this.cache_id = Configuration.cache;
+        this.cache_id = (new Date().getTime() + Math.floor((Math.random() * 10000) + 1)).toString(16);
+        //this.cache_id = Configuration.cache;
     }
   
     this.load_file = function (file_id)

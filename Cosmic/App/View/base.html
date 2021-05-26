@@ -38,7 +38,8 @@
   
     <script src="/assets/js/jquery-3.2.1.min.js"></script>
     <script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  
   
     <script>
     var Site = {
@@ -74,7 +75,7 @@
         {% if publickey is not empty %}recaptcha_public: "{{publickey}}",{% endif %}
         revision: "{{revision}}2213",
         cache: "{{cache_timestamp}}",
-        findretros: {% if findretros.enabled %}true{% else %}false{% endif %}
+        findretros: {% if findretros %}true{% else %}false{% endif %}
     }
     </script>
 </head>
@@ -305,7 +306,7 @@
     <script src="/assets/js/jquery.magnific-popup.js"></script>
     <script src="/assets/js/selectric.js?v=34212"></script>
     <script src="/assets/js/functions.js"></script>
-    <script src="/assets/js/web/loading.js?v={{cache_timestamp}}"></script>
+    <script src="/assets/js/web/loading.js?v={{date().timestamp}}"></script>
     <script src="/assets/js/pagination.js"></script>
     <script src="/assets/js/jquery.wysibb.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

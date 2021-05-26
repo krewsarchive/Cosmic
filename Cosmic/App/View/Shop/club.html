@@ -26,12 +26,11 @@
 
     <div class="right-side">
         <div class="shop-purses">
+          <div class="purse-container credits">{{player.credits}}</div>
             {% for value in data.currencys %}
-                {% if value.type != 0 %}
                 <div class="purse-container {{value.currency}}">
                    {{value.amount}}
                 </div> 
-                {% endif %}
             {% endfor %}
         </div>
         <aside class="default-section">

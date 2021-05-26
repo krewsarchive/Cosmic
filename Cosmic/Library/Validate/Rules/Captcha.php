@@ -31,12 +31,11 @@ class Captcha extends Rule
     }
 
     public function captcha($value) {
-      try {
-
+        
         $url = 'https://www.google.com/recaptcha/api/siteverify';
-        $data = ['secret'   => Core::settings()->recaptcha_secretkey ?? null,
+        $data = ['secret'   => Core::settings()->recaptcha_secretkey,
                  'response' => $value,
-                 'remoteip' => $_SERVER['REMOTE_ADDR']];
+                 'remoteip' => request()->getIp()];
                  
         $options = [
             'http' => [
@@ -48,10 +47,7 @@ class Captcha extends Rule
     
         $context  = stream_context_create($options);
         $result = file_get_contents($url, false, $context);
+        
         return json_decode($result)->success;
     }
-    catch (Exception $e) {
-        return null;
-    }
-  }
 }

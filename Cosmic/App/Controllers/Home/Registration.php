@@ -23,7 +23,7 @@ class Registration
   
     public function request()
     {
-        $validate = request()->validator->validate([
+        $dataset = [
             'username'              => 'required|min:2|max:15|pattern:[a-zA-Z0-9-=?!@:.]+',
             'email'                 => 'required|max:150|email',
             'password'              => 'required|min:6|max:32',
@@ -33,8 +33,15 @@ class Registration
             'birthdate_year'        => 'required|numeric',
             'gender'                => 'required|pattern:^(?:maleORfemale)$',
             'figure'                => 'required|figure',
-            'g-recaptcha-response'  => 'captcha'
-        ]);
+            'csrftoken'             => 'required',
+            'g-recaptcha-response'  => 'required|captcha'
+        ];
+      
+        if(empty($this->settings->recaptcha_publickey) && empty($this->settings->recaptch_secretkey)) {
+            unset($dataset['g-recaptcha-response']);
+        }
+      
+        $validate = request()->validator->validate($dataset);
 
         if(!$validate->isSuccess()) {
             exit;

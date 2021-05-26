@@ -21,6 +21,7 @@ class Routes extends Router
 {
     public static function init()
     {            
+        parent::csrfVerifier(new \App\Middleware\CsrfMiddleware());
       
         if(request()->getUrl()->contains('housekeeping')) {
             parent::setDefaultNamespace('\App\Controllers\Admin');
@@ -58,7 +59,7 @@ class Routes extends Router
             });
         } else {
             parent::setDefaultNamespace('\App\Controllers');
-
+          
             parent::group(['middleware' => AuthMiddleware::class], function () {
 
 
