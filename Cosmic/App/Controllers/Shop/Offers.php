@@ -150,7 +150,7 @@ class Offers
             }
           
             Shop::update(input('orderId'), "YES", 'delivered');
-            response()->json(["status" => "success", "message" => "Order delivered"]);
+            response()->json(["status" => "success", "message" => "Order delivered: " . $offer->amount]);
         }
     }
 }
