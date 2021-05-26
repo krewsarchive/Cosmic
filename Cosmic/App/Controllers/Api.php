@@ -189,30 +189,6 @@ class Api
           response()->json($this->callback ?? null);
     }
   
-    public function krews()
-    {
-        if (strpos(request()->getUserAgent(), $this->settings->krews_api_useragent) !== false) {
-          
-            if($this->settings->krews_api_advanced_stats) {
-                $statistics = [
-                    'catalog_pages_count' => Core::getCatalogPages(),
-                    'catalog_items_count' => Core::getCatalogItems(),
-                    'users_registered'    => Core::getRegisteredUsers(),
-                    'items_count'         => Core::getItems(),
-                    'online'              => Core::getOnlineCount()
-                ];
-            } else {
-                $statistics = [
-                    'online'              => Core::getOnlineCount()
-                ];
-            }
-            
-            response()->json($statistics);
-        } else {
-            $this->noMatch();
-        }
-    }
-  
     public function noMatch()
     {
         response()->json([
@@ -221,7 +197,7 @@ class Api
         ]);
     }
   
-    public function room($callback, $roomId)
+    public function room($roomId)
     {
         if (!request()->player->online) {
             response()->json(["status" => "success",  "replacepage" => "hotel?room=" . $roomId]);
