@@ -1235,7 +1235,8 @@ function WebPageShopInterface(main_page) {
                   
                   Web.ajax_manager.post("/shop/offers/status", {
                       status: 'FAILED',
-                      orderId: data.orderID
+                      orderId: data.orderID,
+                      csrftoken: csrftoken
                   });
                   
                   Web.notifications_manager.create("error", err, 'Error..');
@@ -1246,7 +1247,8 @@ function WebPageShopInterface(main_page) {
                   
                      Web.ajax_manager.post("/shop/offers/status", {
                         status: 'CANCELD',
-                        orderId: data.orderID
+                        orderId: data.orderID,
+                        csrftoken: csrftoken
                     });
                 },
                 onApprove: function(data, actions) {
@@ -1256,7 +1258,7 @@ function WebPageShopInterface(main_page) {
                           'Accept': 'application/json',
                           'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({orderId: data.orderID, offerId: orderId})
+                        body: JSON.stringify({orderId: data.orderID, offerId: orderId, csrftoken: csrftoken})
                     }).then(function(res) {
                         return res.json();
                     }).then(function(orderData) {
@@ -1272,7 +1274,8 @@ function WebPageShopInterface(main_page) {
                         }
 
                         Web.ajax_manager.post("/shop/offers/validate", {
-                            orderId: orderData.id
+                            orderId: orderData.id,
+                            csrftoken: csrftoken
                         });
                       
                         $(".payment-accept").show();
