@@ -68,6 +68,6 @@ class Dashboard
 
     public function view()
     {
-        View::renderTemplate('Admin/home.html', ['permission' => 'housekeeping', 'version' => \App\Controllers\Api::version()]);
+        View::renderTemplate('Admin/home.html', ['permission' => 'housekeeping']);
     }
 }
