@@ -59,9 +59,7 @@ function WebHotelManagerInterface() {
         if (!body.hasClass("hotel-visible")) {
             Web.ajax_manager.get("/api/vote", function(result) {
 
-                console.log(Configuration.findretros)
                 if (result.status != "voted" && Configuration.findretros === true) {
-                    console.log(result.api)
                     window.location.href = result.api;
                 } else {
                     if (container.find(".client-frame").length === 0)
@@ -533,7 +531,8 @@ function WebPageProfileInterface(main_page) {
 
         page_container.find(".fa-heart").click(function() {
             if (loadmore == true) {
-                addLike($(this).attr("data-id"));
+                var csrftoken = $("[name=csrftoken]").val();
+                addLike($(this).attr("data-id"), csrftoken);
             }
         });
 
@@ -900,7 +899,8 @@ function WebPageCommunityPhotosInterface(main_page) {
 
         page_container.find(".fa-heart").click(function() {
             if (loadmore == true) {
-                addPhotoLike($(this).attr("data-id"));
+                var csrftoken = $("[name=csrftoken]").val();
+                addPhotoLike($(this).attr("data-id"), csrftoken);
             }
         });
 
@@ -932,7 +932,6 @@ function WebPageCommunityPhotosInterface(main_page) {
         });
 
         function addPhotoLike(id, csrftoken) {
-           
             if (User.is_logged == true) {
                 Web.ajax_manager.post("/community/photos/like", {
                     post: id,
@@ -1625,7 +1624,6 @@ function WebPageForumInterface(main_page) {
         });
 
         page_container.find(".replybtn").click(function() {
-            console.log(1)
             if ($(this).data("id") !== undefined) {
                 $("#editor").val('#quote:' + $(this).data("id") + '\n\n');
             }
