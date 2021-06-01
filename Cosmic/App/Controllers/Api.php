@@ -32,10 +32,6 @@ class Api
         $this->settings = Core::settings();
     }
   
-    public function test()
-    {
-        debug(HotelApi::execute('givebadge', ['user_id' => 2, 'badge' => 'ADM']));
-    }
   
     public function ssoTicket()
     {
