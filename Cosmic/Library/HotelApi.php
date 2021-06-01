@@ -21,14 +21,14 @@ class HotelApi {
     {
         $this->settings = Core::settings();
       
-        $rcon_api_timeout = filter_var(Core::settings()->rcon_api_timeout, FILTER_VALIDATE_BOOLEAN); 
+        $rcon_api_persistent = filter_var(Core::settings()->rcon_api_persistent, FILTER_VALIDATE_BOOLEAN); 
       
         $this->socket = new Socket([
             'host' => (string)$this->settings->rcon_api_host,
             'protocol' => (string)$this->settings->rcon_api_protocol,
             'port' => (int)$this->settings->rcon_api_port,
             'timeout' => (int)$this->settings->rcon_api_timeout,
-            'persistent' => $rcon_api_timeout,
+            'persistent' => $rcon_api_persistent,
         ]);
     }
   
