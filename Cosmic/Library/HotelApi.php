@@ -1,8 +1,8 @@
 <?php
 namespace Library;
 
+use App\Models\Core;
 use Library\RconException;
-
 use Origin\Socket\Socket;
 
 class HotelApi {
