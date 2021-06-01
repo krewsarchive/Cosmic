@@ -22,47 +22,16 @@ class Api
     public $settings;
     public $krewsList;
   
+  
+    const discordApi = 'https://discord.com/api/oauth2/authorize';
+    const discordToken = 'https://discord.com/api/oauth2/token';
+    const apiBase = 'https://discord.com/api/users/@me';
+  
     public function __construct()
     {
         $this->settings = Core::settings();
     }
-  
-    public function welcome()
-    {
-        $this->callback = [
-                "message" => "hello world"
-        ];
-      
-        return response()->json($this->callback);
-    }
-  
-    public function ssotoken()
-    {
-        if(empty($_SESSION['auth_ticket'])){
-            http_response_code(401);
-            return response()->json(['message' => 'no token']);
-        }
-      
-        $this->callback = [
-                "ssoToken" => $_SESSION['auth_ticket']
-        ];
-      
-        $user = Player::getDataById(request()->player->id);
-        if ($user->getMembership()) {
-            HotelApi::execute('setrank', ['user_id' => $user->id, 'rank' => $user->getMembership()->old_rank]);
-            $user->deleteMembership();
-        }
-      
-        return response()->json($this->callback);
-    }
-  
-    private function generateSso($player)
-    {
-        $auth_ticket = Token::authTicket($player->id);
-        Player::update($player->id, ["auth_ticket" => $auth_ticket]);
-        return $auth_ticket;
-    }
-  
+
     public function ssoTicket()
     {
         if(!request()->player) {
@@ -71,9 +40,11 @@ class Api
             ]);
         }
       
-        $ssoticket = $this->generateSso(request()->player);
-        if(!empty($ssoticket)) {
-            response()->json(["status" => "success",  "ticket" => $ssoticket]);
+        $auth_ticket = Token::authTicket($player->id);
+        Player::update($player->id, ["auth_ticket" => $auth_ticket]);
+      
+        if(!empty($auth_ticket)) {
+            response()->json(["status" => "success",  "ticket" => $auth_ticket]);
         }
     }
   
@@ -108,12 +79,8 @@ class Api
       
     }
 
-    public function user($callback, $username)
+    public function user($username)
     {
-        if($username == 'avatars') {
-            $this->avatars();
-        }
-      
         $user = Player::getDataByUsername($username);
         if(!$user) {
             response()->json([
@@ -126,11 +93,28 @@ class Api
             'motto'     => $user->motto,
             'credits'   => $user->credits,
             'look'      => $user->look,
-            'duckets'   => Player::getUserCurrencys($user->id, 0)->amount,
-            'diamonds'  => Player::getUserCurrencys($user->id, 5)->amount
         ];
 
+        foreach(Player::getCurrencys(request()->player->id) as $value) {
+              foreach($value as $key) {
+                  //array_push($response, [$key => ]);
+              }
+        }
+      
         response()->json($response);
+    }
+  
+    public function discordAuth()
+    {
+        $params = [
+            'client_id'     => '531125300235337728',
+            'redirect_uri'  => 'https://yoursite.location/ifyouneedit',
+            'response_type' => 'code',
+            'scope'         => 'identify guilds'
+          ];
+
+          redirect('Location: https://discord.com/api/oauth2/authorize' . '?' . http_build_query($params), 200);
+          die();
     }
   
     public function online()

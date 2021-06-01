@@ -70,13 +70,14 @@ class Settings
   
     public function getItems()
     {
-        $items = json_decode($this->settings->vip_gift_items, true);
-        foreach($items as $item)
-        {
-            $this->data->{$item['value']} = Admin::getFurnitureById($item['value']);
+        $this->settings->vip_gift_items = json_decode($this->settings->vip_gift_items);
+        if(!empty($this->settings->vip_gift_items)) {
+            foreach($this->settings->vip_gift_items->value as $item) {
+                $item->name = Admin::getFurnitureById($item->value)->item_name;
+            }
         }
       
-        echo json_encode($this->data);
+        echo json_encode($this->settings->vip_gift_items->value);
     }
   
     public function getCurrencys()
@@ -87,13 +88,6 @@ class Settings
     public function view()
     {
         $this->settings->vip_badges = json_decode($this->settings->vip_badges,true);
-      
-        $this->settings->vip_gift_items = json_decode($this->settings->vip_gift_items);
-        if(!empty($this->settings->vip_gift_items)) {
-            foreach($this->settings->vip_gift_items as $item) {
-                $item->name = Admin::getFurnitureById($item->value)->item_name;
-            }
-        }
       
         $this->settings->vip_currency_type = Core::getCurrencyByType($this->settings->vip_currency_type);
         $this->settings->namechange_currency_type = Core::getCurrencyByType($this->settings->namechange_currency_type);

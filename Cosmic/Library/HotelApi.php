@@ -1,55 +1,60 @@
 <?php
 namespace Library;
 
-use App\Config;
-use App\Models\Core;
+use Library\RconException;
 
-use Library\Json;
+use Origin\Socket\Socket;
 
-class HotelApi
-{ 
-    public static function flatten($array, $prefix = '')
+class HotelApi {
+  
+    public $result = [];
+  
+    public $socket;
+    public $settings;
+  
+    public $serverPort;
+    public $serverHost;
+    public $timeout;
+    public $protocol;
+  
+    public function __construct()
     {
-        $result = array();
-        foreach($array as $key=>$value) {
-            if(is_array($value)) {
-                $result = $result + self::flatten($value);
-            }
-            else {
-                $result[$prefix . $key] = $value;
-            }
+        $this->settings = Core::settings();
+      
+        $this->socket = new Socket([
+            'host' => $this->settings->rcon_api_host,
+            'protocol' => $this->settings->rcon_api_protocol,
+            'port' => $this->settings->rcon_api_port,
+            'timeout' => $this->settings->rcon_api_timeout,
+            'persistent' => $this->settings->rcon_api_persistent,
+        ]);
+    }
+  
+    public static function flatten($array)
+    {
+        foreach($array as $key => $value) 
+        {
+            $result = (is_array($value)) ? $result + self::flatten($value) : $value;
         }
         return $result;
     }
+  
+    public function send($command)
+    {
+      
+        if ($this->socket->connect()) {
+            $this->socket->write($command);
+            $result = $this->socket->read();
+        }
     
+        $this->socket->disconnect();
+        return response()->json(["status" => "error", "message" => $result]);
+    }
+  
     public static function execute($param, $data = null, $merge = false)
     {
-        if(!Config::apiEnabled) {
-            return Json::encode(["status" => "error", "message" => "Socket API has been disabled"]);
-        }
-      
-        if (!function_exists('socket_create')){
-            return Json::encode(["status" => "error", "message" => "Please enable sockets in your php.ini!"]);
-        }
-      
-        $data = json_encode(array('key' => $param, 'data' => ($merge == true) ? self::flatten($data) : $data));
-        $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-      
-        if ($socket === false) {
-            return Json::encode(["status" => "error", "message" => "socket_create() failed: reason: " . socket_strerror(socket_last_error()) . ""]);
-        }
-      
-        $apiSettings = Core::settings();
-
-        $result = socket_connect($socket, $apiSettings->rcon_api_host, $apiSettings->rcon_api_port);
-        if ($result === false) {
-            return false;
-        }
-
-        if(socket_write($socket, $data, strlen($data)) === false){
-            return Json::encode(["status" => "error", "message" => socket_strerror(socket_last_error($socket))]);
-        }
-
-        return socket_read($socket, 2048);
+        $command = json_encode(['key' => $param, 'data' => ($merge == true) ? self::flatten($data) : $data]);
+        return (new self)->send($command);
     }
 }
+  

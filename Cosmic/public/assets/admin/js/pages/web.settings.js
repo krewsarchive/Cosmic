@@ -180,14 +180,12 @@ jQuery(document).ready(function() {
     var self = this;
     this.ajax_manager = new WebPostInterface.init();
 
-    self.ajax_manager.post("/housekeeping/api/settings/getItems", {},function(result) {
-          var items = [];
-          for (var item in result){
-              items.push(result[item].id);
-          }
-          $('.targetItems').val(items);
-          $('.targetItems').trigger('change');
-    });
+var Values = new Array();
+Values.push("value1");
+Values.push("value2");
+Values.push("value3");
+
+$(".targetItems").val(Values).trigger('change');
 
     tinymce.init({
         selector: "textarea",

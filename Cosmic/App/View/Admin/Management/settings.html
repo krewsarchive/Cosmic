@@ -35,6 +35,27 @@
                                                                 <span class="form-text text-muted">Please fill in here your ip from your port server</span>
                                                             </div>
                                                         </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">API protocol:</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" name="rcon_api_port" value="{{settings.rcon_api_protocol}}" class="form-control">
+                                                                <span class="form-text text-muted">TCP or UDP</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">API timeout:</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" name="rcon_api_port" value="{{settings.rcon_api_timeout}}" class="form-control">
+                                                                <span class="form-text text-muted">TCP or UDP</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-3 col-form-label">API persistent:</label>
+                                                            <div class="col-lg-6">
+                                                                <input type="text" name="rcon_api_port" value="{{settings.rcon_api_persistent}}" class="form-control">
+                                                                <span class="form-text text-muted">true or false</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <h3 class="kt-section__title">2. Findretros API:</h3>
@@ -309,9 +330,7 @@
                                                                 <label class="col-lg-3 col-form-label">Gift items:</label>
                                                                 <div class="col-lg-5">
                                                                     <select name="vip_gift_items[]" class="form-control targetItems" multiple="multiple">
-                                                                        {% for items in settings.vip_gift_items %}
-                                                                        <option value="{{items.value}}">{{items.name}}</option>
-                                                                        {% endfor %}
+                                                                        <option>test</option>
                                                                     </select>
                                                                 </div>
                                                             </div> 
