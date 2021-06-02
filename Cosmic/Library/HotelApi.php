@@ -1,71 +1,48 @@
 <?php
-namespace App\Controllers;
-
-use App\Config;
-use App\Hash;
-use App\Token;
+namespace Library;
 
 use App\Models\Core;
-<<<<<<< HEAD
 use Core\Locale;
 use Origin\Socket\Socket;
-=======
-use App\Models\Room;
-use App\Models\Player;
->>>>>>> 5e07fc29dd73c2d098b95136c59a3f410bd06e66
 
-use Library\HotelApi;
-use Library\Json;
-
-use Core\Session;
-use Core\Locale;
-use \Selly as Selly;
-
-class Api
-{
-    public $callback = array();
+class HotelApi {
+  
+    public $result = [];
+  
+    public $socket;
     public $settings;
-    public $krewsList;
-
+  
+    public $serverPort;
+    public $serverHost;
+    public $timeout;
+    public $protocol;
+  
     public function __construct()
     {
         $this->settings = Core::settings();
-    }
-  
-    public function ssoTicket()
-    {
-        if(!request()->player) {
-            response()->json([
-                'error' => 'Required login',
-            ]);
-        }
       
-        $auth_ticket = Token::authTicket(request()->player->id);
-        Player::update(request()->player->id, ["auth_ticket" => $auth_ticket]);
+        $rcon_api_persistent = filter_var(Core::settings()->rcon_api_persistent, FILTER_VALIDATE_BOOLEAN); 
       
-        if(!empty($auth_ticket)) {
-            response()->json(["status" => "success",  "ticket" => $auth_ticket]);
+        $this->socket = new Socket([
+            'host' => (string)$this->settings->rcon_api_host,
+            'protocol' => (string)$this->settings->rcon_api_protocol,
+            'port' => (int)$this->settings->rcon_api_port,
+            'timeout' => (int)$this->settings->rcon_api_timeout,
+            'persistent' => $rcon_api_persistent,
+        ]);
+    }
+  
+    public static function flatten($array)
+    {
+        foreach($array as $key => $value) 
+        {
+            $result = (is_array($value)) ? $result + self::flatten($value) : $value;
         }
+        return $result;
     }
   
-    public function vote()
+    public function send($command)
     {
-          $FindRetros = new \Library\FindRetros();
-
-          if($FindRetros->hasClientVoted()) {  
-              $this->callback = ["status" => "voted"];
-          } else {
-              $this->callback = [
-                  "status"  => 0,
-                  "api"     => $FindRetros->redirectClient()
-              ];
-          }
-          response()->json($this->callback ?? null);
-    }
-  
-    public function room($roomId)
-    {
-<<<<<<< HEAD
         try {
             if ($this->socket->connect()) {
                 $this->socket->write($command);
@@ -76,54 +53,12 @@ class Api
         }
     
         $this->socket->disconnect();
-=======
-        if (!request()->player->online) {
-            response()->json(["status" => "success",  "replacepage" => "hotel?room=" . $roomId]);
-        }
-
-        $room = \App\Models\Room::getById($roomId);
-        if ($room == null) {
-            response()->json(["status" => "error", "message" => Locale::get('core/notification/room_not_exists')]);
-        }
-
-        HotelApi::execute('forwarduser', array('user_id' => request()->player->id, 'room_id' => $roomId));
-        response()->json(["status" => "success",  "replacepage" => "hotel"]);
-      
-    }
-
-    public function user($username)
-    {
-        $user = Player::getDataByUsername($username);
-        if(!$user) {
-            response()->json([
-                'error' => 'User not found'
-            ]);
-        }
-
-        $response = [
-            'username'  => $user->username,
-            'motto'     => $user->motto,
-            'credits'   => $user->credits,
-            'look'      => $user->look,
-        ];
-
-        foreach(Player::getCurrencys(request()->player->id) as $value) {
-              foreach($value as $key) {
-                  //array_push($response, [$key => ]);
-              }
-        }
-      
-        response()->json($response);
->>>>>>> 5e07fc29dd73c2d098b95136c59a3f410bd06e66
     }
   
-    public function online()
+    public static function execute($param, $data = null, $merge = false)
     {
-        echo Core::getOnlineCount();
-    }
-  
-    public function currencys() 
-    {
-        response()->json(Core::getCurrencys());
+        $command = json_encode(['key' => $param, 'data' => ($merge == true) ? self::flatten($data) : $data]);
+        return (new self)->send($command);
     }
 }
+  
