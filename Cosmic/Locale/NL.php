@@ -223,7 +223,7 @@ $GLOBALS['language'] = array (
         'community_staff' => array (
             'title'       => 'Hoe word ik '. Config::site['shortname'] . ' Staff?',
             'desc'        => 'Zij vertegenwoordigen het officiele team dat verantwoordelijk is voor de goede werking van het hotel.',
-            'content_1'   => 'Natuurlijk droomt iedereen wel van zo\'n plaats als '. Config::site['shortname'] . ' Staff lid, maar helaas is dit niet voor iedereen weggelegd. Om '. Config::site['shortname'] . ' Staff te kunnen worden moet je solliciteren.',
+            'content_1'   => 'Natuurlijk droomt iedereen wel van zo\'n plaats als '. Config::site['shortname'] . ' Stafflid, maar helaas is dit niet voor iedereen weggelegd. Om '. Config::site['shortname'] . ' Staff te kunnen worden moet je solliciteren.',
             'content_2'   => 'Dit kan alleen op momenten wanneer wij vacatures hebben, wanneer we dit hebben, wordt dit vermeldt in het nieuws.'
         ),
         'community_value' => array (
@@ -260,7 +260,6 @@ $GLOBALS['language'] = array (
             'desc'                      => 'Je kunt hier op zoek naar antwoorden op je vragen. Vind je het antwoord op jouw vraag niet, dien dan een hulpverzoek in.',
 
           /*  Help/request.html  */
-            'request_closed'            => 'GESLOTEN',
             'request_on'                => 'Op:',
             'request_ticket_count'      => 'Aantal tickets:',
             'request_react_on'          => 'Reactie op:',
@@ -574,8 +573,10 @@ $GLOBALS['language'] = array (
             'room_not_exists'       => 'Deze kamer bestaat niet!',
             'staff_received'        => 'Bedankt! De '. Config::site['shortname'] . ' Staff heeft dit ontvangen!',
             'not_enough_belcredits' => 'Je hebt niet genoeg belcredits.',
+			'not_enough_points'     => 'Je hebt helaas geen genoeg Diamanten!',
             'topic_closed'          => 'Je kunt niet reageren op een topic dat is gesloten!',
-            'post_not_allowed'      => 'Je hebt geen rechten om te posten!'
+            'post_not_allowed'      => 'Je hebt geen rechten om te posten!',
+            'draw_badge_uploaded'   => 'Je badge is ingediend en is klaar voor beoordeling!'
         ),
         'pattern' => array (
             'can_be'                => 'mag maximaal',
@@ -715,3 +716,4 @@ $GLOBALS['language'] = array (
         )
     )
 );
+?>
