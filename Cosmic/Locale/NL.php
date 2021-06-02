@@ -543,7 +543,7 @@ $GLOBALS['language'] = array (
             'to_login'          => 'om in te loggen.',
             'desc'              => 'Hier kun je Bel-Credits kopen voor echt geld. Met Bel-Credits kun je exclusieve items kopen.',
             'store'             => 'Winkel',
-            'get'               => 'Je krijgt',
+            'get'               => 'Je krijgt'
         ),
         'games_ranking' => array(
             'title'             => 'Highscores',
