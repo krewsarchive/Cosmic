@@ -25,11 +25,7 @@ class Shop
     }
   
     public function index()
-    {     
-        if(!HotelApi::execute('executecommand', ['user_id' => request()->player->id, 'about'])) {
-            response()->json(["status" => "error", "message" => "Item can only be purchased when our hotel is back online :-)!"]);
-        }
-      
+    {          
         $this->data->shop = Offer::getOffers();
         $this->data->currencys = Player::getCurrencys(request()->player->id);
       

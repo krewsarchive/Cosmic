@@ -549,7 +549,7 @@ $GLOBALS['language'] = array (
             'to_login'          => 'to log in.',
             'store'             => 'Store',
             'desc'              => 'Here you can buy credits for real money, with this you can buy exclusive items in our catalogue',
-            'get'               => 'You earn',
+            'get'               => 'You earn'
         ),
         'games_ranking' => array(
             'title'             => 'Highscores',
@@ -681,6 +681,9 @@ $GLOBALS['language'] = array (
         'enabled_secretcode'        => 'Authentication method set! You will have to log in again... see you soon!',
         'disabled_secretcode'       => 'Authentication method disabled!'
     ),
+    'rcon' => array (
+        'exception'                 => 'RCON can not be proceed because the emulator is turned off.'
+    ),
     'shop' => array (
         'offers' => array (
             'invalid_transaction'   => 'Transaction could not be processed!',
@@ -697,7 +700,7 @@ $GLOBALS['language'] = array (
             'expired'               => 'Item is expired, its not possible to purchase this item!',
             'purchased'             => 'Item is succesfull purchased and is now added to your inventory',
             'regards'               => 'Your item has been arrived! Friendly regards from ' . Config::site['shortname']
-        )
+        ),
     ),
     'help' => array (
         'ticket_created'            => 'Your Help Ticket has been created. View your Help Tickets to view the help request.',

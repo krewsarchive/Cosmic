@@ -673,6 +673,9 @@ $GLOBALS['language'] = array (
         'enabled_secretcode'        => 'Authenticatie methode ingesteld! Je zult opnieuw moeten inloggen.. tot zo!',
         'disabled_secretcode'       => 'Authenticatie methode uitgeschakeld!'
     ),
+    'rcon' => array (
+        'exception'                 => 'RCON kan niet worden uitgevoerd omdat het hotel niet online is!'
+    ),
     'shop' => array (
         'offers' => array (
             'invalid_transaction'   => 'Transactie kon niet verwerkt worden!',
@@ -689,7 +692,7 @@ $GLOBALS['language'] = array (
             'expired'               => 'Item die je probeert te kopen is niet meer te koop!',
             'purchased'             => 'Item is met succes gekocht en is toegevoegd aan je inventory!',
             'regards'               => 'Je gekochte item is gearriveerd! Met vriendelijke groet, ' . Config::site['shortname']
-        )
+        ),
     ),
     'help' => array (
         'ticket_created'            => 'Jouw Help Ticket is aangemaakt. Bekijk je Help Tickets om het hulpverzoek te bekijken.',

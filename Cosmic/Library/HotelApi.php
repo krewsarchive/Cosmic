@@ -2,7 +2,7 @@
 namespace Library;
 
 use App\Models\Core;
-use Library\RconException;
+use Core\Locale;
 use Origin\Socket\Socket;
 
 class HotelApi {
@@ -43,13 +43,16 @@ class HotelApi {
   
     public function send($command)
     {
-        if ($this->socket->connect()) {
-            $this->socket->write($command);
-            $result = $this->socket->read();
+        try {
+            if ($this->socket->connect()) {
+                $this->socket->write($command);
+                return json_decode($this->socket->read());
+            }
+        } catch (\Exception $e) {  
+            response()->json(["status" => "error", "message" => Locale::get('rcon/exception')]);
         }
     
         $this->socket->disconnect();
-        return response()->json(["status" => "error", "message" => $result]);
     }
   
     public static function execute($param, $data = null, $merge = false)
