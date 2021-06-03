@@ -63,7 +63,9 @@ class View
             $twig->addGlobal('paypal_client_id', $settings->paypal_client_id);
             $twig->addGlobal('paypal_currency', $settings->paypal_currency);
             $twig->addGlobal('client', Config::client);
-            $twig->addGlobal('findretros', boolval($settings->findretros_enabled));
+            
+            $findretros = filter_var($settings->findretros_enabled, FILTER_VALIDATE_BOOLEAN); 
+            $twig->addGlobal('findretros', $findretros);
             $twig->addGlobal('cache_timestamp', $settings->cache_timestamp ?? null);
             $twig->addGlobal('csrf_token', csrf_token());
           

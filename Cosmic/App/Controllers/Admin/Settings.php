@@ -88,13 +88,11 @@ class Settings
     public function view()
     {
         $this->settings->vip_badges = json_decode($this->settings->vip_badges,true);
-      
         $this->settings->vip_currency_type = Core::getCurrencyByType($this->settings->vip_currency_type);
         $this->settings->namechange_currency_type = Core::getCurrencyByType($this->settings->namechange_currency_type);
         $this->settings->draw_badge_currency = Core::getCurrencyByType($this->settings->draw_badge_currency);
-      
-        $this->settings->ranks = Permission::getRanks();
         $this->settings->user_of_the_week = Player::getDataById($this->settings->user_of_the_week ?? 0, ['id', 'username']) ?? false;
+        $this->settings->ranks = Permission::getRanks();
 
         View::renderTemplate('Admin/Management/settings.html', ['settings' => $this->settings, 'permission' => 'housekeeping_config']);
     }

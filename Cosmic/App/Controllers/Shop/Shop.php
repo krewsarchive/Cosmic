@@ -28,11 +28,13 @@ class Shop
     {          
         $this->data->shop = Offer::getOffers();
         $this->data->currencys = Player::getCurrencys(request()->player->id);
+        $currency = Core::settings()->paypal_currency;
       
         View::renderTemplate('Shop/shop.html', [
             'title' => Locale::get('core/title/shop/index'),
             'page'  => 'shop',
-            'data'  => $this->data
+            'data'  => $this->data,
+            'currency' => $currency
         ]);
     }
 }

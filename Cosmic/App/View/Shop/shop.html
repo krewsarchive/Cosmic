@@ -29,9 +29,9 @@
             <div class="offers-container">
                 {% for offer in data.shop %}
                 <div class="offer-container" id="offer-{{offer.id}}">
-                    <a href="#" data-id="{{offer.id}}" data-amount="{{offer.amount}}" data-description="{{offer.description}}" data-type="{{offer.currency}}" class="offer-content pixelated">
+                    <a href="#" data-id="{{offer.id}}" data-amount="{{offer.amount}}" data-description="{{offer.description}}" data-type="{{currency}}" class="offer-content pixelated">
                         <div class="offer-label">{{offer.title|capitalize }}</div>
-                        <div class="offer-amount">€{{offer.price}}</div>
+                        <div class="offer-amount">{{offer.price}} {{currency}}</div>
                         <div class="credits-sprite credits-sprite-shop_icon_1" style="background-image: url(/assets/images/web/pages/shop/{{offer.image}}?)"></div>
                     </a>
                 </div>
