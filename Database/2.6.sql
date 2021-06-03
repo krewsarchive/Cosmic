@@ -468,7 +468,7 @@ INSERT INTO `website_settings` VALUES ('rcon_api_timeout', '30');
 INSERT INTO `website_settings` VALUES ('rcon_api_protocol', 'tcp');
 INSERT INTO `website_settings` VALUES ('rcon_api_persistent', 'false');
 INSERT INTO `website_settings` VALUES ('recaptcha_publickey', NULL);
-INSERT INTO `website_settings` VALUES ('recaptcha_secretkey', NULL;
+INSERT INTO `website_settings` VALUES ('recaptcha_secretkey', NULL);
 INSERT INTO `website_settings` VALUES ('maintenance', '0');
 INSERT INTO `website_settings` VALUES ('start_credits', '1000');
 INSERT INTO `website_settings` VALUES ('vip_permission_id', '2');

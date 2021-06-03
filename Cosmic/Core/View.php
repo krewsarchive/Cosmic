@@ -47,7 +47,7 @@ class View
         ));
     }
 
-    public static function getTemplate($template, $args = [], $cacheTime, $request = false)
+    public static function getTemplate($template, $args = [], $cacheTime = false, $request = false)
     {
         static $twig = null;
         
