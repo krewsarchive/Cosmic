@@ -32,7 +32,7 @@ class Client
         $reader = new Reader(__DIR__. '/../../' .Config::vpnLocation);
 
         try {
-            $this->record = $reader->asn(request()->getIp());
+            $this->record = $reader->asn(getIpAddress());
         } catch (AddressNotFoundException $e) {
         } catch (InvalidDatabaseException $e) {
         }
