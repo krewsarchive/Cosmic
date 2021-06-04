@@ -30,7 +30,7 @@ class AdminAuthMiddleware implements IMiddleware
             }
         }
         
-        if (request()->getIp() != $request->player->ip_current || $_SERVER['HTTP_USER_AGENT'] != Session::get('agent')) {
+        if (getIpAddress() != $request->player->ip_current || $_SERVER['HTTP_USER_AGENT'] != Session::get('agent')) {
             Auth::logout();
             redirect('/');
         }
