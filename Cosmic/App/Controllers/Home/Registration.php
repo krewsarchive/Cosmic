@@ -52,7 +52,7 @@ class Registration
         $settings = Core::settings();
         $playerData = (object)input()->all();
         $playerData->figure = input('figure');
-        $getMaxIp = Player::checkMaxIp(request()->getIp());
+        $getMaxIp = Player::checkMaxIp(getIpAddress());
      
         if (Player::exists($username)) {
             response()->json(["status" => "error", "message" => Locale::get('register/username_exists')]);
@@ -88,10 +88,10 @@ class Registration
  
             if(!empty($referral) && $getMaxIp == 0) {
                 $referral_days = strtotime('-' . $settings->referral_acc_create_days . ' days');
-                $referralSignup = Player::getReferral($referral->id, request()->getIp());
+                $referralSignup = Player::getReferral($referral->id, getIpAddress());
  
                 if($referral->account_created < $referral_days && $referralSignup == 0) {
-                    Player::insertReferral($player->id, $referral->id, request()->getIp(), time());
+                    Player::insertReferral($player->id, $referral->id, getIpAddress(), time());
                     HotelApi::execute('givepoints', ['user_id' => $referral->id, 'points' => $this->settings->referral_points, 'type' => $this->settings->referral_points_type]);
                 }
             }
