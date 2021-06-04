@@ -51,6 +51,16 @@ function request(): Request
     return Router::request();
 }
 
+function getIpAddress()
+{
+    if(isset(Router::Request()->getHeaders()['http_x_forwarded_for']) && Router::Request()->getHeaders()['http_x_forwarded_for'] !== NULL) {
+        return Router::Request()->getHeaders()['http_x_forwarded_for']; 
+    }
+
+    return Router::Request()->getHeaders()['remote-addr']; 
+}
+
+
 /**
  * Get input class
  * @param string|null $index Parameter index name
