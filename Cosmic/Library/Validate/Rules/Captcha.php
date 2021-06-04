@@ -35,7 +35,7 @@ class Captcha extends Rule
         $url = 'https://www.google.com/recaptcha/api/siteverify';
         $data = ['secret'   => Core::settings()->recaptcha_secretkey,
                  'response' => $value,
-                 'remoteip' => request()->getIp()];
+                 'remoteip' => getIpAddress()];
                  
         $options = [
             'http' => [
