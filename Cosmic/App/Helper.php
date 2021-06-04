@@ -163,7 +163,7 @@ class Helper
         $reader = new Reader(__DIR__. Config::vpnLocation);
 
         try {
-            static::$record = $reader->asn(request()->getIp());
+            static::$record = $reader->asn(getIpAddress());
         } catch (AddressNotFoundException $e) {
         } catch (InvalidDatabaseException $e) {
         }
