@@ -253,6 +253,7 @@
                           var verification_data = {
                               username: $(".login-form [name=username]").val(),
                               password: $(".login-form [name=password]").val(),
+                              csrftoken: $(".login-form [name=csrftoken]").val(),
                           };
                           Web.ajax_manager.post("/home/login/request", verification_data, function(result) {
 
