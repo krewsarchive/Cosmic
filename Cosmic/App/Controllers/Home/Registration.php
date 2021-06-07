@@ -32,8 +32,7 @@ class Registration
             'birthdate_month'       => 'required|numeric',
             'birthdate_year'        => 'required|numeric',
             'gender'                => 'required|pattern:^(?:maleORfemale)$',
-            'figure'                => 'required|figure',
-            'csrftoken'             => 'required',
+            'figure'                => 'required|figure'
             'g-recaptcha-response'  => 'required|captcha'
         ];
       
