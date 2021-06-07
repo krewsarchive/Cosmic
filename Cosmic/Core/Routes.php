@@ -21,7 +21,7 @@ class Routes extends Router
 {
     public static function init()
     {            
-        parent::csrfVerifier(new \App\Middleware\CsrfMiddleware());
+        //parent::csrfVerifier(new \App\Middleware\CsrfMiddleware());
       
         if(request()->getUrl()->contains('housekeeping')) {
             parent::setDefaultNamespace('\App\Controllers\Admin');
