@@ -32,14 +32,20 @@ class HotelApi {
         ]);
     }
   
-    public static function flatten($array)
+   public static function flatten($array, $prefix = '')
     {
-        foreach($array as $key => $value) 
-        {
-            $result = (is_array($value)) ? $result + self::flatten($value) : $value;
+        $result = array();
+        foreach($array as $key=>$value) {
+            if(is_array($value)) {
+                $result = $result + self::flatten($value);
+            }
+            else {
+                $result[$prefix . $key] = $value;
+            }
         }
         return $result;
     }
+
   
     public function send($command)
     {
