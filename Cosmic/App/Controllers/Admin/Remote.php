@@ -351,6 +351,7 @@ class Remote
 
     public function change()
     {
+        debug(input()->all());
         $validate = request()->validator->validate([
             'pincode'       => 'max:6|numeric',
             'motto'         => 'max:70'
