@@ -19,13 +19,9 @@ class AuthMiddleware implements IMiddleware
 	          $request->setRewriteUrl(url('lost'));            
         }
       
-        if(!Session::exists('player_id')) {
-            $request->setRewriteUrl(url('lost'));
-        }
-
         $request->player = Player::getDataById(Session::get('player_id'));
         if($request->player == null) {
-           $request->setRewriteUrl(url('user.login'));
+           return;
         }
       
        if (getIpAddress() != $request->player->ip_current || $_SERVER['HTTP_USER_AGENT'] != Session::get('agent')) {
