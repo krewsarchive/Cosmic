@@ -22,10 +22,6 @@ class AuthMiddleware implements IMiddleware
         $request->player = Player::getDataById(Session::get('player_id'));
         if($request->player == null) {
            return;
-
-        $request->player = Player::getDataById(Session::get('player_id'));
-        if($request->player == null) {
-           return;
         }
       
        if (getIpAddress() != $request->player->ip_current || $_SERVER['HTTP_USER_AGENT'] != Session::get('agent')) {
