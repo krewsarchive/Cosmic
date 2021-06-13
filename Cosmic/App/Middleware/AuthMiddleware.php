@@ -15,13 +15,17 @@ class AuthMiddleware implements IMiddleware
 {
     public function handle(Request $request) : void
     {
+	if(url()->contains('Admin')) {
+	    $request->setRewriteUrl(url('lost'));            
+        }
+      
         if(!Session::exists('player_id')) {
-            return;
+            $request->setRewriteUrl(url('lost'));
         }
 
         $request->player = Player::getDataById(Session::get('player_id'));
         if($request->player == null) {
-            return;
+           $request->setRewriteUrl(url('user.login'));
         }
       
        if (getIpAddress() != $request->player->ip_current || $_SERVER['HTTP_USER_AGENT'] != Session::get('agent')) {
@@ -30,3 +34,4 @@ class AuthMiddleware implements IMiddleware
         }
     }
 }
+
