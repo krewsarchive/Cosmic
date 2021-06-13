@@ -15,8 +15,8 @@ class AuthMiddleware implements IMiddleware
 {
     public function handle(Request $request) : void
     {
-	if(url()->contains('Admin')) {
-	    $request->setRewriteUrl(url('lost'));            
+	      if(url()->contains('Admin')) {
+	          $request->setRewriteUrl(url('lost'));            
         }
       
         if(!Session::exists('player_id')) {
