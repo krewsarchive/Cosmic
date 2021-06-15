@@ -1,0 +1,31 @@
+{
+    "name": "devraizer/meteor",
+    "type": "project",
+    "description": "Simple, Basic, Framework , CMS for Habbo",
+    "homepage": "https://projectmeteor.online",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.2",
+        "codeigniter4/framework": "^4",
+        "twig/twig": "^3.0",
+        "casbin/codeigniter-permission": "^1.0",
+        "sonata-project/google-authenticator": "^2.2",
+        "raizdev/twig-codeigniter4": "^1.0",
+        "originphp/socket": "^2.0"
+    },
+    "require-dev": {
+        "mikey179/vfsstream": "1.6.*",
+        "phpunit/phpunit": "8.5.*"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Support\\": "tests/_support"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "post-update-cmd": [
+          "@composer dump-autoload"
+        ]
+	  }
+}

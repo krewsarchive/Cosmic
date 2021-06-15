@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Poppins:200,300,300i,400,400i,500,500i,600,600i,700,700i|Roboto:400,500,700">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico&display=swap">
+      <link rel="stylesheet" href="/assets/css/fontawesome.min.css">
+      <link rel="stylesheet" href="/assets/css/app.css?v=2112">
+      <link rel="stylesheet" href="/assets/css/responsive.css">
+      <link rel="stylesheet" href="/assets/css/avatargenerate.css">
+      <link rel="stylesheet" href="/assets/css/selectric.css">
+      <link rel="stylesheet" href="https://codeseven.github.io/toastr/build/toastr.min.css">
+      <title>{{getenv('meteor.hotelname')}} ~ Home </title>
+      <script src="/assets/javascript/jquery-3.5.1.min.js"></script>
+   </head>
+   <body>
+      <div class="cookies-container" style="display: none;">
+         <div class="close-container">×</div>
+         {{getenv('meteor.hotelname')}} maakt gebruik van eigen cookies en die van derden om zo een betere service te kunnen verlenen en zorgt er daarnaast voor dat de advertenties beter bij jouw voorkeuren aansluiten. Als je gebruik maakt van onze website ga je akkoord met ons cookie-beleid.
+         <a href="{{site_url('help')}}">Lees meer</a>
+      </div>
+      <nav class="navigation-container">
+         <ul class="navigation-menu flex-container">
+            <li class="navigation-item main-link-item logo"></li>
+            <li class="navigation-item selected"><a href="{{site_url()}}">Home</a></li>
+            <li class="navigation-item has-items">
+               <a href="{{site_url('community')}}">Community</a>
+               <ul class="navigation-submenu">
+                  <li class="navigation-subitem"><a href="{{site_url('community')}}">Community</a></li>
+                  <li class="navigation-subitem"><a href="{{site_url('staff')}}">{{getenv('meteor.hotelname')}} Staff</a></li>
+                  <li class="navigation-subitem"><a href="{{site_url('news')}}">Nieuws</a></li>
+                  <li class="navigation-subitem"><a href="{{site_url('ruilwaarde')}}">Ruilwaarde</a></li>
+                  <li class="navigation-subitem"><a href="{{site_url('Vacatures')}}">Vacatures</a></li>
+               </ul>
+            </li>
+            <li class="navigation-item ">
+               <a href="{{site_url('forum')}}">Forum</a>
+            </li>
+            <li class="navigation-item has-items">
+               <a href="{{site_url('help')}}">Help Tool</a>
+               <ul class="navigation-submenu">
+                  <li class="navigation-subitem"><a href="{{site_url('help')}}">Help Tool</a></li>
+               </ul>
+            </li>
+            <li class="navigation-item"><a href="{{site_url('download')}}">Download</a></li>
+            {% if user %}
+            <li class="navigation-item navigation-right-side-item has-items">
+            <a href="https://www.leet.ws/me">
+            <div class="account-avatar"><img src="https://cdn.leet.ws/imaging/avatarimage?figure=hr-7302-61.lg-7537-1408.hd-209-1359.ch-210-1429.sh-3035-1408&amp;gesture=sml" alt="Raizerr" class="pixelated"></div>
+            <span>Raizerr</span>
+            </a>
+            <ul class="navigation-submenu">
+            <li class="navigation-subitem"><a href="{{site_url('hotel')}}" target="_self">Naar Leet Hotel</a></li>
+            <li class="navigation-subitem"><a href="{{site_url('settings')}}">Instellingen</a></li>
+            <li class="navigation-subitem"><a href="{{site_url('auth/logout')}}">Logout</a></li>
+            </ul>
+            </li>
+            {% else %}
+            <li class="navigation-item navigation-right-side-item">
+               <a style="border-left: 0 !important;"><strong>135</strong> {{getenv('meteor.hotelname')}}'s in het hotel!</a>
+            </li>
+           {% endif %}
+         </ul>
+      </nav>
+      {% if user %}
+      <header class="logged-in pixelated">
+         <div class="header-content">
+            <div class="avatar" style="background-image: url(https://cdn.leet.ws/imaging/avatarimage?figure={{user.look}}&amp;direction=2&amp;head_direction=3&amp;size=l&amp;gesture=sml&amp;action=wav&amp;&amp;img_format=png)"></div>
+            <div class="currency">
+                {% for currency in currencys %}
+               <div class="bar">
+                  <div class="icon {{currency.currency}}"></div>
+                  <b>{{currency.amount}}</b> <span>{{currency.currency}}</span>
+               </div>
+               {% endfor %}
+                <div style="float:right">
+                <div class="bar show-friends">
+                <div class="icon status"></div> <b>1</b> <span>vrienden online <i class="fa fa-caret-down"></i></span>
+                </div>
+                </div>
+            </div>
+            <div class="account-container">
+               <div class="account-buttons">
+                  <a href="https://www.leet.ws/hotelv2" target="_blank" class="rounded-button white plain">Naar Leet Hotel</a>
+                  <a href="https://www.leet.ws/hotel" target="_blank" class="rounded-button white plain">Download (Flash)</a>
+               </div>
+            </div>
+         </div>
+      </header>
+      {% else %}
+      <header class="logged-out pixelated">
+         <div class="header-content">
+            <div class="account-container">
+               <div class="account-title">
+                  {{getenv('meteor.hotelname')}} is een virtuele wereld waar je vrienden kunt maken.
+               </div>
+               <div class="account-buttons">
+                  <a href="{{site_url()}}" class="rounded-button white">Inloggen</a>
+                  <span>of</span>
+                  <a href="{{site_url()}}register" class="rounded-button white plain">Meld je gratis aan!</a>
+               </div>
+            </div>
+         </div>
+      </header>
+      {% endif %}
+      <section class="page-container" data-page="{{page}}">
+         {% block body %}{% endblock %}
+      </section>
+      <script src="/assets/javascript/app.js?v={{date().timestamp}}"></script>
+      <script src="/assets/javascript/toastr.js"></script>
+      <script src="/assets/javascript/cookies.js"></script>
+      <script src="/assets/javascript/avatargenerate.js?v=2"></script>
+      <script src="/assets/javascript/selectric.js"></script>
+      {% if session.get('errors') or session.get('warning') %}
+      <script>
+         $(document).ready(function () {
+             {% if flashdata.modal %}
+                 $('#{{flashdata.modal}}').modal('show');
+             {% endif %}
+           
+             {% for error,key in session.get('errors')|slice(0,1) %}
+                toastr.error("{{key|capitalize }}", "{{error|capitalize }}");
+             {% endfor %}
+             
+             {% if session.get('warning') %}
+                toastr.warning("{{session.get('warning')}}", "Oops..");
+             {% endif %}
+             
+             {% if session.get('success') %}
+                toastr.success("{{session.get('success')}}", "Success!");
+             {% endif %}
+         });
+      </script>
+      {% endif %}
+   </body>
+</html>

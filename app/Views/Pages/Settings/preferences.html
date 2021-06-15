@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="row">
+   <div class="col-md-12">
+      <h1 class="mt-5">Settings</h1>
+   </div>
+</div>
+<div class="row my-settings mt-5">
+   {% include "Pages/Settings/nav.html" %}
+   <div class="col-md-8 mt-2">
+      <div class="card flex-column">
+         <div class="card-body">
+               <h4>
+                  Mijn instellingen
+               </h4>
+               <hr>
+               <form action="/settings/preferences/save" method="POST">
+               
+               <dl class="row"> 
+                  <dt class="col-sm-10 pt-2">
+                    <h6>Volgfunctie - wie mogen je volgen?</h6>
+                    <small class="text-muted">Ik wil dat {{hotelname}}'s mij niet mogen volgen</small>
+                 </dt>
+                  <dd class="col-sm-2 pt-2">
+                     <div class="switch">
+                        <label>
+                        <input type="checkbox" name="block_following" {% if settings.block_following %}checked{% endif %}>
+                        </label>
+                     </div>
+                  </dd>
+                  <dt class="col-sm-10 pt-4">
+                    <h6>Vriendschapverzoeken</h6>
+                    <small class="text-muted">Vriendschap verzoeken toestaan?</small>
+                 </dt>
+                  <dd class="col-sm-2 pt-4">
+                     <div class="switch">
+                        <label>
+                        <input type="checkbox" name="block_friendrequests" {% if settings.block_friendrequests %}checked{% endif %}>
+                        </label>
+                     </div>
+                  </dd>
+                  <dt class="col-sm-10 pt-4">
+                    <h6>Kamer uitnodigingen</h6>
+                    <small class="text-muted">Ik wil niet uitgenodigd worden voor kamers</small>
+                 </dt>
+                  <dd class="col-sm-2 pt-4">
+                     <div class="switch">
+                        <label>
+                        <input type="checkbox" name="block_roominvites" {% if settings.block_roominvites %}checked{% endif %}>
+                        </label>
+                     </div>
+                  </dd>
+                  <dt class="col-sm-10 pt-4">
+                    <h6>Hotel alerts</h6>
+                    <small class="text-muted">Ik wil geen hotelmeldingen ontvangen</small>
+                 </dt>
+                  <dd class="col-sm-2 pt-4">
+                     <div class="switch">
+                        <label>
+                        <input type="checkbox" name="block_alerts" {% if settings.block_alerts %}checked{% endif %}>
+                        </label>
+                     </div>
+                  </dd>
+                  <dt class="col-sm-10 pt-4">
+                    <h6>Chat instellingen</h6>
+                    <small class="text-muted">Ik wil gebruik maken van de oude chat</small>
+                 </dt>
+                  <dd class="col-sm-2 pt-4">
+                     <div class="switch">
+                        <label>
+                        <input type="checkbox" name="old_chat" {% if settings.old_chat %}checked{% endif %}>
+                        </label>
+                     </div>
+                  </dd>
+               </dl>
+                <button class="btn btn-outline-success w-100 mt-2">Sla op intellingen<div class="ripple-container"></div></button>
+                </form>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

@@ -1,0 +1,265 @@
+{% extends "base.html" %} {% block body %}
+<style>
+.page-container[data-page=index] .sides-container:before, .page-container[data-page=register] .sides-container:before { width: 0px !important }
+</style>
+<div class="page-content" style="max-width: fit-content !important">
+   <article class="default-section" style="width: 990px !important">
+      {{form_open('register/account/create')}}
+         <div class="sides-container">
+            <div class="content-side" style="width: 48% !important">
+               <h3 class="aside-title">Maak je eigen Leet</h3>
+               <div class="column">
+                  <h5>Leetnaam</h5>
+                  <input type="text" name="username" class="rounded-input blue-active username" placeholder="Leetnaam..." maxlength="15" required="" autocomplete="off">
+               </div>
+               <div class="column space-bottom">
+                  <div class="form-help form-username">Jouw unieke naam in Leet Hotel.</div>
+               </div>
+               <div class="column space-bottom">
+                  <h5>E-mailadres</h5>
+                  <input type="email" name="mail" class="rounded-input blue-active" placeholder="E-mailadres..." required="" autocomplete="off">
+               </div>
+               <div class="column space-bottom">
+                  <div class="form-help">We zullen deze informatie nodig hebben om je account te herstellen voor het geval je de toegang verliest.</div>
+               </div>
+               <div class="column space-bottom">
+                  <h5>Geboortedatum</h5>
+                  <div class="birth-date">
+                      <select name="birthdate_day" class="selectric">
+                          <option disabled selected>Dag</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                          <option value="13">13</option>
+                          <option value="14">14</option>
+                          <option value="15">15</option>
+                          <option value="16">16</option>
+                          <option value="17">17</option>
+                          <option value="18">18</option>
+                          <option value="19">19</option>
+                          <option value="20">20</option>
+                          <option value="21">21</option>
+                          <option value="22">22</option>
+                          <option value="23">23</option>
+                          <option value="24">24</option>
+                          <option value="25">25</option>
+                          <option value="26">26</option>
+                          <option value="27">27</option>
+                          <option value="28">28</option>
+                          <option value="29">29</option>
+                          <option value="30">30</option>
+                          <option value="31">31</option>
+                      </select>
+                  </div>
+                  <div class="birth-date big">
+                       <select name="birthday_month" class="selectric" tabindex="-1">
+                          <option disabled="" selected="">Maand</option>
+                          <option value="1">Januari</option>
+                          <option value="2">Februari</option>
+                          <option value="3">Maart</option>
+                          <option value="4">April</option>
+                          <option value="5">Mei</option>
+                          <option value="6">Juni</option>
+                          <option value="7">Juli</option>
+                          <option value="8">Augustus</option>
+                          <option value="9">September</option>
+                          <option value="10">Oktober</option>
+                          <option value="11">November</option>
+                          <option value="12">December</option>
+                       </select>
+                  </div>
+                  <div class="birth-date">
+                       <select name="birthday_year" class="selectric" tabindex="-1">
+                          <option disabled="" selected="">Jaar</option>
+                          <option value="2020">2020</option>
+                          <option value="2019">2019</option>
+                          <option value="2018">2018</option>
+                          <option value="2017">2017</option>
+                          <option value="2016">2016</option>
+                          <option value="2015">2015</option>
+                          <option value="2014">2014</option>
+                          <option value="2013">2013</option>
+                          <option value="2012">2012</option>
+                          <option value="2011">2011</option>
+                          <option value="2010">2010</option>
+                          <option value="2009">2009</option>
+                          <option value="2008">2008</option>
+                          <option value="2007">2007</option>
+                          <option value="2006">2006</option>
+                          <option value="2005">2005</option>
+                          <option value="2004">2004</option>
+                          <option value="2003">2003</option>
+                          <option value="2002">2002</option>
+                          <option value="2001">2001</option>
+                          <option value="2000">2000</option>
+                          <option value="1999">1999</option>
+                          <option value="1998">1998</option>
+                          <option value="1997">1997</option>
+                          <option value="1996">1996</option>
+                          <option value="1995">1995</option>
+                          <option value="1994">1994</option>
+                          <option value="1993">1993</option>
+                          <option value="1992">1992</option>
+                          <option value="1991">1991</option>
+                          <option value="1990">1990</option>
+                          <option value="1989">1989</option>
+                          <option value="1988">1988</option>
+                          <option value="1987">1987</option>
+                          <option value="1986">1986</option>
+                          <option value="1985">1985</option>
+                          <option value="1984">1984</option>
+                          <option value="1983">1983</option>
+                          <option value="1982">1982</option>
+                          <option value="1981">1981</option>
+                          <option value="1980">1980</option>
+                          <option value="1979">1979</option>
+                          <option value="1978">1978</option>
+                          <option value="1977">1977</option>
+                          <option value="1976">1976</option>
+                          <option value="1975">1975</option>
+                          <option value="1974">1974</option>
+                          <option value="1973">1973</option>
+                          <option value="1972">1972</option>
+                          <option value="1971">1971</option>
+                          <option value="1970">1970</option>
+                          <option value="1969">1969</option>
+                          <option value="1968">1968</option>
+                          <option value="1967">1967</option>
+                          <option value="1966">1966</option>
+                          <option value="1965">1965</option>
+                          <option value="1964">1964</option>
+                          <option value="1963">1963</option>
+                          <option value="1962">1962</option>
+                          <option value="1961">1961</option>
+                          <option value="1960">1960</option>
+                          <option value="1959">1959</option>
+                          <option value="1958">1958</option>
+                          <option value="1957">1957</option>
+                          <option value="1956">1956</option>
+                          <option value="1955">1955</option>
+                          <option value="1954">1954</option>
+                          <option value="1953">1953</option>
+                          <option value="1952">1952</option>
+                          <option value="1951">1951</option>
+                          <option value="1950">1950</option>
+                       </select>
+                  </div>
+               </div>
+               <div class="column space-bottom">
+                  <div class="form-help">We zullen deze informatie nodig hebben om je account te herstellen voor het geval je de toegang verliest.</div>
+               </div>
+               <div class="column">
+                  <div class="column-2">
+                     <h5>Wachtwoord</h5>
+                     <input type="password" name="password" class="rounded-input blue-active" placeholder="Wachtwoord..." maxlength="32" required="" autocomplete="off">
+                  </div>
+                  <div class="column-2">
+                     <h5>Wachtwoord nogmaals</h5>
+                     <input type="password" name="password_confirmation" class="rounded-input blue-active" placeholder="Wachtwoord nogmaals..." maxlength="32" required="" autocomplete="off">
+                  </div>
+               </div>
+               <div class="column space-bottom">
+                  <div class="form-help">Je wachtwoord moet minimaal 6 tekens lang zijn en letters en cijfers bevatten. <strong>Zorg dat je wachtwoord anders is dan op andere website's!</strong></div>
+               </div>
+            </div>
+            <div class="content-side">
+               <h3 class="aside-title">Hoe wil je er uit zien?</h3>
+               <div class="column">
+                  <h5>Geslacht</h5>
+                  <select name="gender" class="selectric" required="" tabindex="-1">
+                     <option value="M">Jongen</option>
+                     <option value="F">Meisje</option>
+                  </select>
+               </div>
+               <div class="avatars-container">
+                    <div id="avatarSelector" class="builder-viewport">
+                         <div class="main-navigation">
+                            <ul>
+                               <li class="active">
+                                  <a href="#" data-navigate="hd" data-subnav="gender"><img src="/assets/images/avatareditor/body.png" /></a>
+                               </li>
+                               <li>
+                                  <a href="#" data-navigate="hr" data-subnav="hair"><img src="/assets/images/avatareditor/hair.png" /></a>
+                               </li>
+                               <li>
+                                  <a href="#" data-navigate="ch" data-subnav="tops"><img src="/assets/images/avatareditor/tops.png" /></a>
+                               </li>
+                               <li>
+                                  <a href="#" data-navigate="lg" data-subnav="bottoms"><img src="/assets/images/avatareditor/bottoms.png" /></a>
+                               </li>
+                               <li>
+                                  <a href="#"><img src="/assets/images/avatareditor/saved-looks.png" /></a>
+                               </li>
+                            </ul>
+                         </div>
+                         <div class="sub-navigation">
+                            <ul id="hair" class="hidden">
+                               <li>
+                                  <a href="#" class="hair nav-selected" data-navigate="hr"></a>
+                               </li>
+                               <li>
+                                  <a href="#" class="hats" data-navigate="ha"></a>
+                               </li>
+                               <li>
+                                  <a href="#" class="hair-accessories" data-navigate="he"></a>
+                               </li>
+                               <li>
+                                  <a href="#" class="glasses" data-navigate="ea"></a>
+                               </li>
+                               <li>
+                                  <a href="#" class="moustaches" data-navigate="fa"></a>
+                               </li>
+                            </ul>
+                            <ul id="tops" class="hidden">
+                               <li>
+                                  <a href="#" class="tops nav-selected" data-navigate="ch"></a>
+                               </li>
+                               <li>
+                                  <a href="#" class="chest" data-navigate="cp"></a>
+                               </li>
+                               <li>
+                                  <a href="#" class="jackets" data-navigate="cc"></a>
+                               </li>
+                               <li>
+                                  <a href="#" class="accessories" data-navigate="ca"></a>
+                               </li>
+                            </ul>
+                            <ul id="bottoms" class="hidden">
+                               <li>
+                                  <a href="#" class="bottoms nav-selected" data-navigate="lg"></a>
+                               </li>
+                               <li>
+                                  <a href="#" class="shoes" data-navigate="sh"></a>
+                               </li>
+                               <li>
+                                  <a href="#" class="belts" data-navigate="wa"></a>
+                               </li>
+                            </ul>
+                         </div>
+                         <div id="clothes-colors">
+                            <div id="clothes"></div>
+                            <div id="colors"></div>
+                         </div>
+                         <div id="avatar">
+                            <img id="myHabbo" src="" alt="My Habbo" title="My Habbo" />
+
+                         </div>
+                      </div>
+                    </div>
+               </div>
+              <p style="text-align: center; margin-top: 30px;"><button type="submit" class="rounded-button blue plain submit-form default-prevent">Registreer</button></p>
+            </div>
+         </div>
+      </form>
+   </article>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="page-content">
+  <article class="default-section">
+     <div class="sides-container">
+        <div class="content-side">
+           <h3 class="aside-title">Log in | {{getenv('meteor.hotelname')}}</h3>
+           {{form_open('auth/login/request')}}
+              <div class="column space-bottom">
+                 <h5>{{getenv('meteor.hotelname')}}{{lang('Login.name')}}</h5>
+                 <input type="text" name="username" class="rounded-input blue-active username" placeholder="{{getenv('meteor.hotelname')}}{{lang('Login.name')}}..." required>
+              </div>
+              <div class="column space-bottom">
+                 <h5>Wachtwoord</h5>
+                 <input type="password" name="password" class="rounded-input blue-active" placeholder="{{lang('Login.password')}}..." required autocomplete="off">
+              </div>
+              <div class="column space-bottom">
+                 <div class="form-help">
+                    <a href="{{site_url('account/forgot')}}" style="float: right">{{lang('Login.lost-password')}}</a>
+                 </div>
+              </div>
+              <div class="column space-bottom">
+                 <p style="text-align: center; margin-top: 30px;"><button type="submit" class="rounded-button blue plain default-prevent">{{lang('Login.login')}}</button></p>
+              </div>
+           </form>
+        </div>
+        <div class="content-side">
+           <h3 class="aside-title">{{lang('Login.new-title')}}</h3>
+           <div class="column">
+              {{lang('Login.new-text')|raw}}
+           </div>
+           <div class="column space-bottom">
+              <p style="text-align: center; margin-top: 30px;"><a href="{{site_url('register')}}" class="rounded-button green plain default-prevent">{{lang('Login.create-account')}}</a></p>
+           </div>
+        </div>
+     </div>
+  </article>
+</div>
+<div class="modal fade" id="loginAuth" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-xl">
+            <form action="/auth/login/authorization" method="POST">
+            <div class="modal-header">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Verificatie..</h4>
+                            <hr>
+                                <label for="username">Voer je 2FA wachtwoord in</label>
+                                <input type="text" name="pincode" placeholder="Pincode..."  class="form-control">
+                                <div class="row mt-3">
+                                    <div class="col-12 col-xs-12 col-md-12">
+                                        <input type="submit" class="btn btn-outline-info w-100"
+                                               value="Wijzig wachtwoord">
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
