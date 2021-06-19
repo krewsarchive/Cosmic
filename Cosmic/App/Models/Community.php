@@ -169,7 +169,7 @@ class Community
 
     public static function getPopularRooms($limit = 10, $offset = 0)
     {
-        return QueryBuilder::connection()->table('rooms')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->offset($offset)->limit($limit)->orderBy('users', 'desc')->get();
+        return QueryBuilder::connection()->table('rooms')->offset($offset)->limit($limit)->orderBy(['rooms.users', 'rooms.id'], 'desc')->get();
     }
 
     public static function getPopularGroups($limit = 10, $offset = 0)
