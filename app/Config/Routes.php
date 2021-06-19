@@ -30,7 +30,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Auth\Login::view');
+$routes->get('/', 'Home\Home::me');
 $routes->get('/home', 'Home\Home::me');
 $routes->get('/register', 'Auth\Registration::view');
 $routes->get('/settings', 'Settings\Preferences::view');
@@ -38,6 +38,8 @@ $routes->get('/settings/password', 'Settings\Password::view');
 $routes->get('/settings/verification', 'Settings\Verification::view');
 $routes->get('/settings/mail', 'Settings\Mail::view');
 $routes->get('/hotel', 'Client\Hotel::view');
+
+$routes->get('/assets/js/web/web.locale.js', 'Home\Home::locale');
 
 $routes->get('/auth/account/create', 'Auth\Registration::account');
 $routes->get('/auth/login', 'Auth\Login::view');

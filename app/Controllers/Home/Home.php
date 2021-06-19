@@ -6,18 +6,24 @@ class Home extends \App\Controllers\Application
     public function __construct()
     {
         parent::__construct();
+        $this->articlesModel = model('ArticlesModel');
     }
   
     public function me()
     {       
-        $this->userCurrency = model('UserCurrencyModel');
-        $this->articlesModel = model('ArticlesModel');
-        $this->userModel = model('UserModel');
+        
+        if($this->user) {
+            $this->userCurrency = model('UserCurrencyModel');
+            $currencys = $this->userCurrency->get($this->user->id);
+        }
       
-        $currencys = $this->userCurrency->get($this->user->id);
-        $getArticles = $this->articlesModel->findAll(getenv('meteor.limit.news'));
-    
-        return $this->twig->display('home/me', ['articles' => $getArticles, 'currencys' => $currencys, 'page' => 'me']);
+        $articles = $this->articlesModel->findAll(getenv('meteor.limit.news'));
+      
+        return $this->twig->display('home/me', [
+            'articles'  => $articles, 
+            'currencys' => $currencys ?? null, 
+            'page'      => 'home'
+        ]);
     }
   
 }

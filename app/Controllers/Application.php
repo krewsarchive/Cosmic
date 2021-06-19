@@ -38,6 +38,7 @@ class Application extends Controller
         $this->session = \Config\Services::session();
 
         $this->twig->addGlobal('session', $this->session);
+        $this->twig->addGlobal('ajaxRequest', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest');
       
         if ($this->session->has('user')) { 
             $this->user = (new UserModel())->find($this->session->get('user')->id);
