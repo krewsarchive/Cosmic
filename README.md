@@ -3,7 +3,7 @@ Cosmic made an transition, we are currently busy with migrate Cosmic to Codeigni
 
 # Get old Cosmic
 
-`$ git clone https://git.krews.org/Raizer/Cosmic/-/tree/old`
+`$ git clone https://git.krews.org/Raizer/Cosmic.git`
 
 `$ git checkout old`
 
