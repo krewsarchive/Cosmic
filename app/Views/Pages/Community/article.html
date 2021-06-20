@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mt-5">Nieuws</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 mt-2">
+        <div class="card">
+            <div class="card-body">
+                <h4>Nieuwsberichten</h4>
+                <hr>
+                {% for item in allArticles %}
+                <div class="row articles">
+                    <div class="col-3 col-md-3 text-center pr-0">
+                        <div class="newsImg text-white" style="background-image:url({{item.header}}); background-position: center center; height: 50px; width: 80%; border-radius: 4px;">
+                        </div>
+                    </div>
+                    <div class="col-9 col-md-9 pl-0 pt-2">
+                        <a href="/community/article/{{item.id}}/{{item.slug}}" class="text-black">
+                            <p>
+                                <span class="font-weight-bold">
+                                    {{item.title}}
+                                </span>
+                                <br>
+                                <span class="text-muted">
+                                        {{item.timestamp|date("d-M H:i")}}
+                                </span>
+                            </p>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 mt-2">
+        <div class="card flex-column">
+            <div class="card-body">
+                <div class="newsImg text-white pl-2" style="background-image:url({{item.header}}); height: 120px; width: 100%; border-radius: 4px;">
+                    <div>
+                        <h4 style="padding-top: 3.5vh">{{item.title}}</h4>
+                        <p>{{item.short_story}}</p>
+                    </div>
+                </div>
+                <div class="pt-2">
+                    <span>{{item.full_story}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
