@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="row">
+   <div class="col-md-12">
+      <h1 class="mt-5">Photos</h1>
+   </div>
+</div>
+<div class="row mt-5">
+   {% for photo in photos %}
+   <div class="col-sm-3">
+      <div class="card mb-3">
+         <div class="img-fluid img-thumbnail"style="width: 268px; height:268px;background-image: url({{photo.url}}); position: relative">
+            <div style="background-color: rgba(255, 255, 255, 0.8);position: absolute;left: 2px;right: 2px;bottom: 0px;margin: -2px;padding: -13px;color: #333;height: 60px;font-weight: 600;font-size: 18px;">
+               <img src="https://habbo.com.br/habbo-imaging/avatarimage?figure={{photo.author.look}}&amp;gesture=sml&amp;headonly=1">
+               <span class="mt-0">{{photo.author.username}} </span><br />
+            </div>
+         </div>
+      </div>
+   </div>
+   {% endfor %}
+</div>
+{% endblock %}
