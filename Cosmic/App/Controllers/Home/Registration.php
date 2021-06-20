@@ -24,7 +24,7 @@ class Registration
     public function request()
     {
         $dataset = [
-            'username'              => 'required|min:2',
+            'username'              => 'required|min:2|pattern:[a-zA-Z0-9-=?!@:.]+',
             'email'                 => 'required|max:150|email',
             'password'              => 'required|min:6|max:32',
             'password_repeat'       => 'required|same:password',
