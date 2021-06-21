@@ -72,6 +72,7 @@ function WebHotelManagerInterface() {
                         container.prepend('<iframe class="client-frame flash" src="/client?' + argument + '"></iframe>');
                     }
 
+                    document.title = 'Hotel - ' + Site.name;
                     body.addClass("hotel-visible");
 
                     var radio = document.getElementById("stream");
