@@ -128,7 +128,7 @@ class Routes extends Router
                 parent::get('/settings/password', 'Settings\Password@index');
                 parent::get('/settings/namechange', 'Settings\Namechange@index');
                 parent::get('/settings/preferences', 'Settings\Preferences@index');
-                parent::get('/settsings/verification', 'Settings\Verification@index');
+                parent::get('/settings/verification', 'Settings\Verification@index');
 
                 parent::get('/help/requests/view', 'Help\Requests@index');
                 parent::get('/help/requests/new', 'Help\Ticket@index');
