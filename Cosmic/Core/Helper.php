@@ -53,15 +53,13 @@ function request(): Request
 
 function getIpAddress()
 {
-    if(isset(Router::Request()->getHeaders()['CF-Connecting-IP']) && Router::Request()->getHeaders()['CF-Connecting-IP'] !== NULL) {
-        return Router::Request()->getHeaders()['CF-Connecting-IP']; 
-    }
-
-    if(isset(Router::Request()->getHeaders()['http_x_forwarded_for']) && Router::Request()->getHeaders()['http_x_forwarded_for'] !== NULL) {
+    if(isset(Router::Request()->getHeaders()['http-cf-connecting-ip']) && Router::Request()->getHeaders()['http-cf-connecting-ip'] !== NULL) {
+        return Router::Request()->getHeaders()['http-cf-connecting-ip']; 
+    } else if(isset(Router::Request()->getHeaders()['http_x_forwarded_for']) && Router::Request()->getHeaders()['http_x_forwarded_for'] !== NULL) {
         return Router::Request()->getHeaders()['http_x_forwarded_for'];     
+    } else {
+        return Router::Request()->getHeaders()['remote-addr']; 
     }
-
-    return Router::Request()->getHeaders()['remote-addr']; 
 }
 
 
