@@ -31,12 +31,12 @@ class Guild
         return QueryBuilder::connection()->table('guilds')->select('guilds_members.*')->join('guilds_members', 'guilds.id', '=', 'guilds_members.guild_id')->where('guilds.id', $guild_id)->where('guilds_members.user_id', $user_id)->first();
     }
   
-    public static function getForumTopics($guild_id, $limit = 1000, $offset = null)
+    public static function getForumTopics($guild_id, $limit = 1000, $offset = 0)
     {
         return QueryBuilder::connection()->table('guilds_forums_threads')->orderBy('pinned', 'DESC')->where('guild_id', $guild_id)->offset($offset)->limit($limit)->where('state', '0')->orderBy('id', 'DESC')->get();
     }
   
-    public static function getPostsById($id, $limit = 1000, $offset = null)
+    public static function getPostsById($id, $limit = 1000, $offset = 0)
     {
         return QueryBuilder::connection()->table('guilds_forums_comments')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('thread_id', $id)->offset($offset)->limit($limit)->get();
     }
