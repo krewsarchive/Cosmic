@@ -76,6 +76,9 @@ class Category {
             response()->json(["status" => "error", "message" => Locale::get('core/notification/something_wrong')]);
         }
       
+        $title    = input('title');
+        $cat_id   = input('guild_id');
+      
         $slug     = Helper::convertSlug($title);
         $forums   = Guild::getGuild($cat_id);
       
