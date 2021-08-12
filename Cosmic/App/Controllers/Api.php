@@ -104,8 +104,8 @@ class Api
         ];
 
         
-        foreach(Player::getCurrencys(request()->player->id) as $value) {
-            $response += [$value->currency => $value->amount];
+        foreach(Player::getCurrencys($user->id) as $value) {
+            $response[$value->currency] = $value->amount;
         }
       
         response()->json($response);
