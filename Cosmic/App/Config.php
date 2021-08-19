@@ -22,9 +22,9 @@ class Config
       'external_figuredata'         => 'gamedata/furnidata.xml?v=5',
       'external_base'               => 'gordon/PRODUCTION-201904011212-888653470',
       'client_swf'                  => 'Habbo.swf',
-      'client_host'                 => '151.80.54.177',
+      'client_host'                 => '127.0.0.1',
       'client_port'                 => 3000,
-      "client_radio"                => "https://21253.live.streamtheworld.com/WEB16_AAC.aac",
+      "client_radio"                => "https://playerservices.streamtheworld.com/api/livestream-redirect/WEB16_ACC.acc",
       "nitro_path"                  => "https://client.circinus.dev"
     ];
   
