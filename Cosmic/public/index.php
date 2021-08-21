@@ -1,14 +1,12 @@
 <?php
-use App\Config;
-use Core\Routes;
-use Core\QueryBuilder;
+use Cosmic\App\Config;
+use Cosmic\System\RouterService;
+use Cosmic\System\DatabaseService;
 
-include_once __DIR__ . '/../Core/Helper.php';
+include_once __DIR__ . '/../src/System/Helpers/Helper.php';
 include_once __DIR__ . '/../vendor/autoload.php';
 
-if(Config::debug) {
-    ini_set("display_errors", 1);
-}
+ini_set("display_errors", 1);
 
 /**
  *  Set session
@@ -20,10 +18,12 @@ session_start();
  *  Set QueryBuilder
  */
 
-new Querybuilder;
+new DatabaseService;
 new Config;
 
 /**
  *  Dispatch URI
  */
-Routes::init();
+
+$router = new RouterService();
+$router->init();

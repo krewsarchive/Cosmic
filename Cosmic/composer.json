@@ -22,9 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Core\\": "Core/",
-            "App\\": "App/",
-            "Library\\": "Library/"
+            "Cosmic\\": "src/"
         }
     }
 }
