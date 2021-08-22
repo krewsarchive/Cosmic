@@ -18,7 +18,7 @@ class Help
     public function helpBySlug($slug)
     {
         $slug_id = explode('-', $slug);
-        $article = \App\Models\Help::getById($slug_id[0]);
+        $article = \Cosmic\App\Models\Help::getById($slug_id[0]);
         if ($article == null) {
             (redirect('/help'));
         }
@@ -28,13 +28,13 @@ class Help
 
     public function helpAction()
     {
-        $category = \App\Models\Help::getCategories();
+        $category = \Cosmic\App\Models\Help::getCategories();
         if($category == null) {
             redirect('/');
         }
 
         foreach ($category as $row) {
-            $row->faq = \App\Models\Help::getByCategory($row->id);
+            $row->faq = \Cosmic\App\Models\Help::getByCategory($row->id);
         }
         
         $this->data->categories = $category;
