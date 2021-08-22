@@ -1,8 +1,8 @@
 <?php
 namespace Cosmic\App\Controllers\Help;
 
-use Cosmic\Core\LocaleService;
-use Cosmic\Core\ViewService;
+use Cosmic\System\LocaleService;
+use Cosmic\System\ViewService;
 
 use stdClass;
 
