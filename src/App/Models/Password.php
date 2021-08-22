@@ -2,11 +2,11 @@
 namespace Cosmic\App\Models;
 
 use Cosmic\App\Config;
-use Cosmic\App\Mail;
-use Cosmic\App\Token;
 
 use Cosmic\System\Locale;
 use Cosmic\System\View;
+use Cosmic\System\MailService;
+use Cosmic\System\TokenService;
 
 use Cosmic\System\DatabaseService as QueryBuilder;
 use PDO;
@@ -16,7 +16,7 @@ class Password
     public static function getByToken($token, $hash = false)
     {
         if($hash) {
-            $token = new Token($token);
+            $token = new TokenService($token);
             $token = $token->getHash();
         }
 
@@ -30,7 +30,7 @@ class Password
 
     public static function createToken($player_id, $username, $email)
     {
-        $token = new Token();
+        $token = new TokenService();
         $hashed_token = $token->getHash();
 
         $data = array(
@@ -49,6 +49,6 @@ class Password
     public static function sendMail($username, $email, $token) {
         $url	= 'http://' . Config::site['domain'].'/password/reset/' . $token;
         $body 	= View::getTemplate('Password/body.html', ['url' => $url, 'username' => $username], true, true);
-        return Mail::send(Locale::get('claim/email/title'), $body, $email);
+        return MailService::send(Locale::get('claim/email/title'), $body, $email);
     }
 }
