@@ -100,7 +100,7 @@ class RouterService extends Router
                 });
 
                 parent::group(['middleware' => NotLoggedInMiddleware::class, 'exceptionHandler' => ExceptionHandler::class], function () {
-                    parent::get('/registration/{name?}', 'Home\Registration@index');
+                    parent::get('/registration/{name?}', 'Auth\Registration@index');
                     parent::get('/facebook', 'Home\Login@facebook');
 
                     parent::get('/password/claim', 'Password\Claim@index');
@@ -123,7 +123,7 @@ class RouterService extends Router
                 parent::get('/hotel', 'Client\Client@hotel');
                 parent::get('/client', 'Client\Client@client');
 
-                parent::get('/logout', 'Home\Login@logout');
+                parent::get('/logout', 'Auth\Login@logout');
                 parent::get('/settings', 'Settings\Preferences@index');
                 parent::get('/settings/email', 'Settings\Email@index');
                 parent::get('/settings/password', 'Settings\Password@index');

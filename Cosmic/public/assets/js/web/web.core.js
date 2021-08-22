@@ -115,7 +115,7 @@ function WebInterface() {
 
             $.magnificPopup.close();
 
-            Web.ajax_manager.post("/home/login/request", verification_data, function (result) {
+            Web.ajax_manager.post("/auth/login/request", verification_data, function (result) {
 
                 if (result.status == "pincode_required") {
                     setTimeout(function () {

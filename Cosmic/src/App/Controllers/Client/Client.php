@@ -1,9 +1,7 @@
 <?php
 namespace Cosmic\App\Controllers\Client;
 
-use Cosmic\App\Core;
 use Cosmic\App\Config;
-use Cosmic\App\Token;
 
 use Cosmic\App\Models\Api;
 use Cosmic\App\Models\Ban;
@@ -12,6 +10,7 @@ use Cosmic\App\Models\Room;
 
 use Cosmic\System\LocaleService;
 use Cosmic\System\ViewService;
+use Cosmic\System\TokenService;
 
 use Cosmic\App\Library\HotelApi;
 
@@ -63,7 +62,7 @@ class Client
 
         $user = Player::getDataById(request()->player->id);
       
-        $this->data->auth_ticket = Token::authTicket($user->id);
+        $this->data->auth_ticket = TokenService::authTicket($user->id);
         $this->data->unique_id = sha1($user->id . '-' . time());
 
         Player::update($user->id, ["auth_ticket" => $this->data->auth_ticket]);

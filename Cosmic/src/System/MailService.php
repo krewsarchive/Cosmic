@@ -1,11 +1,11 @@
 <?php
-namespace Cosmic\App;
+namespace Cosmic\System;
 
 use Swift_Mailer;
 use Swift_Message;
 use Swift_SmtpTransport;
 
-class Mail
+class MailService
 {
     public static function send($subject, $body, $to) {
         $transport = (new Swift_SmtpTransport(Config::mailHost, Config::mailPort, 'ssl'))

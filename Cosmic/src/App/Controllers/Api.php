@@ -3,7 +3,7 @@ namespace Cosmic\App\Controllers;
 
 use Cosmic\App\Config;
 use Cosmic\App\Hash;
-use Cosmic\App\Token;
+use Cosmic\System\TokenService;
 
 use Cosmic\App\Models\Core;
 use Cosmic\App\Models\Room;
@@ -32,9 +32,9 @@ class Api
             ]);
         }
       
-        $auth_ticket = Token::authTicket(request()->player->id);
+        $auth_ticket = TokenService::authTicket(request()->player->id);
         Player::update(request()->player->id, ["auth_ticket" => $auth_ticket]);
-      
+
         if(!empty($auth_ticket)) {
             response()->json([
                 "status"  => "success",  

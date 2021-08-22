@@ -1,16 +1,17 @@
 <?php
 namespace Cosmic\System;
 
-use Cosmic\App\Auth;
 use Cosmic\App\Config;
-use Cosmic\App\Flash;
 
 use Cosmic\App\Models\Permission;
 use Cosmic\App\Models\Player;
 use Cosmic\App\Models\Admin;
 use Cosmic\App\Models\Core;
 
+use Cosmic\App\Controllers\Auth\Auth;
+
 use Cosmic\System\LocaleService;
+use Cosmic\System\FlashService;
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;

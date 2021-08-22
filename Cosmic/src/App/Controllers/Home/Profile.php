@@ -2,7 +2,7 @@
 namespace Cosmic\App\Controllers\Home;
 
 use Cosmic\App\Config;
-use Cosmic\App\Helper;
+use Cosmic\App\Helpers\Helper;
 use Cosmic\pp\Models\Community;
 use Cosmic\App\Models\Core;
 use Cosmic\App\Models\Player;

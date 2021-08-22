@@ -1,9 +1,9 @@
 <?php
-namespace Cosmic\App;
+namespace Cosmic\App\Helpers;
 
-use Cosmic\App\Models\Ban;
 use Cosmic\App\Config;
 
+use Cosmic\App\Models\Ban;
 use Cosmic\App\Models\Permission;
 use Cosmic\App\Models\Player;
 use Cosmic\App\Models\Guild;
@@ -160,7 +160,7 @@ class Helper
     }
   
     public static function asnBan() {
-        $reader = new Reader(__DIR__. Config::vpnLocation);
+        $reader = new Reader(__DIR__. '/../' . Config::vpnLocation);
 
         try {
             static::$record = $reader->asn(getIpAddress());

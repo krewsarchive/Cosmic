@@ -1,9 +1,9 @@
 <?php
-namespace Cosmic\App;
+namespace Cosmic\System;
 
 use Exception;
 
-class Token
+class TokenService
 {
     protected $token;
 

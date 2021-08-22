@@ -1,9 +1,9 @@
 <?php
-namespace Cosmic\App\Controllers\Home;
+namespace Cosmic\App\Controllers\Auth;
 
 use Cosmic\App\Config;
-use Cosmic\App\Helper;
-use Cosmic\App\Auth;
+use Cosmic\App\Helpers\Helper;
+use Cosmic\App\Controllers\Auth\Auth;
 
 use Cosmic\App\Models\Player;
 use Cosmic\App\Models\Core;

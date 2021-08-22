@@ -1,7 +1,7 @@
 <?php
-namespace Cosmic\App;
+namespace Cosmic\System;
 
-class Hash
+class HashService
 {
     public static function password($string)
     {

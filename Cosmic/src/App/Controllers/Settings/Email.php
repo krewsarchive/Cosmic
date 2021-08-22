@@ -1,13 +1,13 @@
 <?php
 namespace Cosmic\App\Controllers\Settings;
 
-use CosmicApp\Hash;
-use CosmicApp\Models\Log;
-use CosmicApp\Models\Player;
+use Cosmic\App\Models\Log;
+use Cosmic\App\Models\Player;
 
 use Cosmic\System\LocaleService;
 use Cosmic\System\ViewService;
 use Cosmic\System\ValidationService;
+use Cosmic\System\HashService;
 
 use Library\Json;
 
@@ -23,7 +23,7 @@ class Email
         $currentPassword = input('current_password');
         $email = input('email');
 
-        if (!Hash::verify($currentPassword, request()->player->password)) {
+        if (!HashService::verify($currentPassword, request()->player->password)) {
             response()->json(["status" => "error", "message" => LocaleService::get('settings/current_password_invalid')]);
         }
 

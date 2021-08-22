@@ -1,7 +1,5 @@
 <?php
-namespace Cosmic\App;
-
-use Cosmic\App\Helper;
+namespace Cosmic\App\Controllers\Auth;
 
 use Cosmic\App\Models\Admin;
 use Cosmic\App\Models\Ban;
@@ -13,7 +11,7 @@ use Cosmic\App\Models\Player;
 use Cosmic\System\LocaleService;
 use Cosmic\System\SessionService;
 
-use Library\Json;
+use Cosmic\App\Helpers\Helper;
 
 class Auth
 {

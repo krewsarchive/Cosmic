@@ -2,12 +2,12 @@
 namespace Cosmic\App\Models;
 
 use Cosmic\App\Config;
-use Cosmic\App\Core;
-use Cosmic\App\Hash;
 
 use Cosmic\App\Models\Permission;
 
 use Cosmic\System\DatabaseService as QueryBuilder;
+use Cosmic\System\HashService;
+
 use PDO;
 
 class Player
@@ -100,7 +100,7 @@ class Player
     {
         $data = array(
             'username' => $data->username,
-            'password' => Hash::password($data->password),
+            'password' => HashService::password($data->password),
             'mail' => $data->email,
             'account_created' => time(),
             'credits' => \Cosmic\App\Models\Core::settings()->start_credits,

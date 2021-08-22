@@ -1,7 +1,7 @@
 <?php
 namespace Cosmic\App\Controllers\Community\Guilds;
 
-use Cosmic\App\Helper;
+use Cosmic\App\Helpers\Helper;
 use Cosmic\App\Models\Guild;
 use Cosmic\App\Models\Player;
 

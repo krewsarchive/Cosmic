@@ -1,7 +1,7 @@
 <?php
 namespace Cosmic\App\Controllers\Jobs;
 
-use Cosmic\App\Helper;
+use Cosmic\App\Helpers\Helper;
 use Cosmic\App\Models\Community;
 
 use Cosmic\System\LocaleService;

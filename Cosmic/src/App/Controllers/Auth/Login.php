@@ -1,18 +1,16 @@
 <?php
-namespace Cosmic\App\Controllers\Home;
+namespace Cosmic\App\Controllers\Auth;
 
-use Cosmic\App\Auth;
 use Cosmic\App\Config;
-use Cosmic\App\Core;
-use Cosmic\App\Helper;
-use Cosmic\App\Hash;
-
+use Cosmic\App\Controllers\Auth\Auth;
+use Cosmic\App\Helpers\Helper;
 use Cosmic\App\Models\Player;
 
 use Cosmic\System\LocaleService;
 use Cosmic\System\SessionService;
 use Cosmic\System\ViewService;
 use Cosmic\System\ValidationService;
+use Cosmic\System\HashService;
 
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
 
@@ -37,7 +35,7 @@ class Login
         $pin_code     = !empty(input('pincode')) ? input('pincode') : false;
 
         $player = Player::getDataByUsername(input('username'), array('id', 'username', 'password', 'rank', 'secret_key', 'pincode'));
-        if ($player == null || !Hash::verify(input('password'), $player->password)) {
+        if ($player == null || !HashService::verify(input('password'), $player->password)) {
             response()->json(["status" => "error", "message" => LocaleService::get('login/invalid_password')]);
         }
 

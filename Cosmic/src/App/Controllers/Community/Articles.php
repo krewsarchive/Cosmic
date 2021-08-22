@@ -2,7 +2,7 @@
 namespace Cosmic\App\Controllers\Community;
 
 use Cosmic\App\Config;
-use Cosmic\App\Helper;
+use Cosmic\App\Helpers\Helper;
 
 use Cosmic\App\Models\Community;
 use Cosmic\App\Models\Permission;
