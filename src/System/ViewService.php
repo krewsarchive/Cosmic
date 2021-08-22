@@ -11,7 +11,6 @@ use Cosmic\App\Models\Core;
 use Cosmic\App\Controllers\Auth\Auth;
 
 use Cosmic\System\LocaleService;
-use Cosmic\System\FlashService;
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -89,7 +88,6 @@ class ViewService
                 if(request()->getUrl()->contains('/housekeeping')) {
                     $twig->addGlobal('staff_count', Admin::getStaffCount(3));
                     $twig->addGlobal('player_rank', Player::getHotelRank(request()->player->rank));
-                    $twig->addGlobal('flash_messages', Flash::getMessages());
                     $twig->addGlobal('alert_messages', Admin::getAlertMessages());
                     $twig->addGlobal('ban_messages', Admin::getBanMessages());
                     $twig->addGlobal('ban_times', Admin::getBanTime(request()->player->rank));

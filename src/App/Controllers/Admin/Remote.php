@@ -2,8 +2,7 @@
 namespace Cosmic\App\Controllers\Admin;
 
 use Cosmic\App\Config;
-use Cosmic\App\Helper;
-use Cosmic\App\Flash;
+use Cosmic\App\Helpers\Helper;
 
 use Cosmic\App\Models\Ban;
 use Cosmic\App\Models\Log;
