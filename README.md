@@ -5,6 +5,8 @@
 
 # <img src="https://raw.githubusercontent.com/Wulles/eyethatseeseverything/master/pwrup_pins.gif"> Installation
 
+<a href="https://git.krews.org/Raizer/cosmic-assets">Get Cosmic Assets (Database & Webkit Plugin)</a>
+
 <a href="https://vimeo.com/396311594">IIS Video Tutorial - Cosmic Installation, Morningstar Arcturus & Catalogue Cosmic</a>
 
 # Cosmic
