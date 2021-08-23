@@ -25,7 +25,7 @@ class Feeds
 
     public function post()
     {
-         ValidateService::validate([
+         ValidationService::validate([
             'reply'     => 'required|max:50',
             'userid'    => 'required'
         ]);
