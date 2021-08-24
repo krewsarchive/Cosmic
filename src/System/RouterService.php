@@ -2,10 +2,10 @@
 namespace Cosmic\System;
 
 use Cosmic\System\Handlers\ExceptionHandler;
+use Cosmic\System\LocaleService;
 
 use Cosmic\App\Middleware\AdminAuthMiddleware;
 use Cosmic\App\Middleware\AuthMiddleware;
-use Cosmic\App\Middleware\CacheMiddleware;
 use Cosmic\App\Middleware\LoggedInMiddleware;
 use Cosmic\App\Middleware\NotLoggedInMiddleware;
 use Cosmic\App\Middleware\PermissionMiddleware;
@@ -16,10 +16,7 @@ use Pecee\SimpleRouter\SimpleRouter as Router;
 
 class RouterService extends Router
 {
-    public function __construct() {
-        $this->localeService = new LocaleService();
-    }
-    
+
     public function init()
     {            
         if(request()->getUrl()->contains('housekeeping')) {
@@ -96,7 +93,7 @@ class RouterService extends Router
 
                 parent::get('/assets/js/web/web.locale.js', function () {
                     header('Content-Type: application/javascript');
-                    return 'var Locale = ' . json_encode($this->localeService->get('website/javascript', true), true) . '';
+                    return 'var Locale = ' . json_encode(LocaleService::get('website/javascript', true), true) . '';
                 });
 
                 parent::group(['middleware' => NotLoggedInMiddleware::class, 'exceptionHandler' => ExceptionHandler::class], function () {

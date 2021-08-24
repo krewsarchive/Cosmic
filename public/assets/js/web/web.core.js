@@ -121,7 +121,7 @@ function WebInterface() {
                     setTimeout(function () {
                         Web.dialog_manager.create("confirm", Locale.web_fill_pincode, Locale.web_twostep, null, "pincode", function (result) {
                             verification_data.pincode = result.toString();
-                            Web.ajax_manager.post("/home/login/request", verification_data);
+                            Web.ajax_manager.post("/auth/login/request", verification_data);
 
                             $.magnificPopup.close();
                         });

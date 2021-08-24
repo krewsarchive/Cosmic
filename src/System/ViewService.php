@@ -96,11 +96,7 @@ class ViewService
                 $twig->addGlobal('template', !isset($_COOKIE['template']) ? "light" : $_COOKIE['template']);
             }
         }
-
-        if(static::$cache === null && !empty($cacheTime)) {
-            \Cosmic\App\Middleware\CacheMiddleware::set($template, $args, $cacheTime);
-        }
-
+      
         if(request()->isAjax() && $request == false) {
             self::getResponse($template, $args);
             exit;
