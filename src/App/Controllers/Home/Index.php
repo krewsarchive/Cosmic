@@ -25,7 +25,6 @@ class Index
         if(isset(request()->player->id)) {
             $random = Player::getMyOnlineFriends(request()->player->id);
             $currencys = Player::getCurrencys(request()->player->id);
-            Player::update(request()->player->id, ['credits' => request()->player->credits + 5]);
         }
 
       
