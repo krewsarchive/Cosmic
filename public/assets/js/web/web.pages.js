@@ -1,6 +1,7 @@
 function WebHotelManagerInterface() {
     this.hotel_container = null;
     this.current_page_url = null;
+    this.hotel_url = null;
     /*
      * Manager initialization
      * */
@@ -41,7 +42,10 @@ function WebHotelManagerInterface() {
       
         var argument = arguments;
         var body = $("body");
-
+      
+        this.current_page_url = argument;
+        this.hotel_url = argument;  
+      
         if(argument == '/=beta' || argument == 'hotel=beta') {
             body.find(".header-container .header-content .account-container .account-buttons .nitroButton").text(Locale.web_hotel_backto);
             if(container.find('iframe').hasClass('nitro') != true) {
@@ -58,7 +62,7 @@ function WebHotelManagerInterface() {
       
         if (!body.hasClass("hotel-visible")) {
             Web.ajax_manager.get("/api/vote", function(result) {
-
+                
                 if (result.status != "voted" && Configuration.findretros === true) {
                     window.location.href = result.api;
                 } else {
@@ -997,6 +1001,9 @@ function WebPageHomeInterface(main_page) {
 
             Web.notifications_manager.create("info", "Saved to clickboard!", "Referral copied!");
         });
+      
+        $(".articles-container a").prop("href", "http://www.jakcms.com");
+        console.log(Web.pages_manager.hotel_url);
 
 
         // Load more articles

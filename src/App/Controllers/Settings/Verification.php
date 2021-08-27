@@ -1,14 +1,12 @@
 <?php
 namespace Cosmic\App\Controllers\Settings;
 
-use Cosmic\App\Token;
-use Cosmic\App\Hash;
 use Cosmic\App\Models\Player;
 
 use Cosmic\System\LocaleService;
 use Cosmic\System\ViewService;
 use Cosmic\System\ValidationService;
-
+use Cosmic\System\HashService;
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
 
 class Verification
@@ -25,7 +23,7 @@ class Verification
             return;
         }
 
-        if (!Hash::verify(input('current_password'), request()->player->password)) {
+        if (!HashService::verify(input('current_password'), request()->player->password)) {
             response()->json(["status" => "error", "message" => LocaleService::get('login/invalid_password')]);
         }
 

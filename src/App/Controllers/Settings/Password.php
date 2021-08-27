@@ -1,12 +1,12 @@
 <?php
 namespace Cosmic\App\Controllers\Settings;
 
-use Cosmic\App\Hash;
 use Cosmic\App\Models\Player;
 
 use Cosmic\System\LocaleService;
 use Cosmic\System\ViewService;
 use Cosmic\System\ValidationService;
+use Cosmic\System\HashService;
 
 use stdClass;
 
@@ -28,7 +28,7 @@ class Password
         $currentPassword = input('current_password');
         $this->data->newpin = input('new_password');
 
-        if (!Hash::verify($currentPassword, request()->player->password)) {
+        if (!HashService::verify($currentPassword, request()->player->password)) {
             response()->json(["status" => "error", "message" => LocaleService::get('settings/current_password_invalid')]);
         }
       
