@@ -7,6 +7,7 @@ use Cosmic\System\LocaleService;
 use Cosmic\System\ViewService;
 use Cosmic\System\ValidationService;
 use Cosmic\System\HashService;
+use Cosmic\System\SessionService;
 
 use stdClass;
 
@@ -33,7 +34,7 @@ class Password
         }
       
         Player::resetPassword(request()->player->id, $this->data->newpin);
-        Session::destroy();
+        SessionService::destroy();
 
         response()->json(["status" => "success", "message" => LocaleService::get('settings/password_saved'), "pagetime" => "/home"]);
     }
