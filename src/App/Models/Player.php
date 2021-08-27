@@ -124,7 +124,7 @@ class Player
 
     public static function resetPassword($player_id, $password)
     {
-        $password_hash = Hash::password($password);
+        $password_hash = HashService::password($password);
         return QueryBuilder::connection()->table('users')->where('id', $player_id)->update(array('password' => $password_hash));
     }
 
