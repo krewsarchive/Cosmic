@@ -19,10 +19,6 @@ class Verification
             'current_password'  => 'required|min:4'
         ]);
 
-        if (!$validate->isSuccess()) {
-            return;
-        }
-
         if (!HashService::verify(input('current_password'), request()->player->password)) {
             response()->json(["status" => "error", "message" => LocaleService::get('login/invalid_password')]);
         }
