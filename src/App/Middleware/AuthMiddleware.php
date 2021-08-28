@@ -1,7 +1,7 @@
 <?php
 namespace Cosmic\App\Middleware;
 
-use Cosmic\App\Auth\Auth;
+use Cosmic\App\Controllers\Auth\Auth;
 use Cosmic\App\Config;
 
 use Cosmic\App\Models\Player;
