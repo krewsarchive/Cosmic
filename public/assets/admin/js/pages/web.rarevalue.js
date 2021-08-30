@@ -73,7 +73,6 @@ var rarevalue = function() {
                 if(result.status == "success") {
                     $("#kt_datatable_rarevalueitems").KTDatatable("reload");
 					$('#editItemModal').modal('toggle');
-					$("#kt_datatable_rarevalueitems").KTDatatable().search(parent_id,'parent_id');
                 }
             });
         },
@@ -92,7 +91,6 @@ var rarevalue = function() {
             }, function (result) {
                 if (result.status == "success") {
                     $('#editItemModal').modal('toggle');
-					$("#kt_datatable_rarevalueitems").KTDatatable().search('','');
                     $("#kt_datatable_rarevalueitems").KTDatatable("reload");
                 }
             });
@@ -114,8 +112,6 @@ var rarevalue = function() {
 
             self.ajax_manager.post("/housekeeping/api/rarevalue/removeitem", {post: id}, function (result) {
                 if(result.status == "success") {
-                    
-					$("#kt_datatable_rarevalueitems").KTDatatable().search('','');
 					$("#kt_datatable_rarevalueitems").KTDatatable("reload");
                 }
             });
