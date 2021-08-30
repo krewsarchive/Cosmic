@@ -2859,6 +2859,87 @@ input:-webkit-autofill {
     width: 100%;
     margin: 0 auto;
 }
+/* Page - Rare Value */
+.page-container[data-page="community_rares"] .page-header {
+    background-image: url(../images/web/pages/shop/banner.png);
+    background-color: #1978c3;
+}
+
+.page-container[data-page="community_rares"] .page-content .rares-pages-container .rares-pages-container .rares-pages-thumbnail {
+    background-position: center;
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-right: 10px;
+}
+
+.page-container[data-page="community_rares"] .page-content .rares-pages-container .rares-pages-container .rares-pages-details {
+    padding-top: 5px;
+}
+
+.page-container[data-page="community_rares"] .page-content .rares-pages-container .rares-pages-container .rares-pages-details .rares-pages-title {
+    font-weight: 400;
+    color: #333;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.page-container[data-page="community_rares"] .page-content .rares-pages-container .rares-pages-details .rares-pages-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: #969696;
+}
+
+.page-container[data-page="community_rares"] .page-content .rares-container {
+    margin: -9px -9px 40px;
+}
+
+.page-container[data-page="community_rares"] .page-content .rares-container .rare-container {
+	width: 40%;
+    float: left;
+    text-align: center;
+}
+.page-container[data-page="community_rares"] .page-content .rares-container .rare-container .rare-content {
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    width: 250px;
+    height: 320px;
+    margin: 9px auto;
+    position: sticky;
+    overflow: hidden;
+}
+.page-container[data-page="community_rares"] .page-content .rares-container .rare-container .rare-content .rare-name{
+ font: 600 16.5px "Poppins", "Roboto", sans-serif;
+    padding: 15px 20px 0px;
+}
+.page-container[data-page="community_rares"] .page-content .rares-container .rare-container .rare-content .rare-image{
+	width: 220px;
+    height: 150px;
+    margin: 0 0 0 25px;
+}
+.page-container[data-page="community_rares"] .page-content .rares-container .rare-container .rare-content .rare-image .rare-bg{
+	width: 190px;
+    height: 150px;
+}
+
+.page-container[data-page="community_rares"] .page-content .rares-container .rare-container .rare-content .rare-info{
+	margin: 5%;
+    width: 100%;
+}
+.page-container[data-page="community_rares"] .page-content .rares-container .rare-container .rare-content .rare-info .rare-cost{
+	width: 100px;
+    margin-left: 5%;
+    float: left;
+}
+.page-container[data-page="community_rares"] .page-content .rares-container .rare-container .rare-content .rare-subinfo{
+    float: left;
+    margin: 2%;
+    margin-left: 5%;
+    font-size: 12px;
+}
 
 /* Page - Photos */
 .page-container[data-page="community_photos"] .page-header {

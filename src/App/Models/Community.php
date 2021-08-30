@@ -37,7 +37,38 @@ class Community
                       ->join('website_permissions_ranks', 'users.rank', '=', 'website_permissions_ranks.rank_id')->whereNot('website_permissions_ranks.permission_id', '!=', 27)
                       ->orderBy('users_currency.amount', 'DESC')->limit($limit)->get();
     }
-    
+    /*
+     * Get rarevalue queries
+     */
+	 public static function getPageRares()
+		{
+           return QueryBuilder::connection()->table('website_rares_pages')->select('website_rares_pages.*')->orderBy('website_rares_pages.id', 'desc')->get();
+		}
+		
+	public static function getPageNameFromId($id)
+    {
+           return QueryBuilder::connection()->table('website_rares_pages')->select('name')->where('id', $id)->first();
+    }
+	public static function getRareValuePagesByString($string, $limit = 10)
+	{
+        return QueryBuilder::connection()->table('website_rares_pages')->select('website_rares_pages.*')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('name', 'LIKE', $string . '%')->limit($limit)->get();
+	}
+		
+	public static function getRareList($parent_id)
+	{
+           return QueryBuilder::connection()->table('website_rares')->select('website_rares.*')->where('website_rares.parent_id', $parent_id)->orderBy('website_rares.id', 'desc')->get();
+	}
+
+	public static function getRareLastList($limit=10)
+	{
+           return QueryBuilder::connection()->table('website_rares')->select('website_rares.*')->orderBy('website_rares.id', 'desc')->limit($limit)->get();
+	}
+	   
+	 public static function getRareUnits($itemid)
+    {
+        return QueryBuilder::connection()->table('items')->where('item_id', $itemid)->count();
+    }
+	 
     /*
      * Get news queries
      */

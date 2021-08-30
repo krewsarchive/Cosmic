@@ -3,7 +3,7 @@ namespace Cosmic\App\Models;
 
 use Cosmic\App\Config;
 use Cosmic\System\DatabaseService as QueryBuilder;
-
+use Cosmic\App\Helpers\Helper;
 use PDO;
 
 class Admin
@@ -157,6 +157,99 @@ class Admin
         return QueryBuilder::connection()->table('users')->select('id')->select('username')->select('ip_current')->select('ip_register')->select('online')
                 ->select('last_login')->where('ip_current', $last_ip)->orWhere('ip_register', $reg_ip)->limit($limit)->get();
     }
+	 /*
+     * RareValue queries
+     */
+	 public static function getRareValuePages()
+    {
+        return QueryBuilder::connection()->table('website_rares_pages')->orderBy('id', 'desc')->get();
+    }
+	
+	public static function getRareValuePagesByString($string, $limit = 10)
+    {
+        return QueryBuilder::connection()->table('website_rares_pages')->select('id')->select('name')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('name', 'LIKE', $string . '%')->limit($limit)->get();
+    }
+
+    public static function getRareValuePageById($id)
+    {
+        return QueryBuilder::connection()->table('website_rares_pages')->where('id', $id)->first();
+    }
+	
+	public static function getRareValueItems()
+    {
+        return QueryBuilder::connection()->table('website_rares')->orderBy('id', 'desc')->get();
+    }
+	
+	public static function getRareValueItemById($id)
+    {
+        return QueryBuilder::connection()->table('website_rares')->where('id', $id)->first();
+    }
+	 
+	 public static function addRareValueItem(String $name, int $item_id=0, int $cost_credits=0, int $cost_points=0, int $points_type=0, String $image, int $userid)
+    {
+        $data = array(
+            'name' => $name,
+            'item_id' => $item_id,
+            'cost_credits' => $cost_credits,
+            'cost_points' => $cost_points,
+            'points_type' => $points_type,
+            'image' => $image,
+			'last_editor' => $userid
+        );
+
+        return QueryBuilder::connection()->table('website_rares')->insert($data);
+    }
+	
+	public static function addRareValuePage($id, String $name, String $desc, String $thumb)
+    {
+        $data = array(
+			'id' => $id,
+            'name' => $name,
+            'description' => $desc,
+            'thumbnail' => $thumb
+        );
+
+        return QueryBuilder::connection()->table('website_rares_pages')->insert($data);
+    }
+	
+	public static function editRareValueItem(int $id, String $name, int $item_id=0, int $cost_credits=0, int $cost_points=0, int $points_type=0, String $image, int $userid)
+    {
+        $data = array(
+           'name' => $name,
+            'item_id' => $item_id,
+            'cost_credits' => $cost_credits,
+            'cost_points' => $cost_points,
+            'points_type' => $points_type,
+            'image' => $image,
+			'last_editor' => $userid
+        );
+
+        return QueryBuilder::connection()->table('website_rares')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('id', $id)->update($data);
+    }
+	
+	 public static function editRareValuePage(int $id, String $name, String $desc, String $thumb, Int $newid)
+    {
+        $data = array(
+		'id' => $newid,
+           'name' => $name,
+            'description' => $desc,
+            'thumbnail' => $thumb
+			
+        );
+
+        return QueryBuilder::connection()->table('website_rares_pages')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('id', $id)->update($data);
+    }
+	
+	public static function deleteRareValueItemById($id)
+    {
+        return QueryBuilder::connection()->table('website_rares')->where('id', $id)->delete();
+    }
+	
+	public static function deleteRareValuePageById($id)
+    {
+        return QueryBuilder::connection()->table('website_rares_pages')->where('id', $id)->delete();
+    }
+	
     /*
      * Wordfilter queries
      */
@@ -227,7 +320,7 @@ class Admin
     public static function addNews(String $title, String $short_story, String $full_story, $category, $header, $images, int $authorId)
     {
         $data = array(
-            'slug' => \Cosmic\App\Helpers\Helper::convertSlug($title),
+            'slug' => Helper::convertSlug($title),
             'title' => $title,
             'short_story' => $short_story,
             'full_story' => $full_story,
@@ -244,7 +337,7 @@ class Admin
     public static function editNews(int $id, String $title, String $short_story, String $full_story, $category, $header, $images, int $authorId)
     {
         $data = array(
-            'slug' => \Cosmic\App\Helpers\Helper::convertSlug($title),
+            'slug' => Helper::convertSlug($title),
             'title' => $title,
             'short_story' => $short_story,
             'full_story' => $full_story,

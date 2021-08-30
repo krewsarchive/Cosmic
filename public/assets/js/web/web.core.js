@@ -453,6 +453,8 @@ function WebPageInterface(manager, type, scroll, page_data) {
             this.page_interface = new WebPageProfileInterface(this);
         else if (this.type === "community_photos")
             this.page_interface = new WebPageCommunityPhotosInterface(this);
+		else if (this.type === "community_rares")
+            this.page_interface = new WebPageCommunityRaresInterface(this);
         else if (this.type === "community_value")
             this.page_interface = new WebPageCommunityValueInterface(this);
         else if (this.type === "jobs")
