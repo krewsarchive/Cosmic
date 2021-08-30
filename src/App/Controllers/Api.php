@@ -68,7 +68,7 @@ class Api
             ]);
         }
 
-        $room = \App\Models\Room::getById($roomId);
+        $room = Room::getById($roomId);
         if ($room == null) {
             response()->json([
                 "status" => "error", 

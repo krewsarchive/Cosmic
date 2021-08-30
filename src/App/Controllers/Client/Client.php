@@ -5,6 +5,7 @@ use Cosmic\App\Config;
 
 use Cosmic\App\Models\Api;
 use Cosmic\App\Models\Ban;
+use Cosmic\App\Models\Core;
 use Cosmic\App\Models\Player;
 use Cosmic\App\Models\Room;
 
@@ -44,7 +45,7 @@ class Client
 
             // Render vpn view if ASN has been disallowed
             if ($asn) {
-                View::renderTemplate('Client/vpn.html', ['asn' => $asn->asn, 'type' => 'vpn']);
+                ViewService::renderTemplate('Client/vpn.html', ['asn' => $asn->asn, 'type' => 'vpn']);
                 exit;
             }
         }
@@ -56,7 +57,7 @@ class Client
         $isPuffin = !empty(strpos($_SERVER['HTTP_USER_AGENT'], "Puffin"));
 
         if ($isPuffin && ($OS == "WD" || $OS == "LD" || $OS == "MD")) {
-            View::renderTemplate('Client/vpn.html', ['type' => 'puffin']);
+            ViewService::renderTemplate('Client/vpn.html', ['type' => 'puffin']);
             exit;
         }
 
@@ -91,7 +92,7 @@ class Client
 
     public function count()
     {
-        echo \App\Models\Core::getOnlineCount();
+        echo Core::getOnlineCount();
         exit;
     }
 }

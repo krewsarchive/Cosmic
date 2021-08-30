@@ -702,7 +702,7 @@ class Admin
             'position'    => $position
         );
       
-        return QueryBuilder::connection()->table('website_forum_categories')-where('id', $id)->update($data);
+        return QueryBuilder::connection()->table('website_forum_categories')->where('id', $id)->update($data);
     } 
   
    public static function createForum($title, $description, $category, $imagePath, $min_rank, $position, $slug)
@@ -732,7 +732,7 @@ class Admin
             'slug'          => $slug
         );
       
-        return QueryBuilder::connection()->table('website_forum_index')-where('id', $id)->update($data);
+        return QueryBuilder::connection()->table('website_forum_index')->where('id', $id)->update($data);
     }
   
     public static function deleteForum($id)

@@ -8,13 +8,12 @@ use Cosmic\App\Library\Json;
 
 use Cosmic\System\ViewService;
 use Cosmic\System\ValidationService;
-
+use Cosmic\System\LocaleService;
 use stdClass;
 
 use MaxMind\Db\Reader\InvalidDatabaseException;
 use GeoIp2\Database\Reader;
 use GeoIp2\Exception\AddressNotFoundException;
-
 class Vpn
 {
     private $data;
@@ -46,9 +45,9 @@ class Vpn
             response()->json(["status" => "success", "message" => "AS {$record->autonomousSystemNumber} is added to our ban list"]);
 
         } catch (AddressNotFoundException $e) {
-            response()->json(["status" => "error", "message" => Locale::get('core/notification/something_wrong')]);
+            response()->json(["status" => "error", "message" => LocaleService::get('core/notification/something_wrong')]);
         } catch (InvalidDatabaseException $e) {
-            response()->json(["status" => "error", "message" => Locale::get('core/notification/something_wrong')]);
+            response()->json(["status" => "error", "message" => LocaleService::get('core/notification/something_wrong')]);
         }
     }
 

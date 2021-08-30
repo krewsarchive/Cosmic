@@ -4,7 +4,7 @@ namespace Cosmic\App\Models;
 use Cosmic\App\Config;
 
 use Cosmic\App\Models\Permission;
-
+use Cosmic\System\TokenService;
 use Cosmic\System\DatabaseService as QueryBuilder;
 use Cosmic\System\HashService;
 
@@ -130,7 +130,7 @@ class Player
 
     public function rememberLogin()
     {
-        $token = new \App\Token();
+        $token = new TokenService();
         $hashed_token = $token->getHash();
 
         $this->remember_token = $token->getValue();
