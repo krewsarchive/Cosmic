@@ -1,11 +1,9 @@
 <?php
 namespace Cosmic\App\Controllers\Community;
 
-use Cosmic\App\Models\Permission;
 use Cosmic\App\Models\Player;
 use Cosmic\App\Models\Community;
 
-use Cosmic\App\Library\Json;
 use Cosmic\System\ViewService;
 
 class Rares
