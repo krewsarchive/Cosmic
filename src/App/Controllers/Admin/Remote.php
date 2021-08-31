@@ -352,6 +352,7 @@ class Remote
         $extra_rank = (input()->post('extra_rank')->value ? input()->post('extra_rank')->value : null);
       
         $currencys = Player::getCurrencys($player->id);
+ 
         foreach($currencys as $currency) {
             if($currency) {
                 $currency->oldamount = $currency->amount;
@@ -360,24 +361,16 @@ class Remote
         }
 
         if(Permission::exists('housekeeping_change_email', request()->player->rank)) {
-            $validate = request()->validator->validate([
+            ValidationService::validate([
                 'email' => 'required|min:6|max:72|email'
             ]);
-
-            if(!$validate->isSuccess()) {
-                exit;
-            }
         }
 
         if(Permission::exists('housekeeping_ranks',  request()->player->rank)) {
-            $validate = request()->validator->validate([
+            ValidationService::validate([
                 'rank' => 'required|numeric',
             ]);
 
-            if(!$validate->isSuccess()) {
-                exit;
-            }
-          
             foreach($currencys as $currency) {
                 if($currency && !is_int($currency->amount)) {
                     response()->json(["status" => "error", "message" => "Currency must be numeric!"]);
