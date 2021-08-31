@@ -11,6 +11,7 @@ $GLOBALS['language'] = array (
             'nav_news'              => 'News',
             'nav_jobs'              => 'Jobs',
             'nav_photos'            => 'Photos',
+            'nav_rarevalue'         => 'Rare Value',
             'nav_staff'             => 'Staff',
             'nav_team'              => 'Team',
             'nav_exchange'          => 'Marketplace',
@@ -227,6 +228,23 @@ $GLOBALS['language'] = array (
             'photos_by'   => 'Photos\'s by',
             'photos_desc' => 'See all the latest pictures taken by',
             'load_more'   => 'View more photos'
+        ),
+		'community_rares' => array (
+		'desc'        => ' Most valuable furnis',
+		'last_clickhere' => 'Click Here!',
+		'last_edited'   => 'Last Edited: ',
+		'last_editor'   => 'Last Editor: ',
+		'last_rares'   => 'Last 10 Rare Published',
+		'none_rare_found_desc'   => 'Maybe you are looking for',
+		'none_rare_found_last'   => 'Last 10 rare',
+		'none_rare_found_title'   => 'I could not find rares on this page',
+		'pages_notfound'   => 'No page available',
+        'rares_pages'   => 'Pages',
+		'search'   => 'Search',
+		'title'       => Config::site['shortname'] . ' Rares',
+        'units'   => 'Units'
+            
+			
         ),
         'community_staff' => array (
             'title'       => 'How do I become staff at ' . Config::site['shortname'] . ' ?',

@@ -2,12 +2,13 @@
 namespace Cosmic\App\Controllers\Help;
 
 use Cosmic\App\Config;
-use Cosmic\App\Helper;
+use Cosmic\App\Helpers\Helper;
 
 use Cosmic\App\Models\Help;
 use Cosmic\App\Models\Player;
 
 use Cosmic\System\LocaleService;
+use Cosmic\System\ValidationService;
 use Cosmic\System\ViewService;
 
 use stdClass;

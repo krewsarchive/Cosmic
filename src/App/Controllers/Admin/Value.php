@@ -86,7 +86,6 @@ class Value
         
         $this->data->currencys = Config::currencys;
         $this->data->value = $value;
-      
         Json::encode($this->data);
     }
   

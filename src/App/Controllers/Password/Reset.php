@@ -22,7 +22,7 @@ class Reset
 
     public function validate()
     {
-        ValidationService::validate([
+        $validate = request()->validator->validate([
             'new_password'      => 'required|min:6|max:32',
             'repeated_password' => 'required|min:6|max:32|same:new_password',
             'token'             => 'max:150'

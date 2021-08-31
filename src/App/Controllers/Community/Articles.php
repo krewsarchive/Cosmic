@@ -9,6 +9,8 @@ use Cosmic\App\Models\Permission;
 use Cosmic\App\Models\Player;
 use Cosmic\App\Models\Admin;
 
+use Cosmic\App\Library\Json;
+
 use Cosmic\System\ViewService;
 use Cosmic\System\LocaleService;
 use Cosmic\System\ValidationService;

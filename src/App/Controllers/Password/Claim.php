@@ -1,6 +1,8 @@
 <?php
 namespace Cosmic\App\Controllers\Password;
 
+use Cosmic\App\Models\Player;
+use Cosmic\App\Models\Password;
 use Cosmic\System\LocaleService;
 use Cosmic\System\ViewService;
 use Cosmic\System\ValidationService;

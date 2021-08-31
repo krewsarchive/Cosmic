@@ -107,13 +107,15 @@ class Remote
             'element'   => 'required',
             'type'      => 'required'
         ]);    
+        
+        $player = Player::getDataByUsername(input('element'));
 
         if(!Permission::exists('housekeeping_reset_user', request()->player->rank)) {
             Log::addStaffLog($player->id, 'No permissions to reset', request()->player->id, 'error');
             response()->json(["status" => "error", "message" => "No permissions to reset!"]);
         }
       
-        $player = Player::getDataByUsername(input('element'));
+        
   
         switch (input()->post('type')->value) {
             

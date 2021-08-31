@@ -12,8 +12,8 @@ use Cosmic\System\LocaleService;
 use Cosmic\System\ViewService;
 use Cosmic\System\ValidationService;
 
-use Library\Json;
-use Library\HotelApi;
+use Cosmic\App\Library\Json;
+use Cosmic\App\Library\HotelApi;
 
 class Registration
 {

@@ -953,7 +953,61 @@ function WebPageCommunityPhotosInterface(main_page) {
         }
     };
 }
+function WebPageCommunityRaresInterface(main_page) {
+    this.main_page = main_page;
+    /*
+     * Generic function
+     * */
+    this.init = function() {
+        var self = this;
+        var page_container = this.main_page.get_page_container();
 
+        this.pages_template = [
+		'<a href="/community/rares/{{id}}-{{name}}" class="rares-pages-container pageinfo">' +
+        '                <div class="rares-pages-thumbnail" style="background-image: url({{thumbnail}});"></div>'+
+        '                <div class="rares-pages-details">'+
+        '                    <div class="rares-pages-title">{{name}}</div>'+
+        '                   <div class="rares-pages-date">{{description}}</div>'+
+        '               </div>'+
+        '           </a>'
+        ].join("");
+
+this.pagesnot_template = [
+		'<div class="rares-pages-container pageinfo">'+
+        '                <div class="rares-pages-details">'+
+        '                    <div class="rares-pages-title">No page available </div>'+
+        '                </div>'+
+        '           </div>'
+        ].join("");
+		
+        page_container.find(".search-rarebtn").click(function() {
+            
+                var word = $('#search-rare-value').val();
+              
+                Web.ajax_manager.post("/community/rares/search", {
+                    word: word
+                }, function(result) {
+					console.log(result);
+                    if (result.status === "success") {
+						page_container.find(".pageinfo").remove();
+						if(result.pages.length > 0){
+						for (var i = 0; i < result.pages.length; i++) {
+                        var page = result.pages[i];
+                        var pages_template = $(self.pages_template.replace(/{{id}}/g, page.id).replace(/{{name}}/g, page.name).replace(/{{thumbnail}}/g, page.thumbnail).replace(/{{description}}/g, page.description));
+							page_container.find(".rares-pages-container").append(pages_template);
+                        };
+						}else{
+							page_container.find(".rares-pages-container").append($(self.pagesnot_template));
+						}
+						
+                    };
+                    }
+					)
+					
+                });
+            
+        };
+    }
 
 function WebPageHomeInterface(main_page) {
     this.main_page = main_page;

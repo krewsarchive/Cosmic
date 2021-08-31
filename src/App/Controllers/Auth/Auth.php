@@ -18,7 +18,7 @@ class Auth
     public static function login(Player $player)
     {
         if (Helper::asnBan()) {
-            response()->json(["status" => "error", "message" => Locale::get('asn/login')]); 
+            response()->json(["status" => "error", "message" => LocaleService::get('asn/login')]); 
         }
       
         session_regenerate_id(true);
@@ -41,7 +41,7 @@ class Auth
 
         if($account || $ip_address) {
             $ban = $account ?? $ip_address;
-            response()->json(["status" => "error", "message" => LocaleService::get('core/notification/banned_1').' ' . $ban->ban_reason . '. '.LocaleService::get('core/notification/banned_2').' ' . \App\Helper::timediff($ban->ban_expire, true)]);
+            response()->json(["status" => "error", "message" => LocaleService::get('core/notification/banned_1').' ' . $ban->ban_reason . '. '.LocaleService::get('core/notification/banned_2').' ' . Helper::timediff($ban->ban_expire, true)]);
         }
     }
 

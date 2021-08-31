@@ -55,7 +55,7 @@ class Topic {
         $topic->forum = $guild;
         $topic->posts = $posts;
 
-        View::renderTemplate('Community/Guilds/topic.html', [
+        ViewService::renderTemplate('Community/Guilds/topic.html', [
             'title'       => $guild->name,
             'page'        => 'forum',
             'topic'       => $topic,
