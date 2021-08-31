@@ -27,7 +27,7 @@ class RareValue
 	
 	public function addpage()
 {
-        $validate = ValidationService::validate([
+         ValidationService::validate([
             'name'         => 'required|max:50',
             'desc'   => 'required|max:200',
             'thumb'    => 'required'
@@ -57,7 +57,7 @@ class RareValue
 
     public function removepage()
     {
-        $validate = ValidationService::validate([
+         ValidationService::validate([
             'post' => 'required|min:1'
         ]);
 
@@ -77,7 +77,7 @@ class RareValue
     }
 	public function additem()
 {
-        $validate = ValidationService::validate([
+         ValidationService::validate([
             'name'   => 'required|max:200|min:1',
             'item_id'   => 'required',
             'cost_credits'    => 'required',
@@ -112,7 +112,7 @@ class RareValue
 	
 	public function removeitem()
     {
-        $validate = ValidationService::validate([
+         ValidationService::validate([
             'post' => 'required|min:1'
         ]);
 
@@ -158,16 +158,6 @@ class RareValue
 	public function getitems()
     {
         $items = Admin::getRareValueItems();
-
-        Json::filter($items, 'desc', 'id');
-    }
-	public function getitemsbypage()
-    {
-		if (empty(input()->post('id')->value)) {
-            response()->json(["status" => "error", "message" => "We were unable to find this page"]);
-        }
-		$page = input()->post('id')->value;
-        $items = Admin::getRareValueitemsByPageId($page);
 
         Json::filter($items, 'desc', 'id');
     }

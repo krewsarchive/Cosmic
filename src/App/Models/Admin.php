@@ -180,6 +180,7 @@ class Admin
         return QueryBuilder::connection()->table('website_rares')->orderBy('id', 'desc')->get();
     }
 	
+
 	public static function getRareValueItemById($id)
     {
         return QueryBuilder::connection()->table('website_rares')->where('id', $id)->first();
