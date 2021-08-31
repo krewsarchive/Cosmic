@@ -17,7 +17,7 @@ class Articles
 {
     public function more()
     {
-        echo Json::encode(['articles' => Community::getNews(6, input('offset'))]);
+        echo response()->json(['articles' => Community::getNews(6, input('offset'))]);
     }
 
     public function hide() {
