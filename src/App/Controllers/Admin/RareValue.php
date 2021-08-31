@@ -24,16 +24,15 @@ class RareValue
     {
         $this->data = new stdClass();
     }
-	
-	public function addpage()
-{
-         ValidationService::validate([
+
+    public function addpage()
+    {
+        ValidationService::validate([
             'name'         => 'required|max:50',
             'desc'   => 'required|max:200',
             'thumb'    => 'required'
         ]);
 
-        
 
         $id = input()->post('pageid')->value ?? 0;
         $newid = input()->post('newid')->value ?? null;
@@ -41,27 +40,23 @@ class RareValue
         $name = input()->post('name')->value;
         $desc = input()->post('desc')->value;
         $thumb = input()->post('thumb')->value;
-      
+
         if ($id == 0) {
             Admin::addRareValuePage($newid, $name, $desc, $thumb);
             Log::addStaffLog('-1', 'New Rare Value Page placed: ' . $name, request()->player->id, 'rarevalue');
-          
             response()->json(["status" => "success", "message" => "Page created successfully!"]);
         }
 
         Admin::editRarevaluePage($id, $name, $desc, $thumb, $newid);
         Log::addStaffLog('-1', 'RareValuePage edit: ' . $name, request()->player->id, 'rarevalue');
-      
         response()->json(["status" => "success", "message" => "Page edited successfully"]);
     }
 
     public function removepage()
     {
-         ValidationService::validate([
+        ValidationService::validate([
             'post' => 'required|min:1'
         ]);
-
-        
 
         $page = input()->post('post')->value;
 
@@ -75,9 +70,10 @@ class RareValue
         Log::addStaffLog('-1', 'Removed a RareValuePage: ' . $page, request()->player->id, 'rarevalue');
         response()->json(["status" => "success", "message" => "PAG: ID({$page}) successfully removed"]);
     }
-	public function additem()
-{
-         ValidationService::validate([
+
+    public function additem()
+    {
+        ValidationService::validate([
             'name'   => 'required|max:200|min:1',
             'item_id'   => 'required',
             'cost_credits'    => 'required',
@@ -85,8 +81,6 @@ class RareValue
             'points_type'    => 'required',
             'image'    => 'required'
         ]);
-
-        
 
         $id = input()->post('id')->value ?? 0;
 
@@ -96,69 +90,66 @@ class RareValue
         $cost_points = input()->post('cost_points')->value;
         $points_type = input()->post('points_type')->value;
         $image = input()->post('image')->value;
-      
+
         if ($id == 0) {
             Admin::addRareValueItem($name, $item_id, $cost_credits, $cost_points, $points_type, $image, request()->player->id);
             Log::addStaffLog('-1', 'New Rare Value Item placed: ' . $name, request()->player->id, 'rarevalue');
-          
             response()->json(["status" => "success", "message" => "New Item is added!"]);
         }
 
         Admin::editRarevalueItem($id, $name, $item_id, $cost_credits, $cost_points, $points_type, $image, request()->player->id);
         Log::addStaffLog('-1', 'RareValueItem edit: ' . $name, request()->player->id, 'rarevalue');
-      
+
         response()->json(["status" => "success", "message" => "Item edited successfully"]);
     }
-	
-	public function removeitem()
+
+    public function removeitem()
     {
-         ValidationService::validate([
+        ValidationService::validate([
             'post' => 'required|min:1'
         ]);
 
-        
-
         $item = input()->post('post')->value;
-
         $item_bc = Admin::getRareValueItemById($item);
+      
         if (empty($item_bc)) {
             response()->json(["status" => "error", "message" => "ITEM: ID({$item}) is already removed"]);
         }
 
         Admin::deleteRareValueItemById($item);
-
         Log::addStaffLog('-1', 'Removed a RareValueItem ' . $item, request()->player->id, 'rarevalue');
         response()->json(["status" => "success", "message" => "ITEM: ID({$item}) successfully removed"]);
     }
 
-	public function edititem()
+    public function edititem()
     {
-	if (empty(input()->post('post')->value)) {
+        if (empty(input()->post('post')->value)) {
             response()->json(["status" => "error", "message" => "We were unable to find this item"]);
         }
 
         $this->data->rarevalueitem = Admin::getRareValueItemById(input()->post('post')->value);
         echo Json::encode($this->data);
-	}
-	public function editpage()
+    }
+  
+    public function editpage()
     {
-	if (empty(input()->post('post')->value)) {
+        if (empty(input()->post('post')->value)) {
             response()->json(["status" => "error", "message" => "We were unable to find this page"]);
         }
 
         $this->data->rarevalue = Admin::getRareValuePageById(input()->post('post')->value);
         echo Json::encode($this->data);
-	}
+    }
+  
     public function getpages()
     {
         $pages = Admin::getRareValuePages();
-
         Json::filter($pages, 'desc', 'id');
     }
-	public function getitems()
+  
+    public function getitems()
     {
         $items = Admin::getRareValueItems();
-
         Json::filter($items, 'desc', 'id');
     }
 

@@ -253,6 +253,8 @@ class Catalog
   
     public function view()
     {
+        echo 1; 
+        exit;
         ViewService::renderTemplate('Admin/Management/catalog.html', ['permission' => 'housekeeping_server_catalog']);
     }
 }

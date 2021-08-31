@@ -64,8 +64,8 @@ class RouterService extends Router
                 parent::get('/article/{slug}', 'Community\Articles@index', ['defaultParameterRegex' => '[\w\-]+']);
 
                 parent::get('/community/photos', 'Community\Photos@index');
-				parent::get('/community/rares/{pagina}', 'Community\Rares@index', ['defaultParameterRegex' => '[\w\-]+']);
-				parent::get('/community/rares', 'Community\Rares@index');
+                parent::get('/community/rares/{pagina}', 'Community\Rares@index', ['defaultParameterRegex' => '[\w\-]+']);
+                parent::get('/community/rares', 'Community\Rares@index');
                 parent::get('/community/staff', 'Community\Staff@index');
                 parent::get('/community/team', 'Community\Staff@team');
 

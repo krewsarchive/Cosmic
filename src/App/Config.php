@@ -33,7 +33,7 @@ class Config
      */
 
     const site = [
-      "domain"      => "http://vuetex.com",
+      "domain"      => "https://cosmic.circinus.dev",
       "cpath"       => "https://client.circinus.dev/assets",
       "fpath"       => "https://habbo.com.br/habbo-imaging",
       "shortname"   => "Cosmic",
