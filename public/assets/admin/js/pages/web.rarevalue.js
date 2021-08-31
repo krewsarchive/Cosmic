@@ -33,7 +33,7 @@ var rarevalue = function() {
             var self = this;
             this.ajax_manager = new WebPostInterface.init();
           
-            self.ajax_manager.post("/housekeeping/api/rarevalue/addpage", {newid: newid, name: name, desc: desc, thumb: thumb}, function (result) {
+            self.ajax_manager.post("/housekeeping/api/RareValue/addpage", {newid: newid, name: name, desc: desc, thumb: thumb}, function (result) {
                 if(result.status == "success") {
 					$('#editPageModal').modal('toggle');
 					
@@ -45,7 +45,7 @@ var rarevalue = function() {
       editPage: function (id, name, desc, thumb, newid) {
             var self = this;
             this.ajax_manager = new WebPostInterface.init();
-            self.ajax_manager.post("/housekeeping/api/rarevalue/addpage", {
+            self.ajax_manager.post("/housekeeping/api/RareValue/addpage", {
                 pageid: id,
                 name: name,
                 desc: desc,
@@ -62,7 +62,7 @@ var rarevalue = function() {
             var self = this;
             this.ajax_manager = new WebPostInterface.init();
           
-            self.ajax_manager.post("/housekeeping/api/rarevalue/additem", {
+            self.ajax_manager.post("/housekeeping/api/RareValue/additem", {
 				parent_id: parent_id,
                 name: name,
                 item_id: item_id,
@@ -79,7 +79,7 @@ var rarevalue = function() {
 		editItem: function (id, parent_id, name, item_id, cost_credits, cost_points, points_type, image) {
             var self = this;
             this.ajax_manager = new WebPostInterface.init();
-            self.ajax_manager.post("/housekeeping/api/rarevalue/additem", {
+            self.ajax_manager.post("/housekeeping/api/RareValue/additem", {
                 id: id,
                 parent_id: parent_id,
                 name: name,
@@ -100,7 +100,7 @@ var rarevalue = function() {
             var self = this;
             this.ajax_manager = new WebPostInterface.init();
 
-            self.ajax_manager.post("/housekeeping/api/rarevalue/removepage", {post: id}, function (result) {
+            self.ajax_manager.post("/housekeeping/api/RareValue/removepage", {post: id}, function (result) {
                 if(result.status == "success") {
                     $("#kt_datatable_rarevalue").KTDatatable("reload");
                 }
@@ -110,7 +110,7 @@ var rarevalue = function() {
             var self = this;
             this.ajax_manager = new WebPostInterface.init();
 
-            self.ajax_manager.post("/housekeeping/api/rarevalue/removeitem", {post: id}, function (result) {
+            self.ajax_manager.post("/housekeeping/api/RareValue/removeitem", {post: id}, function (result) {
                 if(result.status == "success") {
 					$("#kt_datatable_rarevalueitems").KTDatatable("reload");
                 }
@@ -120,7 +120,7 @@ var rarevalue = function() {
             var self = this;
             this.ajax_manager = new WebPostInterface.init();
 
-            self.ajax_manager.post("/housekeeping/api/rarevalue/edititem", {
+            self.ajax_manager.post("/housekeeping/api/RareValue/edititem", {
                 post: id
             }, function(result) {
                 if (id != null) {
@@ -147,7 +147,7 @@ var rarevalue = function() {
             var self = this;
             this.ajax_manager = new WebPostInterface.init();
 
-            self.ajax_manager.post("/housekeeping/api/rarevalue/editpage", {
+            self.ajax_manager.post("/housekeeping/api/RareValue/editpage", {
                 post: id
             }, function(result) {
                 if (id != null) {
@@ -177,7 +177,7 @@ var rarevalue = function() {
                    type: 'remote',
                    source: {
                      read: {
-                       url: '/housekeeping/api/rarevalue/getpages',
+                       url: '/housekeeping/api/RareValue/getpages',
                        headers: {'Authorization': 'housekeeping_rarevalue_control' }
                      }
                    },
@@ -265,7 +265,7 @@ var rarevalue = function() {
                    type: 'remote',
                    source: {
                      read: {
-                       url: '/housekeeping/api/rarevalue/getitems',
+                       url: '/housekeeping/api/RareValue/getitems',
                        headers: {'Authorization': 'housekeeping_rarevalue_control' }
                      }
                    },
