@@ -1056,10 +1056,6 @@ function WebPageHomeInterface(main_page) {
             Web.notifications_manager.create("info", "Saved to clickboard!", "Referral copied!");
         });
       
-        $(".articles-container a").prop("href", "http://www.jakcms.com");
-        console.log(Web.pages_manager.hotel_url);
-
-
         // Load more articles
         page_container.find(".load-more-button button").click(function() {
             var countdivs = $('.article-container').length;
