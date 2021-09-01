@@ -23,7 +23,7 @@ var rarevalue = function() {
                     $('[name=itemimage]').val("");
 				$(".modal-titles").html("Add Item ");
 					$(".editItem").unbind().click(function() {
-                        rarevalue.addItem($("eparentId").val(), $("#eItemName").val(), $("#eItemId").val(), $("#eItemCredits").val(), $("#eItemPoints").val(), $("#eItemType").val(), $("#eImageItem").val());
+                        rarevalue.addItem($("#eparentId").val(), $("#eItemName").val(), $("#eItemId").val(), $("#eItemCredits").val(), $("#eItemPoints").val(), $("#eItemType").val(), $("#eImageItem").val());
                     
                     });
             });
@@ -333,7 +333,7 @@ var rarevalue = function() {
                     rarevalue.itemRequest(id);
 					$(".modal-title").html("Edit " + title);
 					$(".editItem").unbind().click(function() {
-                        rarevalue.editItem(id, $("eparentId").val(), $("#eItemName").val(), $("#eItemId").val(), $("#eItemCredits").val(), $("#eItemPoints").val(), $("#eItemType").val(), $("#eImageItem").val());
+                        rarevalue.editItem(id, $("#eparentId").val(), $("#eItemName").val(), $("#eItemId").val(), $("#eItemCredits").val(), $("#eItemPoints").val(), $("#eItemType").val(), $("#eImageItem").val());
                     });
                 } else {
                     $('#confirm-delete').on('show.bs.modal', function(e) {
