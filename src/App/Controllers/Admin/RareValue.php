@@ -86,10 +86,10 @@ class RareValue
             'image'    => 'required'
         ]);
 
-        
+    post
 
         $id = input()->post('id')->value ?? 0;
-
+        $page_id = input()->post('parent_id')->value ?? 0;
         $name = input()->post('name')->value;
         $item_id = input()->post('item_id')->value;
         $cost_credits = input()->post('cost_credits')->value;
@@ -98,7 +98,7 @@ class RareValue
         $image = input()->post('image')->value;
       
         if ($id == 0) {
-            Admin::addRareValueItem($name, $item_id, $cost_credits, $cost_points, $points_type, $image, request()->player->id);
+            Admin::addRareValueItem($name, $page_id, $item_id, $cost_credits, $cost_points, $points_type, $image, request()->player->id);
             Log::addStaffLog('-1', 'New Rare Value Item placed: ' . $name, request()->player->id, 'rarevalue');
           
             response()->json(["status" => "success", "message" => "New Item is added!"]);
