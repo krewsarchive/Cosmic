@@ -214,10 +214,11 @@ class Admin
         return QueryBuilder::connection()->table('website_rares_pages')->insert($data);
     }
 	
-	public static function editRareValueItem(int $id, String $name, int $item_id=0, int $cost_credits=0, int $cost_points=0, int $points_type=0, String $image, int $userid)
+	public static function editRareValueItem(int $id, String $name, int $page, int $item_id=0, int $cost_credits=0, int $cost_points=0, int $points_type=0, String $image, int $userid)
     {
         $data = array(
            'name' => $name,
+            'parent_id' => $page,
             'item_id' => $item_id,
             'cost_credits' => $cost_credits,
             'cost_points' => $cost_points,
