@@ -86,8 +86,6 @@ class RareValue
             'image'    => 'required'
         ]);
 
-    post
-
         $id = input()->post('id')->value ?? 0;
         $page_id = input()->post('parent_id')->value ?? 0;
         $name = input()->post('name')->value;
