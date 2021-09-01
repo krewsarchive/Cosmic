@@ -79,6 +79,7 @@ class RareValue
 {
          ValidationService::validate([
             'name'   => 'required|max:200|min:1',
+            'parent_id' => 'numeric'
             'item_id'   => 'required',
             'cost_credits'    => 'required',
             'cost_points'    => 'required',
