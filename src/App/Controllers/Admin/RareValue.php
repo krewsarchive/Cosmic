@@ -103,7 +103,7 @@ class RareValue
             response()->json(["status" => "success", "message" => "New Item is added!"]);
         }
 
-        Admin::editRarevalueItem($id, $name, $item_id, $cost_credits, $cost_points, $points_type, $image, request()->player->id);
+        Admin::editRarevalueItem($id, $name, $page_id, $item_id, $cost_credits, $cost_points, $points_type, $image, request()->player->id);
         Log::addStaffLog('-1', 'RareValueItem edit: ' . $name, request()->player->id, 'rarevalue');
       
         response()->json(["status" => "success", "message" => "Item edited successfully"]);
