@@ -186,10 +186,11 @@ class Admin
         return QueryBuilder::connection()->table('website_rares')->where('id', $id)->first();
     }
 	 
-	 public static function addRareValueItem(String $name, int $item_id=0, int $cost_credits=0, int $cost_points=0, int $points_type=0, String $image, int $userid)
+	 public static function addRareValueItem(String $name, int $page=0, int $item_id=0, int $cost_credits=0, int $cost_points=0, int $points_type=0, String $image, int $userid)
     {
         $data = array(
             'name' => $name,
+            'parent_id' => $page,
             'item_id' => $item_id,
             'cost_credits' => $cost_credits,
             'cost_points' => $cost_points,
