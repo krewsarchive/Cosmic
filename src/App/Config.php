@@ -20,10 +20,10 @@ class Config
       'external_figuredata'         => 'gamedata/furnidata.xml?v=5',
       'external_base'               => 'gordon/PRODUCTION-201904011212-888653470',
       'client_swf'                  => 'Habbo.swf',
-      'client_host'                 => '85.215.240.29',
+      'client_host'                 => '141.95.18.184',
       'client_port'                 => 3000,
       "client_radio"                => "https://playerservices.streamtheworld.com/api/livestream-redirect/WEB16_ACC.acc",
-      "nitro_path"                  => "https://assets.circinus.dev"
+      "nitro_path"                  => "https://client.circinus.dev"
     ];
   
     /**

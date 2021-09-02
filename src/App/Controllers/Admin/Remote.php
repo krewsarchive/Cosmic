@@ -202,9 +202,21 @@ class Remote
         $this->getMailLogs($player_id);
         $this->getBanLogs($player_id);
         $this->getStaffLogs($player_id);
+        $this->getCommandLogs($player_id);
 
         Json::encode($this->data);
     }
+  
+    protected function getCommandLogs($player_id)
+    {
+        $this->data->commandlogs = Admin::getCommandLogsByPlayer($player_id);
+
+        foreach ($this->data->commandlogs as $row) {
+            $row->username = Player::getDataById($row->user_id, 'username')->username ?? null;
+            $row->timestamp = date("d-M-Y H:i:s", $row->timestamp);
+        }
+    }
+       
 
     protected function getStaffLogs($player_id)
     {

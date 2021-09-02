@@ -309,6 +309,55 @@ var remote = function() {
             
             datatableUserLogs();
           
+            var datatableCommandLogs = function() {
+              
+            if ($('#kt_datatable_commandlogs').length === 0) {
+               return;
+            }
+              
+            var t;
+            $("#kt_datatable_commandlogs").KTDatatable({
+                   data: {
+                       type: 'local',
+                       source: jsonObj.commandlogs,
+                       pageSize: 10
+                   },
+                   layout: {
+                       scroll: !1,
+                       footer: !1
+                   },
+                   sortable: !0,
+                   pagination: !0,
+                   search: {
+                       input: $("#generalSearch_commandlogs")
+                   },
+                   columns: [{
+                       title: "Command",
+                       field: "command",
+                       width: 75,
+                   }, {
+                       field: "params",
+                       title: "Param",
+                       width: 200
+                   }, {
+                       field: "succes",
+                       title: "Executed",
+                       width: 250
+                   }, {
+                       field: "timestamp",
+                       title: "timestamp",
+                       width: 175,
+                       template: function(data) {
+                           return '<span class="kt-font">' + data.timestamp + '</span>';
+                       }
+                   }]
+                }), $("#kt_datatable_reload_commandlogs").on("click", function() {
+                   $("#kt_datatable_commandlogs").KTDatatable("reload")
+                })
+            }
+            
+            datatableCommandLogs();
+          
             var datatableTradeLogs = function() {
               
             if ($('#kt_datatable_tradelogs').length === 0) {

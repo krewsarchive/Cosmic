@@ -151,6 +151,12 @@ class Admin
     {
         return QueryBuilder::connection()->table('commandlogs')->OrderBy('timestamp', 'desc')->limit($limit)->get();
     }
+  
+    public static function getCommandLogsByPlayer($player_id)
+    {
+        return QueryBuilder::connection()->table('commandlogs')->where('user_id', $player_id)->OrderBy('timestamp', 'desc')->get();
+    }
+
 
     public static function getClones($last_ip, $reg_ip, $limit = 1000)
     {
