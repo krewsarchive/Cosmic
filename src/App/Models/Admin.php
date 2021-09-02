@@ -139,7 +139,7 @@ class Admin
 
     public static function getMessengerLogs($user_id, $limit = 500)
     {
-        return QueryBuilder::connection()->table('chatlogs_private')->where('user_from_id', $user_id)->OrderBy('timestamp', 'desc')->limit($limit)->get();
+        return QueryBuilder::connection()->table('chatlogs_private')->where('user_from_id', $user_id)->orWhere('user_from_to', $user_id)->OrderBy('timestamp', 'desc')->limit($limit)->get();
     }
 
     public static function getStaffLogs($limit = 100)
