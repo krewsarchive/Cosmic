@@ -1,6 +1,7 @@
 <?php
 namespace Cosmic\System;
 
+use Cosmic\App\Config;
 use Exception;
 
 class TokenService
