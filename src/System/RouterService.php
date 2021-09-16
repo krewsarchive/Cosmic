@@ -106,38 +106,41 @@ class RouterService extends Router
                     parent::get('/password/reset/{token}', 'Password\Reset@index');
                 });
 
-                parent::all('/api/ssotoken', 'Api@ssotoken');
-                parent::all('/api/user/avatars', 'Api@avatars');
-                parent::all('/api/user/avatars/select', 'Api@select');
-                parent::all('/api/public/info/hello', 'Api@welcome');
-                parent::all('/api/public/authentication/login', 'Api@login');
+                parent::group(['middleware' => NotLoggedInMiddleware::class, 'exceptionHandler' => ExceptionHandler::class], function () {
+                  
+                    parent::all('/api/ssotoken', 'Api@ssotoken');
+                    parent::all('/api/user/avatars', 'Api@avatars');
+                    parent::all('/api/user/avatars/select', 'Api@select');
+                    parent::all('/api/public/info/hello', 'Api@welcome');
+                    parent::all('/api/public/authentication/login', 'Api@login');
 
-                parent::partialGroup('/api/{callback}', function ($callback) {
-                    parent::all('/{param}', 'Api@' . $callback);
-                    parent::all('/', 'Api@' . $callback);
+                    parent::partialGroup('/api/{callback}', function ($callback) {
+                        parent::all('/{param}', 'Api@' . $callback);
+                        parent::all('/', 'Api@' . $callback);
+                    });
+
+                    parent::get('/disconnect', 'Home\Lost@index')->setName('index.home');
+
+                    parent::get('/hotel', 'Client\Client@hotel');
+                    parent::get('/client', 'Client\Client@client');
+
+                    parent::get('/logout', 'Auth\Login@logout');
+                    parent::get('/settings', 'Settings\Preferences@index');
+                    parent::get('/settings/email', 'Settings\Email@index');
+                    parent::get('/settings/password', 'Settings\Password@index');
+                    parent::get('/settings/namechange', 'Settings\Namechange@index');
+                    parent::get('/settings/preferences', 'Settings\Preferences@index');
+                    parent::get('/settings/verification', 'Settings\Verification@index');
+
+                    parent::get('/help/requests/view', 'Help\Requests@index');
+                    parent::get('/help/requests/new', 'Help\Ticket@index');
+                    parent::get('/help/requests/{ticket}/view', 'Help\Requests@ticket', ['defaultParameterRegex' => '[0-9]+']);
+
+                    parent::partialGroup('/guilds/post/{controller}/{action}', function ($controller, $action) {
+                        parent::post('/', 'Community\Guilds\\' . ucfirst($controller) . '@' . $action)->addMiddleware(GuildMiddleware::class);
+                    });
+
                 });
-
-                parent::get('/disconnect', 'Home\Lost@index')->setName('index.home');
-
-                parent::get('/hotel', 'Client\Client@hotel');
-                parent::get('/client', 'Client\Client@client');
-
-                parent::get('/logout', 'Auth\Login@logout');
-                parent::get('/settings', 'Settings\Preferences@index');
-                parent::get('/settings/email', 'Settings\Email@index');
-                parent::get('/settings/password', 'Settings\Password@index');
-                parent::get('/settings/namechange', 'Settings\Namechange@index');
-                parent::get('/settings/preferences', 'Settings\Preferences@index');
-                parent::get('/settings/verification', 'Settings\Verification@index');
-
-                parent::get('/help/requests/view', 'Help\Requests@index');
-                parent::get('/help/requests/new', 'Help\Ticket@index');
-                parent::get('/help/requests/{ticket}/view', 'Help\Requests@ticket', ['defaultParameterRegex' => '[0-9]+']);
-
-                parent::partialGroup('/guilds/post/{controller}/{action}', function ($controller, $action) {
-                    parent::post('/', 'Community\Guilds\\' . ucfirst($controller) . '@' . $action)->addMiddleware(GuildMiddleware::class);
-                });
-
                 parent::partialGroup('{directory}/{controller}/{action}', function ($directory, $controller, $action) {
                      if(request()->getMethod() == "post"){
                         parent::post('/', ucfirst($directory) . '\\' . ucfirst($controller) . '@' . $action);

@@ -10,7 +10,7 @@ class NotLoggedInMiddleware implements IMiddleware
 {
     public function handle(Request $request) : void
     {
-        if(!is_null($request->player)) {
+        if(is_null($request->player)) {
             if($request->isAjax()) { 
                 response()->json(["title" => "Oeps..", "dialog" => LocaleService::get('core/dialog/not_logged_in'), "loadpage" => "home"]);
             } else {

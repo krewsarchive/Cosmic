@@ -67,7 +67,7 @@ class News
         $full_story = input()->post('full_story')->value;
         $category = input()->post('category')->value;
         $images = input()->post('images')->value;
-        $imagePath = input()->file('imagesUpload')->filename;
+        $imagePath = input()->file('imagesUpload');
 
         if (!empty($imagePath)) {
             if ($this->imageUpload($imagePath)) {
