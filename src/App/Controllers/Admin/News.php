@@ -6,6 +6,7 @@ use Cosmic\App\Config;
 use Cosmic\App\Helpers\Helper;
 use Cosmic\App\Models\Admin;
 use Cosmic\App\Models\Log;
+use Cosmic\App\Models\Core;
 use Cosmic\App\Models\Player;
 use Cosmic\App\Library\Upload;
 use Cosmic\App\Library\Json;
@@ -71,7 +72,7 @@ class News
 
         if (!empty($imagePath)) {
             if ($this->imageUpload($imagePath)) {
-                $imagePath = '/uploads/' . $this->file->getInfo()->filename;
+                $imagePath = '/uploads/' . $this->file->file_dst_name;
             }
         } else {
             if ($id != 0) {
@@ -163,20 +164,15 @@ class News
 
     protected function imageUpload($imagePath)
     {
-        if(preg_match("/^[^\?]+\.(jpg|jpeg|gif|png)(?:\?|$)/", $imagePath)) {
-            $this->file = new Upload();
+        if(preg_match("/^[^\?]+\.(jpg|jpeg|gif|png)(?:\?|$)/", $imagePath->filename)) {
 
-            $this->file->setInput("imagesUpload");
-            $this->file->setDestinationDirectory("../public/uploads/");
-            $this->file->setUploadFunction("copy");
-            $this->file->setAllowMimeType("image");
-            $this->file->setAutoFilename();
-            $this->file->save();
-
-            if ($this->file->getStatus()) {
-                return true;
+            $this->file = new upload($imagePath); 
+            
+            if ($this->file->uploaded) {
+               $this->file->file_new_name_body = uniqid();
+               $this->file->process(__DIR__ . '/../../../../public/uploads/');
+               return ($this->file->processed) ? true : false;
             }
-        }
-        return false;
+      	}
     }
 }
