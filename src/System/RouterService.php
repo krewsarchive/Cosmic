@@ -98,7 +98,7 @@ class RouterService extends Router
                     return 'var Locale = ' . json_encode(LocaleService::get('website/javascript', true), true) . '';
                 });
 
-                parent::group(['middleware' => NotLoggedInMiddleware::class, 'exceptionHandler' => ExceptionHandler::class], function () {
+                parent::group(['middleware' => LoggedInMiddleware::class, 'exceptionHandler' => ExceptionHandler::class], function () {
                     parent::get('/registration/{name?}', 'Auth\Registration@index');
                     parent::get('/facebook', 'Home\Login@facebook');
 
