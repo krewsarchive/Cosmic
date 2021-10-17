@@ -104,7 +104,7 @@ class ViewService
 
         if(Auth::maintenance()) {
             $rank = (isset(request()->player->rank)) ? request()->player->rank : 1;
-            if(!Permission::exists('housekeeping', $rank)) {
+            if(!Permission::exists('maintenance_login', $rank)) {
                 Auth::logout();
                 return $twig->render('maintenance.html');
             }
