@@ -106,18 +106,12 @@ class RouterService extends Router
                     parent::get('/password/reset/{token}', 'Password\Reset@index');
                 });
 
+                parent::partialGroup('/api/{callback}', function ($callback) {
+                    parent::all('/{param}', 'Api@' . $callback);
+                    parent::all('/', 'Api@' . $callback);
+                });
+              
                 parent::group(['middleware' => NotLoggedInMiddleware::class, 'exceptionHandler' => ExceptionHandler::class], function () {
-                  
-                    parent::all('/api/ssotoken', 'Api@ssotoken');
-                    parent::all('/api/user/avatars', 'Api@avatars');
-                    parent::all('/api/user/avatars/select', 'Api@select');
-                    parent::all('/api/public/info/hello', 'Api@welcome');
-                    parent::all('/api/public/authentication/login', 'Api@login');
-
-                    parent::partialGroup('/api/{callback}', function ($callback) {
-                        parent::all('/{param}', 'Api@' . $callback);
-                        parent::all('/', 'Api@' . $callback);
-                    });
 
                     parent::get('/disconnect', 'Home\Lost@index')->setName('index.home');
 
