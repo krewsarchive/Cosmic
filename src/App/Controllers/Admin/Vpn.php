@@ -20,7 +20,6 @@ class Vpn
 
     public function __construct()
     {
-        $this->apiKey = '2b3dcf9260762a123c4d1ddeb9ae50c3d188ce34f1f93fe8241d4a5b';
         $this->data = new stdClass();
     }
 
@@ -30,9 +29,7 @@ class Vpn
         $reader = new Reader(__DIR__. '/../../' . Config::vpnLocation);
 
         try {
-
             $last_ip = Player::getDataByUsername($player, 'ip_current')->ip_current;
-            $organisation = file_get_contents('https://api.ipdata.co/' . $last_ip . '?api-key=' . $this->apiKey);
 
             $record = $reader->asn($last_ip);
 
@@ -41,7 +38,7 @@ class Vpn
                 response()->json(["status" => "success", "message" => "AS {$asn->asn} is already banned"]);
             }
 
-            Ban::createNetworkBan($record->autonomousSystemNumber, json_decode($organisation)->asn->name, request()->player->id);
+            Ban::createNetworkBan($record->autonomousSystemNumber, $record->autonomousSystemOrganization, request()->player->id);
             response()->json(["status" => "success", "message" => "AS {$record->autonomousSystemNumber} is added to our ban list"]);
 
         } catch (AddressNotFoundException $e) {
@@ -76,6 +73,6 @@ class Vpn
 
     public function view()
     {
-        ViewService::renderTemplate('Admin/Management/vpn.html', ['apiKey' => $this->apiKey, 'permission' => 'housekeeping_vpn_control']);
+        ViewService::renderTemplate('Admin/Management/vpn.html', ['permission' => 'housekeeping_vpn_control']);
     }
 }
