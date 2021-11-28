@@ -11,6 +11,7 @@ $GLOBALS['language'] = array (
             'nav_news'              => 'Nieuws',
             'nav_jobs'              => 'Jobs',
             'nav_photos'            => 'Foto\'s',
+            'nav_rarevalue'         => 'Ruilwaarde',
             'nav_staff'             => 'Staff',
             'nav_team'              => 'Teams',
             'nav_exchange'          => 'Marketplace',
@@ -179,6 +180,22 @@ $GLOBALS['language'] = array (
             'reaction_hidden_no'     => 'Nieuwsreactie is zcithbaar gemaakt!',
             'forbidden_words'        => 'Your message contains forbidden words!',
         ),
+
+		'community_rares' => array (
+		'desc'        => ' Meest waardevolle meubels',
+		'last_clickhere' => 'Klik hier',
+		'last_edited'   => 'Laatst bewerkt: ',
+		'last_editor'   => 'Laatst bewerkt door: ',
+		'last_rares'   => 'Laatste 10 meubels',
+		'none_rare_found_desc'   => 'Misschien ben je hier naar op zoek? ',
+		'none_rare_found_last'   => 'Laatste 10 rares',
+		'none_rare_found_title'   => 'Geen rares gevonden',
+		'pages_notfound'   => 'Geen pagina beschikbaar',
+        'rares_pages'   => 'Paginas',
+		'search'   => 'Zoek',
+		'title'       => Config::site['shortname'] . ' Rares',
+        'units'   => 'Units'),
+        
         'forum' => array (
           /*  Forum/index.html  */
             'index_subject'             => 'Onderwerp',

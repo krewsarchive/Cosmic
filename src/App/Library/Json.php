@@ -98,7 +98,7 @@ class Json
             if ($sort === 'asc') {
                 return $a->$field > $b->$field;
             }
-            return $a->$field < $b->$field;
+            return $a->$field <=> $b->$field;
         });
 
         // $perpage 0; get all data
