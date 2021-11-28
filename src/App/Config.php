@@ -36,7 +36,7 @@ class Config
     const site = [
       "domain"      => "https://cosmic.devraizer.nl",
       "cpath"       => "https://client.devraizer.nl/assets",
-      "fpath"       => "https://imaging.devraizer.nl",
+      "fpath"       => "https://cdn.leet.ws/imaging/avatarimage",
       "shortname"   => "Cosmic",
       "sitename"    => "Cosmic"
     ];

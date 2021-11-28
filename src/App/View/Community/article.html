@@ -24,7 +24,7 @@
                         {% if article.author == "0" %}
                         <img src="/assets/images/web/avatar-frank.png" alt="Hotel Management">
                         {% else %}
-                        <img src="{{site.fpath}}/avatarimage?figure={{article.author.look}}&direction=2&head_direction=3&gesture=sml&size=b&headonly=1" alt="{{article.author.username}}">
+                        <img src="{{site.fpath}}?figure={{article.author.look}}&direction=2&head_direction=3&gesture=sml&size=b&headonly=1" alt="{{article.author.username}}">
                         {% endif %}
                     </div>
 
@@ -59,7 +59,7 @@
                     {% if post.hidden != 1 or 'housekeeping_moderation_tools' in permissions %}
                     <div class="ac-item" data-id="{{post.id}}" style="margin-bottom: 5px;border-radius: 10px; padding: 10px 8px 2px; {% if post.hidden == 1 %}filter: grayscale(100%);{% endif %}">
                             <div style="float: left; vertical-align: middle; ">
-                                <img style="margin-top: -5px;" src="{{site.fpath}}/avatarimage?figure={{post.author.look}}&direction=2&head_direction=3&gesture=sml&size=s&headonly=1" alt="">
+                                <img style="margin-top: -5px;" src="{{site.fpath}}?figure={{post.author.look}}&direction=2&head_direction=3&gesture=sml&size=s&headonly=1" alt="">
                             </div>
                         <strong>
                             <a href="/profile/{{post.author.username}}">
