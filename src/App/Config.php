@@ -22,13 +22,9 @@ class Config
       'client_swf'                  => 'Habbo.swf',
       'client_host'                 => '141.95.18.184',
       'client_port'                 => 3000,
-<<<<<<< HEAD
-      "client_radio"                => "https://playerservices.streamtheworld.com/api/livestream-redirect/WEB16_ACC.acc",
-      "nitro_path"                  => "https://client.devraizer.nl"
-=======
       "client_radio"                => "https://21253.live.streamtheworld.com/WEB13_AAC.aac",
       "nitro_path"                  => "https://client.circinus.dev"
->>>>>>> b160c27e2750ce0b7b77939030ddae698cbe7510
+
     ];
   
     /**
