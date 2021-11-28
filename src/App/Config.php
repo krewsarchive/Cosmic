@@ -23,7 +23,7 @@ class Config
       'client_host'                 => '141.95.18.184',
       'client_port'                 => 3000,
       "client_radio"                => "https://playerservices.streamtheworld.com/api/livestream-redirect/WEB16_ACC.acc",
-      "nitro_path"                  => "https://client.circinus.dev"
+      "nitro_path"                  => "https://client.devraizer.nl"
     ];
   
     /**
@@ -33,9 +33,9 @@ class Config
      */
 
     const site = [
-      "domain"      => "https://cosmic.circinus.dev",
-      "cpath"       => "https://client.circinus.dev/assets",
-      "fpath"       => "https://habbo.com.br/habbo-imaging",
+      "domain"      => "https://cosmic.devraizer.nl",
+      "cpath"       => "https://client.devraizer.nl/assets",
+      "fpath"       => "https://imaging.devraizer.nl",
       "shortname"   => "Cosmic",
       "sitename"    => "Cosmic"
     ];
@@ -43,17 +43,6 @@ class Config
     const language = "EN";
     const region = "Europe/Amsterdam";
     const SECRET_TOKEN = "COSMIC-shdl3w5rvb4ef141spbed";
-
-  
-    /**
-     * Mail: For sending emails when someone has forgotten their password
-     */
-  
-    const mailHost      = "mail.cosmicproject.nl";
-    const mailFrom      = "info@cosmicproject.nl";
-    const mailUser      = "info@cosmicproject.nl";
-    const mailPass      = "";
-    const mailPort      = 587;
 
     /**
      * Register: Basic looks user can choose when they create an account

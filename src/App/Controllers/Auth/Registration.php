@@ -38,6 +38,10 @@ class Registration
             'g-recaptcha-response'  => 'required|captcha'
         ];
       
+        preg_match('/MOD/', $dataset['username'], $matches, PREG_OFFSET_CAPTURE);
+        print_r($matches);
+        exit;
+      
         if(empty($this->settings->recaptcha_publickey) && empty($this->settings->recaptch_secretkey)) {
             unset($dataset['g-recaptcha-response']);
         }

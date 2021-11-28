@@ -20,6 +20,7 @@ class News
 {
     private $data;
     private $file;
+    public $uploadPath;
 
     public function __construct()
     {
@@ -72,7 +73,7 @@ class News
 
         if (!empty($imagePath)) {
             if ($this->imageUpload($imagePath)) {
-                $imagePath = '/uploads/' . $this->file->file_dst_name;
+                $imagePath = '/uploads/' . $this->uploadPath;
             }
         } else {
             if ($id != 0) {
@@ -164,15 +165,20 @@ class News
 
     protected function imageUpload($imagePath)
     {
-        if(preg_match("/^[^\?]+\.(jpg|jpeg|gif|png)(?:\?|$)/", $imagePath->filename)) {
-
-            $this->file = new upload($imagePath); 
-            
-            if ($this->file->uploaded) {
-               $this->file->file_new_name_body = uniqid();
-               $this->file->process(__DIR__ . '/../../../../public/uploads/');
-               return ($this->file->processed) ? true : false;
+        if(preg_match("/^[^\?]+\.(jpg|jpeg|gif|png)(?:\?|$)/", $imagePath->filename, $matchings)) {
+          
+            $upload = new Upload();
+          
+            $upload->upload_dir = Core::settings()->upload_path;
+            $upload->extensions = ['.jpg', '.jpeg', '.gif', '.png'];
+            $upload->the_temp_file = $imagePath->tmpName;
+            $upload->the_file = sprintf(uniqid() . ".%s", $matchings[1]);
+            $this->uploadPath = $upload->the_file;
+          
+            if ($upload->upload()) {
+                return true;
             }
+            return false;
       	}
     }
 }

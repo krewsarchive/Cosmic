@@ -42,7 +42,7 @@ class Drawbadge
                $extension = $matchings['extension'];
                $filename = sprintf(uniqid() . ".%s", $extension);
 
-               if(file_put_contents($this->settings->draw_badge_imaging . $filename, $imageData))
+               if(file_put_contents($this->settings->upload_path . $filename, $imageData))
                {
                   HotelApi::execute('givepoints', ['user_id' => request()->player->id, 'points' => - $this->settings->draw_badge_price, 'type' => $this->settings->draw_badge_currency]);
                   Shop::insertBadge(request()->player->id, $filename);

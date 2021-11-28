@@ -32,9 +32,16 @@ class Api
             ]);
         }
       
+        $user = Player::getDataById(request()->player->id);
+      
         $auth_ticket = TokenService::authTicket(request()->player->id);
         Player::update(request()->player->id, ["auth_ticket" => $auth_ticket]);
 
+        if ($user->getMembership()) {
+            HotelApi::execute('setrank', ['user_id' => $user->id, 'rank' => $user->getMembership()->old_rank]);
+            $user->deleteMembership();
+        }
+      
         if(!empty($auth_ticket)) {
             response()->json([
                 "status"  => "success",  

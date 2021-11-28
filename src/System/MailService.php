@@ -1,24 +1,23 @@
 <?php
 namespace Cosmic\System;
 
-use Swift_Mailer;
-use Swift_Message;
-use Swift_SmtpTransport;
+use Cosmic\App\Models\Core;
+
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\Mailer;
 
 class MailService
 {
     public static function send($subject, $body, $to) {
-        $transport = (new Swift_SmtpTransport(Config::mailHost, Config::mailPort, 'ssl'))
-            ->setUsername(Config::mailUser)
-            ->setPassword(Config::mailPass);
+        $transport = Transport::fromDsn(Core::settings()->mailer_dsn);
+        $mailer = new Mailer($transport);
 
-        $mailer = new Swift_Mailer($transport);
+        $email = (new Email())
+            ->from(Core::settings()->mailer_from)
+            ->to($to)
+            ->subject('Mail from' . Config::site['sitename'])
+            ->html($body);
 
-        $message = (new Swift_Message($subject))
-            ->setFrom([Config::mailFrom => Config::site['sitename']])
-            ->setTo([$to])
-            ->setBody($body, 'text/html');
-
-        return $mailer->send($message);
+        $mailer->send($email);
     }
 }
