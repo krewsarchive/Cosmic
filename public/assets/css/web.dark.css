@@ -1570,7 +1570,7 @@ input:-webkit-autofill {
 .cookies-accept-container {
     -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    background-color: #fff;
+    background-color: #1C1C1A;
     position: fixed;
     left: 0;
     right: 0;
@@ -2124,13 +2124,7 @@ input:-webkit-autofill {
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    background: #25292C;
-    color: #e2e2e2;
-    background-image: url(https://projectmeteor.online/assets/images/large_hotel_left.png);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: left bottom;
-    background-size: 585px;
+    background: #414141 url(../images/web/background_dark.png) no-repeat fixed right bottom;
 }
 
 .page-container .page-header {
