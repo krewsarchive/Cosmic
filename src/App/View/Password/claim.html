@@ -6,7 +6,7 @@
                 <div class="aside-title-content">{{locale.title}}</div>
                 <div class="aside-content">
                     {{locale.content_1}} <strong>{{locale.content_2}}</strong><br><br>
-                    <form action="password/claim/validate" method="post" autocomplete="off" class="password_claim-form">
+                    <form action="password/claim/validate" method="post" class="registration-form">
                         <h4 class="form-subcategory">{{locale.username}}</h4>
                         <div class="row">
                             <input type="text" name="username" class="rounded-input darkblue-active" maxlength="32" autofocus required>
@@ -17,7 +17,7 @@
                             <input type="email" name="email" class="rounded-input darkblue-active" required>
                         </div>
                         <input type="hidden" name="csrftoken" value="{{csrf_token}}">
-                        <p class="submit-button"><button type="submit" class="rounded-button darkblue submit-form default-prevent" id="password_claim-recaptcha">{{locale.send}}</button></p>
+                        <p style="text-align: center; margin-top: 30px; padding-bottom: 30px;"><button type="submit" class="rounded-button blue plain submit-form default-prevent" id="registration-recaptcha">{{locale.send}}</button></p>
                     </form>
                 </div>
             </article>

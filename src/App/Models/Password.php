@@ -49,7 +49,7 @@ class Password
     }
 
     public static function sendMail($username, $email, $token) {
-        $url	= 'http://' . Config::site['domain'].'/password/reset/' . $token;
+        $url	= 'https://' . Config::site['domain'].'/password/reset/' . $token;
         $body 	= ViewService::getTemplate('Password/body.html', ['url' => $url, 'username' => $username], true, true);
         return MailService::send(LocaleService::get('claim/email/title'), $body, $email);
     }

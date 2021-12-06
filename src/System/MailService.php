@@ -1,8 +1,10 @@
 <?php
 namespace Cosmic\System;
 
+use Cosmic\App\Config;
 use Cosmic\App\Models\Core;
 
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mailer\Mailer;
 
@@ -15,7 +17,7 @@ class MailService
         $email = (new Email())
             ->from(Core::settings()->mailer_from)
             ->to($to)
-            ->subject('Mail from' . Config::site['sitename'])
+            ->subject('Mail from: ' . Config::site['sitename'])
             ->html($body);
 
         $mailer->send($email);

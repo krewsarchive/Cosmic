@@ -22,15 +22,11 @@ class Reset
 
     public function validate()
     {
-        $validate = request()->validator->validate([
+        ValidationService::validate([
             'new_password'      => 'required|min:6|max:32',
             'repeated_password' => 'required|min:6|max:32|same:new_password',
             'token'             => 'max:150'
         ]);
-
-        if(!$validate->isSuccess()) {
-            return;
-        }
 
         $token = input('token');
         $newPassword = input('new_password');

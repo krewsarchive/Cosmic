@@ -23,7 +23,7 @@ class Config
       'client_host'                 => '141.95.18.184',
       'client_port'                 => 3000,
       "client_radio"                => "https://21253.live.streamtheworld.com/WEB13_AAC.aac",
-      "nitro_path"                  => "https://client.circinus.dev"
+      "nitro_path"                  => "https://client.devraizer.nl"
 
     ];
   
