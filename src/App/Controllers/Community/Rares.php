@@ -25,12 +25,6 @@ if($route[0] == 0){
 	$rares = Community::getRareList($route[0]);
 		$pagename = Community::getPageNameFromId($route[0]);
 }
-        
-        if($rares) {
-		foreach($rares as $rare) {
-            $rare->author   = Player::getDataById($rare->last_editor, 'username');
-            $rare->units  = Community::getRareUnits($rare->item_id);
-        }}
 			$pages = Community::getPageRares();
 		
         ViewService::renderTemplate('Community/rares.html', [
