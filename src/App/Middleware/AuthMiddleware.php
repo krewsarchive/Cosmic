@@ -4,7 +4,7 @@ namespace Cosmic\App\Middleware;
 use Cosmic\App\Controllers\Auth\Auth;
 use Cosmic\App\Config;
 
-use Cosmic\App\Middleware\isBannedMiddleware;
+use Cosmic\App\Middleware\BannedMiddleware;
 use Cosmic\App\Models\Player;
 
 use Cosmic\System\SessionService;
@@ -25,8 +25,8 @@ class AuthMiddleware implements IMiddleware
            return;
         }
       
-        $isBanned = new \Cosmic\App\Middleware\isBannedMiddleware();
-        $isBanned->handle($request);
+       $isBanned = new \Cosmic\App\Middleware\BannedMiddleware();
+       $isBanned->handle($request);
       
        if (getIpAddress() != $request->player->ip_current || $_SERVER['HTTP_USER_AGENT'] != SessionService::get('agent')) {
             Auth::logout();

@@ -7,7 +7,7 @@ use Cosmic\App\Helpers\Helper;
 
 use Cosmic\App\Models\Help;
 use Cosmic\App\Models\Player;
-use Cosmic\App\Middleware\isBannedMiddleware;
+use Cosmic\App\Middleware\BannedMiddleware;
 
 use Cosmic\System\LocaleService;
 use Cosmic\System\ValidationService;
@@ -92,7 +92,7 @@ class Requests
 
     public function index()
     {
-        $banned_reason = isBannedMiddleware::$ban;
+        $banned_reason = BannedMiddleware::$ban;
       
         if(request()->player) {
             $tickets = Help::getTicketsByUserId(request()->player->id);
