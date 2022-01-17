@@ -19,9 +19,6 @@ class Auth
         if (Helper::asnBan()) {
             response()->json(["status" => "error", "message" => LocaleService::get('asn/login')]); 
         }
-      
-        session_regenerate_id(true);
-        self::banCheck($player);
 
         if (in_array('housekeeping', array_column(Permission::get($player->rank), 'permission'))) {
             Log::addStaffLog('-1', 'Staff logged in: ' . getIpAddress(), $player->id, 'LOGIN');
@@ -31,17 +28,6 @@ class Auth
         Player::update($player->id, ['ip_current' => getIpAddress(), 'last_online' => time()]);
 
         return $player;
-    }
-
-    public static function banCheck($player)
-    {
-        $account = Ban::getBanByUserId($player->id);
-        $ip_address = Ban::getBanByUserIp(getIpAddress());
-
-        if($account || $ip_address) {
-            $ban = $account ?? $ip_address;
-            response()->json(["status" => "error", "message" => LocaleService::get('core/notification/banned_1').' ' . $ban->ban_reason . '. '.LocaleService::get('core/notification/banned_2').' ' . Helper::timediff($ban->ban_expire, true)]);
-        }
     }
 
     public static function logout()
