@@ -21,12 +21,17 @@ class BannedMiddleware implements IMiddleware
         $ip_address = Ban::getBanByUserId($request->player->id);
                                        
         if($account || $ip_address) {
+          
             self::$ban = $account ?? $ip_address;
           
-            if(!empty(self::$ban)&& !url()->contains('/help/requests/new') || !url()->contains('/help/requests/')) 
+            if( !empty(self::$ban)
+                && !url()->contains('/help')
+                && !url()->contains('/help/requests')
+                && !url()->contains('/help/requests')) 
+            {
                 if(!url()->contains('assets/js/web/web.locale.js')) 
                 redirect('/help/requests/new');
-               
+            }
         }
     }
 }
