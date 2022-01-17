@@ -2,7 +2,6 @@
 namespace Cosmic\App\Controllers\Auth;
 
 use Cosmic\App\Models\Admin;
-use Cosmic\App\Models\Ban;
 use Cosmic\App\Models\Log;
 use Cosmic\App\Models\Core;
 use Cosmic\App\Models\Permission;

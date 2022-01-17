@@ -4,6 +4,7 @@ namespace Cosmic\App\Middleware;
 use Cosmic\App\Controllers\Auth\Auth;
 use Cosmic\App\Config;
 
+use Cosmic\App\Middleware\isBannedMiddleware;
 use Cosmic\App\Models\Player;
 
 use Cosmic\System\SessionService;
@@ -18,6 +19,9 @@ class AuthMiddleware implements IMiddleware
         if(url()->contains('Admin')) {
             $request->setRewriteUrl(url('lost'));            
         }
+      
+        $isBanned = new \Cosmic\App\Middleware\isBannedMiddleware();
+        $isBanned->handle($request);
 
         $request->player = Player::getDataById(SessionService::get('player_id'));
         if($request->player == null) {

@@ -83,8 +83,8 @@ class Registration
  
             $referral = Player::getDataByUsername($playerData->referral);
  
-            if(!empty($referral) && $getMaxIp == 0) {
-                $referral_days = strtotime('-' . $settings->referral_acc_create_days . ' days');
+            if(!empty($referral) && $getMaxIp < 3) { 
+                $referral_days = strtotime("-" . $settings->referral_acc_create_days . " days");
                 $referralSignup = Player::getReferral($referral->id, getIpAddress());
  
                 if($referral->account_created < $referral_days && $referralSignup == 0) {
@@ -94,6 +94,7 @@ class Registration
             }
         }
 
+        exit;
         Auth::login($player);
         response()->json(["status" => "success", "location" => "/hotel"]);
     }
