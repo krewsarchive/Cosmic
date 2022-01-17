@@ -20,13 +20,13 @@ class AuthMiddleware implements IMiddleware
             $request->setRewriteUrl(url('lost'));            
         }
       
-        $isBanned = new \Cosmic\App\Middleware\isBannedMiddleware();
-        $isBanned->handle($request);
-
         $request->player = Player::getDataById(SessionService::get('player_id'));
         if($request->player == null) {
            return;
         }
+      
+        $isBanned = new \Cosmic\App\Middleware\isBannedMiddleware();
+        $isBanned->handle($request);
       
        if (getIpAddress() != $request->player->ip_current || $_SERVER['HTTP_USER_AGENT'] != SessionService::get('agent')) {
             Auth::logout();
