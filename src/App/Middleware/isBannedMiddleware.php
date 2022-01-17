@@ -13,6 +13,8 @@ use Pecee\Http\Request;
 
 class isBannedMiddleware implements IMiddleware
 {
+    public static $ban;
+  
     public function handle(Request $request) : void
     {
         if (!SessionService::exists('player_id')) {
@@ -24,9 +26,13 @@ class isBannedMiddleware implements IMiddleware
            return;
         }
         
-        if(Ban::getBanByUserIp(getIpAddress() || Ban::getBanByUserId($player->id))) {
-           $ban = $account ?? $ip_address;
-            if(url()->contains('/help/requests/new')) {
+        $account = Ban::getBanByUserIp(getIpAddress());
+        $ip_address = Ban::getBanByUserId($request->player->id);
+                                       
+        if($account || $ip_address) {
+            $ban = $account ?? $ip_address;
+            if(url()->contains('/help/requests/new') || url()->contains('/help/requests/')) {
+                self::$ban = $ban;
                 return;
             } else {
                 redirect('/help/requests/new');

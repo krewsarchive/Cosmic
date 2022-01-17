@@ -86,6 +86,14 @@
    {% endif %}
 
    {% else %}
+    {% if banned_reason %}
+    <div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <b>You have been banned!</b> <br />
+    Reason: {{banned_reason.ban_reason}} <br />
+    Expire: {{ banned_reason.ban_expire|date }}   
+    </div>
+    {% endif %}
    <article class="default-section">
       <div class="aside-title-content">{{locale.request_contact}}</div>
       <div class="aside-content">

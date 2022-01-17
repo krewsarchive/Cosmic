@@ -4,8 +4,10 @@ namespace Cosmic\App\Controllers\Help;
 use Cosmic\App\Config;
 use Cosmic\App\Helpers\Helper;
 
+
 use Cosmic\App\Models\Help;
 use Cosmic\App\Models\Player;
+use Cosmic\App\Middleware\isBannedMiddleware;
 
 use Cosmic\System\LocaleService;
 use Cosmic\System\ValidationService;
@@ -90,6 +92,8 @@ class Requests
 
     public function index()
     {
+        $banned_reason = isBannedMiddleware::$ban;
+      
         if(request()->player) {
             $tickets = Help::getTicketsByUserId(request()->player->id);
             $this->data->tickets = $tickets;
@@ -98,7 +102,8 @@ class Requests
         ViewService::renderTemplate('Help/requests.html', [
             'title' => LocaleService::get('core/title/help/requests'),
             'page'  => 'help',
-            'data'  => $this->data
+            'data'  => $this->data,
+            'banned_reason' => $banned_reason
         ]);
     }
 }
