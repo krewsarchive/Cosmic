@@ -55,19 +55,14 @@ class Community
 	}
 		
 	public static function getRareList($parent_id)
-	{
-           return QueryBuilder::connection()->table('website_rares')->select('website_rares.*')->where('website_rares.parent_id', $parent_id)->orderBy('website_rares.id', 'desc')->get();
-	}
+    {
+        return QueryBuilder::connection()->table('website_rares')->select('website_rares.*')->select('users.username')->select(QueryBuilder::connection()->raw('count(items.id) as units'))->leftJoin('items', 'items.item_id', '=', 'website_rares.item_id')->leftJoin('users', 'users.id', '=', 'website_rares.last_editor')->orderBy('website_rares.id', 'desc')->where('website_rares.parent_id', $parent_id)->groupBy('website_rares.id')->get();
+    }
 
 	public static function getRareLastList($limit=10)
 	{
-           return QueryBuilder::connection()->table('website_rares')->select('website_rares.*')->orderBy('website_rares.id', 'desc')->limit($limit)->get();
+        return QueryBuilder::connection()->table('website_rares')->select('website_rares.*')->select('users.username')->select(QueryBuilder::connection()->raw('count(items.id) as units'))->leftJoin('items', 'items.item_id', '=', 'website_rares.item_id')->leftJoin('users', 'users.id', '=', 'website_rares.last_editor')->orderBy('website_rares.id', 'desc')->groupBy('website_rares.id')->limit($limit)->get();
 	}
-	   
-	 public static function getRareUnits($itemid)
-    {
-        return QueryBuilder::connection()->table('items')->where('item_id', $itemid)->count();
-    }
 	 
     /*
      * Get news queries
