@@ -27,7 +27,8 @@ class BannedMiddleware implements IMiddleware
             if( !empty(self::$ban)
                 && !url()->contains('/help')
                 && !url()->contains('/help/requests')
-                && !url()->contains('/help/requests')) 
+                && !url()->contains('/help/requests')
+                && !url()->contains('/logout')) 
             {
                 if(!url()->contains('assets/js/web/web.locale.js')) 
                 redirect('/help/requests/new');
