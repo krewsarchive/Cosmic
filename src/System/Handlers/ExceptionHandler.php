@@ -22,7 +22,7 @@ class ExceptionHandler implements IExceptionHandler
 
         if($error instanceof NotFoundHttpException) {
 
-            http_response_code(404);
+            response()->httpCode(404);
             $request->setRewriteUrl(url('lost'));
             return;
 

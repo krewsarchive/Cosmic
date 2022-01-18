@@ -102,11 +102,12 @@ function WebHotelManagerInterface() {
         this.hotel_container.find(".client-buttons .client-radio .fa-play").click(function() {
             radio.src = Client.client_radio;
             radio.volume = 0.1;
-            radio.play();
-
-            $(".fa-play").hide();
-            $(".fa-pause").show();
-        });
+            setTimeout(function(){
+                radio.play();
+                }, Client.client_radio_play_seconds); 
+                    $(".fa-play").hide();
+                    $(".fa-pause").show();
+            });
 
         this.hotel_container.find(".client-buttons .client-radio .fa-pause").click(function() {
 

@@ -22,7 +22,8 @@ class Config
       'client_swf'                  => 'Habbo.swf',
       'client_host'                 => '141.95.18.184',
       'client_port'                 => 3000,
-      "client_radio"                => "https://21253.live.streamtheworld.com/WEB13_AAC.aac",
+      'client_radio'                => "https://21253.live.streamtheworld.com/WEB13_AAC.aac",
+      'client_radio_play_seconds'   => 10000,
       "nitro_path"                  => "https://client.devraizer.nl"
 
     ];
