@@ -94,7 +94,6 @@ class Registration
             }
         }
 
-        exit;
         Auth::login($player);
         response()->json(["status" => "success", "location" => "/hotel"]);
     }
