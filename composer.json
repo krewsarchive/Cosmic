@@ -15,7 +15,7 @@
         "symfony/dotenv": "^6.0",
         "calcinai/php-imagick": "^0.1.2",
         "pecee/simple-router": "^4.3.5.0",
-        "paypal/paypal-checkout-sdk": "1.0.1",
+        "paypal/paypal-checkout-sdk": "1.0.2",
         "originphp/socket": "^2.0",
         "pecee/pixie": "^4.15",
         "symfony/mailer": "^5.3",
