@@ -15,13 +15,13 @@ class DatabaseService {
         $dotenv->loadEnv(dirname(__DIR__).'/../.env');
       
         $config = [
-            'driver'    => getenv('DB_DRIVER'), 
-            'host'      => getenv('DB_HOST'),
-            'database'  => getenv('DB_NAME'),
-            'username'  => getenv('DB_USER'),
-            'password'  => getenv('DB_PASS'),
-            'charset'   => getenv('DB_CHARSET'), 
-            'collation' => getenv('DB_COLLATION'),
+            'driver'    => $_ENV['DB_DRIVER'], 
+            'host'      => $_ENV['DB_HOST'],
+            'database'  => $_ENV['DB_NAME'],
+            'username'  => $_ENV['DB_USER'],
+            'password'  => $_ENV['DB_PASS'],
+            'charset'   => $_ENV['DB_CHARSET'], 
+            'collation' => $_ENV['DB_COLLATION'],
             'options'   => [
                 PDO::ATTR_TIMEOUT => 5,
                 PDO::ATTR_EMULATE_PREPARES => false,
