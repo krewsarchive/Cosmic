@@ -931,11 +931,9 @@ function WebPageCommunityPhotosInterface(main_page) {
 						var day = pad2(date.getDate());//day (1-31)
 						var year= date.getFullYear();
 						var usedate =  day+"-"+month+"-"+year;
-						console.log(usedate);
                         var photo_template = $(self.photo_template.replace(/{story}/g, photo_data.url).replace(/{photo._id}/g, photo_data.id).replace(/{photo.date.full}/g, usedate).replace(/{photo.date.min}/g, photo_data.timestamp).replace(/{creator.username}/g, photo_data.author).replace(/{creator.figure}/g, photo_data.figure).replace(/{photo.likes}/g, photo_data.likes));
                         page_container.find(".photos-container").append(photo_template); 
                         photo_template.fadeIn();
-
                         page_container.find(".fa-heart[data-id=" + photo_data.id + "]").click(function() {
                             addPhotoLike($(this).attr("data-id"), csrftoken);
                         });
