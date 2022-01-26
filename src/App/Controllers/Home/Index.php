@@ -1,6 +1,9 @@
 <?php
 namespace Cosmic\App\Controllers\Home;
 
+use Cosmic\System\DatabaseService as QueryBuilder;
+use PDO;
+
 use Cosmic\App\Config;
 
 use Cosmic\App\Models\Community;
@@ -17,6 +20,7 @@ class Index
 {
     public function index()
     {              
+      
         $news = Community::getNews(6);
         $rooms = Community::getPopularRooms(5);
         $groups = Community::getPopularGroups(7);
@@ -28,7 +32,7 @@ class Index
       
         $oftw_userid = Core::Settings()->user_of_the_week ?? null;
         $oftw = Player::getDataByUsername($oftw_userid, ['username', 'look', 'motto']);
-        
+
         ViewService::renderTemplate('Home/home.html', [
             'title'     => !request()->player ? LocaleService::get('core/title/home') : request()->player->username,
             'page'      => 'home',

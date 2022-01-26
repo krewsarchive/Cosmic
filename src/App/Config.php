@@ -25,7 +25,6 @@ class Config
       'client_radio'                => "https://21253.live.streamtheworld.com/WEB13_AAC.aac",
       'client_radio_play_seconds'   => 10000,
       "nitro_path"                  => "https://client.devraizer.nl"
-
     ];
   
     /**
@@ -39,7 +38,11 @@ class Config
       "cpath"       => "https://client.devraizer.nl/assets",
       "fpath"       => "https://cdn.leet.ws/imaging/avatarimage",
       "shortname"   => "Cosmic",
-      "sitename"    => "Cosmic"
+      "sitename"    => "Cosmic",
+      "buttons"     => [
+        "client_flash_button" => false,
+        "client_nitro_button" => true,
+      ]
     ];
       
     const language = "EN";

@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block body %}
-
         <div class="page-content">
             {% if player %}
             <div class="left-side" style="height: auto !important;">
@@ -151,6 +150,23 @@
                         </div>
                     </aside>
                 {% endif %}
+            <div class="friends-container" style="display: block !important">
+                <div class="list-row">
+                    <ul>
+                        {% for friend in random %}
+                        <li>
+                            <div class="avatar">
+                                <img src="{{site.fpath}}?figure={{player.look}}&gesture=sml&headonly=1" style="margin-top: -15px;margin-left: -10px;">
+                                <div class="status online"></div>
+                            </div>
+                            <div class="content">
+                                <div class="title"><a href="/profile/{{friend.username}}">{{friend.username}}</a></div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                     </ul>
+                </div>
+            </div>
             </div>
             {% endif %}
 
