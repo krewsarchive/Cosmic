@@ -22,6 +22,8 @@ class BannedMiddleware implements IMiddleware
           
         if($account || $ip_address) {
           
+            self::$ban = $account ?? $ip_address;
+          
             if( !empty(self::$ban)
                 && !url()->contains('/help')
                 && !url()->contains('/help/requests')
