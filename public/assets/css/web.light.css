@@ -1742,7 +1742,7 @@ input:-webkit-autofill {
     overflow: hidden;
     position: relative;
     height: 150px;
-    background: url(../images/citysky.png),url(../images/cloudysky.png);
+    background: url(../images/web/header/citysky.png),url(../images/web/header/cloudysky.png);
     background-color: #74d8ea;
     background-repeat: repeat-x;
     border-bottom: 3px solid rgba(8,8,8,.18);
@@ -2717,7 +2717,7 @@ input:-webkit-autofill {
 }
 
 .page-container[data-page="home"] .page-content article.default-section.profile-section .header-image {
-    background: url(../images/plate.png) center bottom no-repeat;
+    background: url(../images/web/plate.png) center bottom no-repeat;
     width: 120px;
     padding: 24px;
     height: 130px;
