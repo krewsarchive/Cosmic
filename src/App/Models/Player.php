@@ -157,9 +157,9 @@ class Player
         return QueryBuilder::connection()->query('SELECT users.look, users.username FROM messenger_friendships JOIN users ON messenger_friendships.user_one_id = users.id WHERE user_two_id = "' . $user_id .'"')->get();
     }
 
-    public static function getMyOnlineFriends($user_id)
+public static function getMyOnlineFriends($user_id)
     {
-        return QueryBuilder::connection()->query('SELECT users.look, users.username FROM messenger_friendships JOIN users ON messenger_friendships.user_one_id = users.id WHERE user_two_id = "' . $user_id .'"')->get();
+        return QueryBuilder::connection()->query('SELECT users.look, users.username FROM messenger_friendships JOIN users ON messenger_friendships.user_one_id = users.id WHERE user_two_id = "' . $user_id .'" AND users.online > "0"')->get();
     }
 
     public static function getGroups($user_id, $limit = 5)
