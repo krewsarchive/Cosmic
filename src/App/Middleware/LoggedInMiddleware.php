@@ -12,7 +12,7 @@ class LoggedInMiddleware implements IMiddleware
 {
     public function handle(Request $request) : void
     {     
-        if(!isset($request->player)) {
+        if(!is_null($request->player)) {
             if($request->isAjax()) { 
                 response()->json(["title" => "Oeps..", "dialog" => LocaleService::get('core/dialog/logged_in'), "loadpage" => "home"]);
             } else {
