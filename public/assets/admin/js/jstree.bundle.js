@@ -8,7 +8,7 @@
     } else {
         factory(jQuery);
     }
-}
+})
     (function ($, undefined) {
         "use strict";
         /*!
