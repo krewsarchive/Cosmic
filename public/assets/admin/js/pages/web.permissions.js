@@ -18,29 +18,11 @@ var permissions = function() {
     
     return {
         roles: function () {
-            $(".permissionManagement").unbind().click(function() {
-                $("#rankWizard").hide();
-                $("#editPermissions").show();
-                $("#goBackWizard").show();
-                $("#manageCommands").hide();
-            });
           
-            $(".rankManagement").unbind().click(function() {
-                $("#rankWizard").hide();
-                $("#rankManagement").show();
-                permissions.getRanks();
-            });
-          
-         
-            $("#goBackWizard").unbind().click(function() {  
-               if($('#goBackWizard').css('display') !== 'block'){
-                $("#rankWizard").show();
-                $("#editPermissions").hide();
-                $("#goBackWizard").hide();
-                $("#permissionsTable").hide();
-                $("#manageCommands").hide();
-               }
-            });
+            $("#editPermissions").show();
+            $("#goBackWizard").show();
+            $("#rankManagement").show();
+            permissions.getRanks();
 
             $(".roleSearch").unbind().click(function() {
                 var self = this;
