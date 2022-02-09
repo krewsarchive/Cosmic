@@ -192,7 +192,7 @@ class Admin
         return QueryBuilder::connection()->table('website_rares')->where('id', $id)->first();
     }
 	 
-	 public static function addRareValueItem(String $name, int $page=0, int $item_id=0, int $cost_credits=0, int $cost_points=0, int $points_type=0, String $image, int $userid)
+	 public static function addRareValueItem($name, $page, $item_id, $cost_credits, $cost_points, $points_type, $image, $userid)
     {
         $data = array(
             'name' => $name,
@@ -208,7 +208,7 @@ class Admin
         return QueryBuilder::connection()->table('website_rares')->insert($data);
     }
 	
-	public static function addRareValuePage($id, String $name, String $desc, String $thumb)
+	public static function addRareValuePage($id, $name, $desc, $thumb)
     {
         $data = array(
 			'id' => $id,
@@ -220,7 +220,7 @@ class Admin
         return QueryBuilder::connection()->table('website_rares_pages')->insert($data);
     }
 	
-	public static function editRareValueItem(int $id, String $name, int $page, int $item_id=0, int $cost_credits=0, int $cost_points=0, int $points_type=0, String $image, int $userid)
+	public static function editRareValueItem($id, $name, $page, $item_id=0, $cost_credits=0, $cost_points=0, $points_type=0, $image, $userid)
     {
         $data = array(
            'name' => $name,
@@ -326,7 +326,7 @@ class Admin
         return QueryBuilder::connection()->table('website_news_categories')->where('id', $id)->first();
     }
 
-    public static function addNews(String $title, String $short_story, String $full_story, $category, $header, $images, int $authorId)
+    public static function addNews($title,  $short_story, $full_story, $category, $header, $images, $authorId)
     {
         $data = array(
             'slug' => Helper::convertSlug($title),
@@ -343,7 +343,7 @@ class Admin
         return QueryBuilder::connection()->table('website_news')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->insert($data);
     }
 
-    public static function editNews(int $id, String $title, String $short_story, String $full_story, $category, $header, $images, int $authorId)
+    public static function editNews($id, $title, $short_story, $full_story, $category, $header, $images, $authorId)
     {
         $data = array(
             'slug' => Helper::convertSlug($title),
