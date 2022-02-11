@@ -220,7 +220,7 @@ class Admin
         return QueryBuilder::connection()->table('website_rares_pages')->insert($data);
     }
 	
-	public static function editRareValueItem($id, $name, $page, $item_id=0, $cost_credits=0, $cost_points=0, $points_type=0, $image, $userid)
+	public static function editRareValueItem($id, $name, $page, $image, $userid, $item_id=0, $cost_credits=0, $cost_points=0, $points_type=0)
     {
         $data = array(
            'name' => $name,
@@ -236,7 +236,7 @@ class Admin
         return QueryBuilder::connection()->table('website_rares')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('id', $id)->update($data);
     }
 	
-	 public static function editRareValuePage(int $id, String $name, String $desc, String $thumb, Int $newid)
+	 public static function editRareValuePage($id, $name, $desc, $thumb, $newid)
     {
         $data = array(
 		'id' => $newid,
