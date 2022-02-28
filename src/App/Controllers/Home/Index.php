@@ -26,7 +26,7 @@ class Index
         $groups = Community::getPopularGroups(7);
 
         if(isset(request()->player->id)) {
-            $random = Player::getMyOnlineFriends(request()->player->id);
+            $friends = Player::getMyOnlineFriends(request()->player->id);
             $currencys = Player::getCurrencys(request()->player->id);
         }
       
@@ -41,7 +41,7 @@ class Index
             'news'      => $news,
             'oftw'      => $oftw,
             'currencys' => isset($currencys) ? $currencys : null,
-            'random'    => isset($random) ? $random : null
+            'friends'   => isset($friends) ? $friends : null
         ]);
      }
 }
