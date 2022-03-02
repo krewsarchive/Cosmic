@@ -3,7 +3,7 @@
         <aside class="default-section">
             <div class="profile-header">
                 <div class="header-content flex-container flex-vertical-center">
-                    <img src="{{site.fpath}}/avatarimage?figure={{data.player.look}}&direction=2&gesture=sml&size=l" alt="{{data.player.username}}" class="pixelated">
+                    <img src="{{site.fpath}}?figure={{data.player.look}}&direction=2&gesture=sml&size=l" alt="{{data.player.username}}" class="pixelated">
                     <div class="header-details">
                         <div class="header-title">{{data.player.username}}</div>
                         <div class="header-description">{{data.player.motto}}</div>
@@ -50,7 +50,7 @@
                     {% for feed in data.player.feeds %}
                     <div class="feed-item" data-id="{{feed.id}}" id="{{feed.id}}">
                         <div class="fi-avatar logo" style="margin-right: 0;height: 60px; margin-top: -7px;">
-                            <div style="background: url({{site.fpath}}/avatarimage?figure={{feed.look}}.&amp;direction=3&amp;headonly=1) no-repeat center; width: 48px; height: 87px;"></div>
+                            <div style="background: url({{site.fpath}}?figure={{feed.look}}.&amp;direction=3&amp;headonly=1) no-repeat center; width: 48px; height: 87px;"></div>
                         </div>
                         <div class="fi-content">
                             <div class="fc-user">
@@ -118,7 +118,7 @@
                     {% if data.player.friends %}
                         {% for row in data.player.friends %}
                         <a href="/profile/{{row.username}}" class="item-container">
-                            <div class="item-icon pixelated" style="background-image: url({{site.fpath}}/avatarimage?figure={{row.look}}&direction=2);"></div>
+                            <div class="item-icon pixelated" style="background-image: url({{site.fpath}}?figure={{row.look}}&direction=2);"></div>
                             <div class="item-name">{{row.username}}</div>
                         </a>
                         {% endfor %}
