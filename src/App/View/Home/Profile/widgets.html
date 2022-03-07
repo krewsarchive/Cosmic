@@ -48,7 +48,7 @@
        {% for row in data.player.friends %}
       <a href="/profile/{{row.username}}" alt="{{row.username}}">
       <span class="friend">
-        <figure style="background-image:url({{site.fpath}}/avatarimage?figure={{row.look}}&direction=4&headonly=1);"></figure>
+        <figure style="background-image:url({{site.fpath}}?figure={{row.look}}&direction=4&headonly=1);"></figure>
       </span></a>
       {% endfor %}
 </div>
@@ -103,7 +103,7 @@
    </div>
 </div>
 <div class="userplate">
-   <div class="useravatar"><img src="{{site.fpath}}/avatarimage?figure={{data.player.look}}&gesture=sml&headonly=1"></div>
+   <div class="useravatar"><img src="{{site.fpath}}?figure={{data.player.look}}&gesture=sml&headonly=1"></div>
 </div>
 <div class="usermotto">
    {{data.player.motto}}
