@@ -56,7 +56,11 @@ function getIpAddress()
     if(isset(Router::Request()->getHeaders()['http-cf-connecting-ip']) && Router::Request()->getHeaders()['http-cf-connecting-ip'] !== NULL) {
         return Router::Request()->getHeaders()['http-cf-connecting-ip']; 
     } else if(isset(Router::Request()->getHeaders()['http_x_forwarded_for']) && Router::Request()->getHeaders()['http_x_forwarded_for'] !== NULL) {
-        return Router::Request()->getHeaders()['http_x_forwarded_for'];     
+        $ip = Router::Request()->getHeaders()['http_x_forwarded_for'];
+
+        return trim(
+            substr($ip, 0, strpos($ip, ','))
+        );
     } else {
         return Router::Request()->getHeaders()['remote-addr']; 
     }
