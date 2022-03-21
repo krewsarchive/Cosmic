@@ -50,7 +50,6 @@ class Client
             }
         }
 
-
         $OS = substr($_SERVER['HTTP_USER_AGENT'], -2);
 
         // Check whether request is made using Puffin browser.
@@ -73,26 +72,13 @@ class Client
             $user->deleteMembership();
         }
 
-        ViewService::renderTemplate('Client/client.html', [
-            'title' => LocaleService::get('core/title/hotel'),
-            'room' => explode("=", url()->getOriginalUrl())[1] ?? null,
-            'data'  => $this->data,
-            'client' => Config::client,
-            'site' => Config::site
-        ]);
-    }
-
-    public function hotel()
-    {
         ViewService::renderTemplate('base.html', [
-            'title' => LocaleService::get('core/title/hotel'),
-            'page'  => 'home'
+            'title' => LocaleService::get('core/title/hotel')
         ]);
     }
 
     public function count()
     {
-        echo Core::getOnlineCount();
-        exit;
+        return Core::getOnlineCount();
     }
 }
