@@ -10,18 +10,6 @@ class Config
     /* Example external_base: = "gordon/PRODUCTION-201904011212-888653470" */
     
     const client = [
-      'external_override_variables' => 'gamedata/override/external_override_variables.txt?v=4',
-      'external_override_texts'     => 'gamedata/override/external_flash_override_texts.txt?v=9',
-      'external_variables'          => 'gamedata/external_variables.txt?v=11',
-      'external_texts'              => 'gamedata/external_flash_texts.txt',
-      'external_figurepartlist'     => 'gamedata/figuredata.xml',
-      'external_figuremap'          => 'gordon/PRODUCTION-201904011212-888653470/figuremap.xml',
-      'external_productdata'        => 'gamedata/productdata.txt',
-      'external_figuredata'         => 'gamedata/furnidata.xml?v=5',
-      'external_base'               => 'gordon/PRODUCTION-201904011212-888653470',
-      'client_swf'                  => 'Habbo.swf',
-      'client_host'                 => '141.95.18.184',
-      'client_port'                 => 3000,
       'client_radio'                => "https://21253.live.streamtheworld.com/WEB13_AAC.aac",
       'client_radio_play_seconds'   => 10000,
       "nitro_path"                  => "https://client.devraizer.nl"
@@ -38,11 +26,7 @@ class Config
       "cpath"       => "https://client.devraizer.nl/assets",
       "fpath"       => "https://cdn.leet.ws/imaging/avatarimage",
       "shortname"   => "Cosmic",
-      "sitename"    => "Cosmic",
-      "buttons"     => [
-        "client_flash_button" => false,
-        "client_nitro_button" => true,
-      ]
+      "sitename"    => "Cosmic"
     ];
       
     const language = "EN";
