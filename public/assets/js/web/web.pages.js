@@ -70,7 +70,38 @@ function WebHotelManagerInterface() {
 
                     if(argument == '/=beta' || argument == 'hotel=beta') {  
                         Web.ajax_manager.get("/api/ssoTicket", function(result) {
-                            container.prepend('<iframe class="client-frame nitro" src="' + Client.nitro_path + '/?sso=' + result.ticket + '"></iframe>');
+                          
+                            container.prepend('<iframe id="nitro" class="client-frame" src="' + Client.nitro_path + '/?sso=' + result.ticket + '"></iframe>');
+                          
+                            let frame = document.getElementById('nitro');
+                          
+                            window.FlashExternalInterface = {};
+                            window.FlashExternalInterface.disconnect = () => {
+                                Web.notifications_manager.create("error", "Client disconnected!");
+                                Web.pages_manager.load('/home');
+                            };
+                          
+                            if (frame && frame.contentWindow) {
+                                window.addEventListener("message", ev => {
+                                    if (!frame || ev.source !== frame.contentWindow) return;
+                                    const legacyInterface = "Nitro_LegacyExternalInterface";
+                                    if (typeof ev.data !== "string") return;
+                                    if (ev.data.startsWith(legacyInterface)) {
+                                        const {
+                                            method,
+                                            params
+                                        } = JSON.parse(
+                                            ev.data.substr(legacyInterface.length)
+                                        );
+                                        if (!("FlashExternalInterface" in window)) return;
+                                        const fn = window.FlashExternalInterface[method];
+                                        if (!fn) return;
+                                        fn(...params);
+                                        return;
+                                    }
+                                });
+                            }
+                          
                         });
                     } else {
                         container.prepend('<iframe class="client-frame flash" src="/client?' + argument + '"></iframe>');
@@ -78,6 +109,7 @@ function WebHotelManagerInterface() {
 
                     document.title = 'Hotel - ' + Site.name;
                     body.addClass("hotel-visible");
+                  
 
                     var radio = document.getElementById("stream");
                     radio.src = Client.client_radio;
@@ -90,8 +122,9 @@ function WebHotelManagerInterface() {
             });
         }
     };
-
   
+  
+    
     /*
      * LeetFM Player
      * */
