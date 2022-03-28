@@ -1183,9 +1183,9 @@ function WebPageRegistrationInterface(main_page) {
         var page_container = this.main_page.get_page_container();
         var avatars_preload = page_container.find(".avatars-preload");
         var avatar_preload = avatars_preload.find("." + this.gender + "-avatar" + avatar).attr("src");
-        var avatar_figure = avatar_preload.replace(Site.figure_url + "?figure=", "").replace("&direction=4&size=l", "");
+        var avatar_look = avatars_preload.find("." + this.gender + "-avatar" + avatar).attr("data-look");
 
-        page_container.find(".avatars-container input[name = 'figure']").val(avatar_figure);
+        page_container.find(".avatars-container input[name = 'figure']").val(avatar_look);
         page_container.find(".avatars-container .avatar-container img").attr("src", avatar_preload);
         page_container.find(".tabs-container span.selected").removeClass("selected");
         page_container.find(".tabs-container span[data-avatar = '" + avatar + "']").addClass("selected");
