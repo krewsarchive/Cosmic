@@ -50,7 +50,7 @@ class Namechange
             response()->json(["status" => "error", "message" => LocaleService::get('core/notification/not_enough_points')]);
         }
       
-        HotelApi::execute('changeusername', array('user_id' => request()->player->id);
+        HotelApi::execute('changeusername', array('user_id' => request()->player->id));
         HotelApi::execute('givepoints', array('user_id' => request()->player->id, 'points' => - $amount + $amount - $this->settings->namechange_price, 'type' => $this->settings->namechange_currency_type));
       
         response()->json(["status" => "success", "message" => LocaleService::get('settings/name_change_saved'), "replacepage" => "settings/namechange"]);
