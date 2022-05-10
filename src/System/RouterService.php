@@ -89,7 +89,7 @@ class RouterService extends Router
                 parent::get('/guilds/{group}/thread/{slug}/page/{page}', 'Community\Guilds\Topic@index', ['defaultParameterRegex' => '[\w\-]+'])->addMiddleware(GuildMiddleware::class);
 
                 parent::get('/jobs/my', 'Jobs\Jobs@my');
-                parent::get('/jobs/{id}/apply', 'Jobs\Apply@index');
+                
 
                 parent::get('/api/player/count', 'Client\Client@count');
 
@@ -125,6 +125,8 @@ class RouterService extends Router
                     parent::get('/settings/namechange', 'Settings\Namechange@index');
                     parent::get('/settings/preferences', 'Settings\Preferences@index');
                     parent::get('/settings/verification', 'Settings\Verification@index');
+
+                    parent::get('/jobs/{id}/apply', 'Jobs\Apply@index');
 
                     parent::get('/help/requests/view', 'Help\Requests@index');
                     parent::get('/help/requests/new', 'Help\Ticket@index');
