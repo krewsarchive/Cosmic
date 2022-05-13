@@ -37,21 +37,7 @@ class Namechange
         HotelApi::execute('changeusername', array('user_id' => request()->player->id));
         HotelApi::execute('givepoints', array('user_id' => request()->player->id, 'points' => - $amount + $amount - $this->settings->namechange_price, 'type' => $this->settings->namechange_currency_type));
       
-        response()->json(["status" => "success", "message" => LocaleService::get('settings/name_change_saved'), "replacepage" => "settings/namechange"]);
-    }
-
-    public function availability()
-    {
-        $username = input('username');
-
-        $userCheck = preg_replace('/[^a-zA-Z0-9\d\-\?!@:\.,]/i', '', $username);
-        $player = Player::getDataByUsername($username, array('id'));
-
-        if ($userCheck != $username || !empty($player)) {
-            response()->json(["status" => "unavailable"]);
-        }
-    
-        response()->json(["status" => "available"]);
+        response()->json(["status" => "success", "replacepage" => "/client"]);
     }
 
     public function index()
