@@ -40,6 +40,22 @@ class Namechange
         response()->json(["status" => "success", "replacepage" => "/client"]);
     }
 
+    public function availability()
+    {
+        $username = input('username');
+
+        $userCheck = preg_replace('/[^a-zA-Z0-9\d\-\?!@:\.,]/i', '', $username);
+        $player = Player::getDataByUsername($username, array('id'));
+
+        if ($userCheck != $username || !empty($player)) {
+            response()->json(["status" => "unavailable"]);
+        }
+    
+        response()->json(["status" => "available"]);
+    }
+
+
+
     public function index()
     {
         $currency = Settings::getCurrencyByType($this->settings->namechange_currency_type)->currency;
