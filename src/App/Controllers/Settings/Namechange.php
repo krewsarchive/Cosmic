@@ -29,22 +29,6 @@ class Namechange
 
     public function validate()
     {
-        ValidationService::validate([
-            'username' => 'required|min:2|max:15|pattern:[^[:space:]]+',
-        ]);
-
-        $username = input('username');
-
-        $user_validate = preg_replace('/[^a-zA-Z0-9\d\-\?!@:\.,]/i', '', $username);
-        if ($user_validate != $username) {
-            response()->json(["status" => "error", "message" => LocaleService::get('register/username_invalid')]);
-        }
-
-        $new_player = Player::getDataByUsername($username);
-        if (!empty($new_player)) {
-            response()->json(["status" => "error", "message" => LocaleService::get('settings/user_is_active')]);
-        }
-
         $amount = Player::getCurrencys(request()->player->id)[$this->settings->namechange_currency_type]->amount;
         if ($amount < $this->settings->namechange_price) {
             response()->json(["status" => "error", "message" => LocaleService::get('core/notification/not_enough_points')]);
