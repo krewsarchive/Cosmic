@@ -27,11 +27,6 @@ class AuthMiddleware implements IMiddleware
       
        $isBanned = new \Cosmic\App\Middleware\BannedMiddleware();
        $isBanned->handle($request);
-      
-       if (getIpAddress() != $request->player->ip_current || $_SERVER['HTTP_USER_AGENT'] != SessionService::get('agent')) {
-            Auth::logout();
-            redirect('/');
-        }
     }
 }
 
