@@ -639,7 +639,35 @@ function WebPageProfileInterface(main_page) {
             }
         });
 
+        function saveWidgets() {
+            var arr = [];
+            $('.selectedActive').each(function(i, obj) {
 
+                var ids = $(this).attr('data-ids');
+                var id = $(this).attr('data-id');
+                var top = $(this).attr('data-top');
+                var left = $(this).attr('data-left');
+                var skin = ($(this).attr('data-skin') !== undefined) ? $(this).attr('data-skin') : '';
+                var type = $(this).attr('data-type'); 
+                var zIndex = $(this).attr('data-zIndex'); 
+                var data = ($(this).attr('data-id') === 'note') ? $('textarea#data').val() : ''; 
+                
+                $(".selectedActive").removeClass('selectedItem');
+                console.log(arr)
+                arr.push([ids, id, top, left, skin, type, data, zIndex]);
+            });
+  
+            if (arr.length !== 0) {
+                Web.ajax_manager.post("/home/profile/save", {
+                    draggable: JSON.stringify(arr),
+                    background: $(".page-content").attr('data-background'),
+                    csrftoken: csrftoken
+                });
+            }
+          
+            arr = []
+        }
+      
         var stickers = [
             '<div class="dialog-popup" style="width: 744px; max-width: 850px;">\n' +
             '<div class="sidenav">' +
@@ -670,28 +698,11 @@ function WebPageProfileInterface(main_page) {
         }
 
         page_container.find(".saveProfile").click(function() {
-
-            var arr = [];
-
+       
             page_container.find(".editActive").hide();
             page_container.find(".editProfile").show();
 
-            $('.widget').each(function(i, obj) {
-
-                var id = $(this).attr('data-id')
-                var top = $(this).attr('data-top');
-                var left = $(this).attr('data-left');
-                var skin = $(this).attr('data-skin');
-                var type = $(this).attr('data-type'); 
-
-                arr.push([id, top, left, skin, type]);
-            });
-
-            Web.ajax_manager.post("/home/profile/save", {
-                draggable: JSON.stringify(arr),
-                background: $(".page-content").attr('data-background'),
-                csrftoken: csrftoken
-            });
+            saveWidgets();
         });
 
         page_container.find(".icon-edit").click(function(e) {
@@ -723,10 +734,10 @@ function WebPageProfileInterface(main_page) {
             });
 
             $(document).mouseup(function(e) {
-                if (!$(e.target).hasClass('selectSkin')) {
-                    if ($(e.target).closest(".page-contianer").length === 0) {
-                        page_container.find("#" + id + '-menu').hide();
-                    }
+                var container = $("#" + id +"-menu");
+                if (!container.is(e.target) && container.has(e.target).length === 0) 
+                {
+                    container.hide();
                 }
             });
 
@@ -748,10 +759,14 @@ function WebPageProfileInterface(main_page) {
                 type: null,
                 csrftoken: csrftoken
             }, function(data) {
+              
                 $.each(data.widgets, function(index, value) {
                     dialog.append('<a href="#" data-name="' + value + '" class="widgetButton btn form-control" style="margin-top: 5px">' + value + '</a>');
 
                     dialog.find(".widgetButton[data-name=" + value + "]").click(function() {
+                      
+                        saveWidgets();
+                      
                         Web.ajax_manager.post("/home/profile/store", {
                             data: 'w',
                             type: 'p',
@@ -773,20 +788,36 @@ function WebPageProfileInterface(main_page) {
             page_container.find(".editActive").show();
             page_container.find(".editProfile").hide();
 
-            $('.widget').draggable({
+            $('.widget').mousedown(function(e) {
+                var maximum = null;
+
+                $('.widget').each(function() {
+                  var value = parseFloat($(this).css("z-index"));
+                  maximum = (value > maximum) ? value : maximum + 1;
+                });
+              
+                $(this).css('zIndex', maximum);
+                $(this).attr('data-zIndex', maximum)
+            });
+          
+            $('.widget').mouseenter(function() {
+              $('*[data-ids="' + $(this).attr('data-ids') + '"]').addClass('selectedActive')
+              $('*[data-ids="' + $(this).attr('data-ids') + '"]').draggable({
                 containment: $('.page-container'),
                 stop: function() {
                     $(this).attr('data-top', $(this).css("top").replace('px', ''))
                     $(this).attr('data-left', $(this).css("left").replace('px', ''))
                 }
+              });
             });
-
+          
             page_container.find(".addSticker").click(function() {
+                
                 Web.ajax_manager.post("/home/profile/store", {
                     data: 's',
                     csrftoken: csrftoken
                 }, function(data) {
-
+        
                     var dialog = $(stickers);
 
                     $.magnificPopup.open({
@@ -819,11 +850,22 @@ function WebPageProfileInterface(main_page) {
                             dialog.find('.' + items.category + '').append('<img src="/assets/images/homestickers/' + items.data + '.gif" class="stickerImage" data-name="' + items.data + '" data-id="' + items.id + '" height="34" width="34">');
 
                             dialog.find(".main img[data-id=" + items.id + "]").click(function() {
-                                $('<img src="' + $(this).attr("src") + '" class="widget" data-id="' + $(this).attr("data-name") + '.gif" data-type="s" style="position: relative;"></div>').appendTo('.page-content').draggable({
+                                $('<div class="widget selectedActive" data-id="' + $(this).attr("data-name") + '.gif" data-zIndex="0" data-type="s" style="position: relative; width: 0px; top: -100px; z-index: 0;"><img src="' + $(this).attr("src") + '"></div>').appendTo('.page-content').draggable({
                                     containment: $('.page-container'),
                                     stop: function() {
                                         $(this).attr('data-top', $(this).css("top").replace('px', ''))
                                         $(this).attr('data-left', $(this).css("left").replace('px', ''))
+                                    },
+                                    start: function() {
+                                      var maximum = null;
+
+                                      $('.widget').each(function() {
+                                        var value = parseFloat($(this).css("z-index"));
+                                        maximum = (value > maximum) ? value : maximum + 1;
+                                      });
+
+                                      $(this).css('zIndex', maximum);
+                                      $(this).attr('data-zIndex', maximum)
                                     }
                                 });
                                 $.magnificPopup.close();

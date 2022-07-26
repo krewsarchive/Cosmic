@@ -109,7 +109,7 @@ class Profile
             }
           
             if(input()->post('type')->value == "p") {
-                Profiles::insert(request()->player->id, input()->post('add')->value, '0', '0', 'default_skin', input('data'));
+                Profiles::insert(request()->player->id, input()->post('add')->value, '0', '0', 'default_skin', input('data'), '0');
                 response()->json(["status" => "success", "replacepage" => "/profile/" . request()->player->username ]);
             }
         }
@@ -137,11 +137,12 @@ class Profile
         }
       
         $items = json_decode(input()->post('draggable')->value);
+
         foreach($items as $i => $v){
             if(Profiles::hasWidget(request()->player->id, $v[0])) {
-                Profiles::update(request()->player->id, $v[0], $v[1], $v[2], $v[3], $v[4]);
+                Profiles::update(request()->player->id, $v[0], $v[1], $v[2], $v[3], $v[4], $v[5], $v[6], $v[7]);
             } else {
-                Profiles::insert(request()->player->id, $v[0], $v[1], $v[2], $v[3], $v[4]);
+                Profiles::insert(request()->player->id, $v[1], $v[2], $v[3], $v[4], $v[5], $v[7]);
             }
         }
       
@@ -151,7 +152,7 @@ class Profile
             Profiles::insertBackground(request()->player->id, input('background'));
         }
       
-        response()->json(["status" => "success", "message" => "Homepage successfully saved."]);
+        response()->json(["status" => "success", "message" => "Homepage successfully saved.", "replacepage" => "/profile/" . request()->player->username]);
     }
   
     public function template()

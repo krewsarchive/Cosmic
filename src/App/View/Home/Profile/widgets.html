@@ -103,7 +103,7 @@
    </div>
 </div>
 <div class="userplate">
-   <div class="useravatar"><img src="{{site.fpath}}?figure={{data.player.look}}&gesture=sml&headonly=1"></div>
+   <div class="useravatar"><img src="{{site.fpath}}?figure={{data.player.look}}&gesture=sml"></div>
 </div>
 <div class="usermotto">
    {{data.player.motto}}
@@ -123,9 +123,22 @@
 {% endif %}
 {% endset %}
 {% endif %}
-{% if widget.type != "s" %}
+{% if widget.name == "note" %}
 <div class="right-side">
-   <div class="widget_{{widget.skin}} widget" data-id="{{widget.name}}" data-ids="{{widget.id}}" data-type="{{widget.type}}" data-skin="{{widget.skin}}" data-top="{{widget.y}}" data-left="{{widget.x}}" style="position: relative; left: {{widget.x}}px; top: {{widget.y}}px;">
+   <div class="widget_{{widget.skin}} widget" data-zIndex="{{widget.z}}" data-id="{{widget.name}}" data-ids="{{widget.id}}" data-type="{{widget.type}}" data-skin="{{widget.skin}}" data-top="{{widget.y}}" data-left="{{widget.x}}" style="position: relative; left: {{widget.x}}px; top: {{widget.y}}px; z-index: {{widget.z}};">
+      <div class="heading">
+         <span>Note</span>
+      </div>
+      {% include "Home/Profile/edit.html" with {note:true, widget: widget} only  %}
+      <div class="body">
+         {{widget.data}}
+      </div>
+   </div>
+</div>
+{% endif %}
+{% if widget.type != "s" and widget.name != "note"  %}
+<div class="right-side">
+   <div class="widget_{{widget.skin}} widget" data-zIndex="{{widget.z}}" data-id="{{widget.name}}" data-ids="{{widget.id}}" data-type="{{widget.type}}" data-skin="{{widget.skin}}" data-top="{{widget.y}}" data-left="{{widget.x}}" style="position: relative; left: {{widget.x}}px; top: {{widget.y}}px; z-index: {{widget.z}};">
       <div class="heading">
          <span>{{title}}</span>
       </div>

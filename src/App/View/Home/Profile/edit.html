@@ -11,5 +11,8 @@
       <option value="golden_skin">Golden</option>
       <option value="hcm_skin">HC Machine</option>
    </select>
+   {% if note %}
+      <textarea rows="5" cols="23" id="data" autofocus>{{widget.data}}</textarea>
+   {% endif %}
    <button class="deleteElement" data-type="{{widget.type}}" data-id="{{widget.id}}">Remove</button>
 </div>

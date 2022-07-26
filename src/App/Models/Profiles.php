@@ -8,7 +8,7 @@ class Profiles
 {
     public static function hasWidget($user_id, $name)
     {
-        return QueryBuilder::connection()->table('website_profile_homes')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('user_id', $user_id)->where('name', $name)->get();
+        return QueryBuilder::connection()->table('website_profile_homes')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('user_id', $user_id)->where('id', $name)->get();
     }
   
     public static function hasBackground($user_id)
@@ -18,7 +18,7 @@ class Profiles
 
     public static function getWidgets($user_id)
     {
-        return QueryBuilder::connection()->table('website_profile_homes')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('user_id', $user_id)->whereIn('type', array('s','w'))->orderBy('z')->get();
+        return QueryBuilder::connection()->table('website_profile_homes')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('user_id', $user_id)->whereIn('type', array('s','w'))->orderBy('id')->get();
     }
 
     public static function getItems($data)
@@ -51,25 +51,28 @@ class Profiles
         return QueryBuilder::connection()->table('website_profile_homes')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->insert(array('user_id' => $user_id, 'name' => $name, 'type' => 'b'));   
     }
   
-    public static function update($user_id, $name, $top, $left, $skin, $type)
+    public static function update($user_id, $id, $name, $top, $left, $skin, $type, $data, $zIndex)
     {
         $data = array(
             'name' => $name,
             'skin' => $skin,
+            'z' => $zIndex,
             'x' => $left,
             'y' => $top,
-            'type' => $type
+            'type' => $type,
+            'data' => $data
         );
       
-        return QueryBuilder::connection()->table('website_profile_homes')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('user_id', $user_id)->where('name', $name)->update($data);
+        return QueryBuilder::connection()->table('website_profile_homes')->setFetchMode(PDO::FETCH_CLASS, get_called_class())->where('user_id', $user_id)->where('id', $id)->update($data);
     }
 
-    public static function insert($user_id, $name, $top, $left, $skin, $type)
+    public static function insert($user_id, $name, $top, $left, $skin, $type, $zIndex)
     {
         $data = array(
             'user_id' => $user_id,
             'name' => $name,
             'skin' => $skin,
+            'z' => $zIndex,
             'x' => $left,
             'y' => $top,
             'type' => $type
