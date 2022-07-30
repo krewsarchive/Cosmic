@@ -9,14 +9,14 @@ use Rakit\Validation\Validator;
 
 class ValidationService
 {
-  
-    public static function validate($array, $post = null) 
+    public static function validate($array, $customMessages, $post = null) 
     {
         $validator = new Validator();
       
         $validator->addValidator('pattern', new Pattern());
         $validator->addValidator('figure', new Figure());
         $validator->addValidator('captcha', new Captcha());
+        $validator->setMessages($customMessages);
 
         $validation = $validator->validate(($post != null) ? $post : $_POST, $array);
         ($validation->fails()) ? response()->json([
