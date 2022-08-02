@@ -30,11 +30,7 @@ class Login
             'username' => 'required|min:1|max:30',
             'password' => 'required|min:1|max:100',
             'pincode'  => 'max:6'
-        ],
-            [
-              'required' => ':attribute is verplicht!'
-            ]
-        );
+        ]);
       
         $pin_code     = !empty(input('pincode')) ? input('pincode') : false;
 
