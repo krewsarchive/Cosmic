@@ -29,7 +29,7 @@ class Config
       "sitename"    => "Cosmic"
     ];
       
-    const language = "NL";
+    const language = "EN";
     const region = "Europe/Amsterdam";
     const SECRET_TOKEN = "COSMIC-shdl3w5rvb4ef141spbed";
 
