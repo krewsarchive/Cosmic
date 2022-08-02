@@ -9,7 +9,7 @@ use Rakit\Validation\Validator;
 
 class ValidationService
 {
-    public static function validate($array, $customMessages = [], $post = null) 
+    public static function validate($array, $customMessages = null, $post = null) 
     {
         $validator = new Validator();
       
