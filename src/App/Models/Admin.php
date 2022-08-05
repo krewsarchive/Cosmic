@@ -651,7 +651,7 @@ class Admin
   
     public static function UpdateOrderNumFromParent($ids)
     {
-        return QueryBuilder::connection()->query("UPDATE catalog_pages SET order_num = '' WHERE id IN ($ids)")->get();
+        return QueryBuilder::connection()->query("UPDATE catalog_pages SET order_num = 1 WHERE id IN ($ids)")->get();
     }
   
     public static function UpdateNewOrderNumFromParent($id, $pos)

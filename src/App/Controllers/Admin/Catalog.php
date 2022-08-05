@@ -128,7 +128,7 @@ class Catalog
     public function move()
     {
 
-        $validate = request()->validator->validate([
+        $validate = ValidationService::validate([
             'old_position'  => 'required|numeric',
             'new_position'  => 'required|numeric',
             'old_parent'    => 'required|numeric',
@@ -137,11 +137,7 @@ class Catalog
             'positions'     => 'required'
         ]);
 
-        if(!$validate->isSuccess()) {
-            echo '{"status":"error","message":"Fill in all fields!"}';
-            exit;
-        }
-          
+
         $old_position = input()->post('old_position')->value;
         $new_position = input()->post('new_position')->value;
         $old_parent = input()->post('old_parent')->value;
