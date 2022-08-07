@@ -11,14 +11,10 @@ class TokenService
     public function __construct($token_value = null)
     {
         if ($token_value) {
-            $this->token = $token_value;
-        } else {
-            try {
-                $this->token = bin2hex(random_bytes(16));
-            } catch (Exception $e) {
+            return $this->token = $token_value;
+	  }
 
-            }
-        }
+	  return $this->token = bin2hex(random_bytes(16));
     }
 
     public function getValue()
