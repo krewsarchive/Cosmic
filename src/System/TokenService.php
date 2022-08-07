@@ -12,7 +12,7 @@ class TokenService
     {
         if ($token_value) {
             return $this->token = $token_value;
-	  }
+	    }
 
 	  return $this->token = bin2hex(random_bytes(16));
     }
