@@ -21,19 +21,6 @@ class ViewService
 {
     public static $cache;
 
-    public static function render($view, $args = [])
-    {
-        extract($args, EXTR_SKIP);
-
-        $file = dirname(__DIR__) . '/App/View/'.$view;
-
-        if (is_readable($file)) {
-            require $file;
-        } else {
-            throw new Exception("$file not found");
-        }
-    }
-
     public static function renderTemplate($template, $args = [], $cacheTime = false)
     {
         echo static::getTemplate($template, $args, $cacheTime);
@@ -53,14 +40,18 @@ class ViewService
     {
         static $twig = null;
         
+        $settings = \Cosmic\App\Models\Core::settings();
+      
         if ($twig === null) {
-            $loader = new FilesystemLoader(dirname(__DIR__) . '/App/View');
+            if (strpos($template, 'Admin/') !== false) {
+                $loader = new FilesystemLoader(dirname(__DIR__) . '/App/View/default');
+            } else {
+                $loader = new FilesystemLoader(dirname(__DIR__) . '/App/View/' . $settings->layout_theme);
+            }
             $twig = new Environment($loader, array(
                 'debug' => Config::debug
             ));
           
-            $settings = \Cosmic\App\Models\Core::settings();
-            
             $twig->addGlobal('site', Config::site); 
             $twig->addGlobal('paypal_client_id', $settings->paypal_client_id);
             $twig->addGlobal('paypal_currency', $settings->paypal_currency);
@@ -79,7 +70,7 @@ class ViewService
             $twig->addGlobal('online_count', \Cosmic\App\Models\Core::getOnlineCount());
  
             if (request()->player !== null) {
-
+              
                 $twig->addGlobal('player_currency', Player::getCurrencys(request()->player->id));
                 $twig->addGlobal('player', request()->player);
   

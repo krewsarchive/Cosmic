@@ -60,6 +60,7 @@ class Profile
         $this->data->player->widgets = Profiles::getWidgets($player->id);
         $this->data->player->background = Profiles::getBackground($player->id);
         $this->data->player->notes = Profiles::getNotes($player->id);
+        $this->data->player->currency = Player::getCurrencys($player->id);
       
         foreach ($this->data->player->feeds as $row) {
             $row->likes = Community::getLikes($row->id);

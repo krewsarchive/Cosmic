@@ -12,7 +12,7 @@ use PDO;
 
 class Player
 {
-    private static $data = array('id','username','password','mail','account_created','account_day_of_birth','last_login','online','pincode','last_online','motto','look','gender','rank','credits','auth_ticket','ip_register','ip_current','machine_id', 'secret_key', 'extra_rank', 'template');
+    private static $data = array('id','username','password','mail','account_created','account_day_of_birth','last_login','online','pincode','last_online','motto','look','gender','rank','credits','auth_ticket','ip_register','ip_current','machine_id', 'secret_key', 'extra_rank', 'template', 'lang');
 
     public static function getAllUsers($data = null)
     {

@@ -73,7 +73,7 @@ class Login
     protected function login(Player $user)
     {
         if ($user && Auth::login($user)) {
-            response()->json(["status" => "error", "location" => "/home"]);
+            response()->json(["status" => "success", "message" => "test", "location" => "/home"]);
         } else {
             response()->json(["status" => "error", "message" => LocaleService::get('login/invalid_password')]);
         }

@@ -43,7 +43,7 @@ class Registration
         }
       
         ValidationService::validate($dataset);
-
+      
         $username = input('username');
 
         $settings = Core::settings();
@@ -52,16 +52,16 @@ class Registration
         $getMaxIp = Player::checkMaxIp(getIpAddress());
      
         if (Player::exists($username)) {
-            response()->json(["status" => "error", "message" => LocaleService::get('register/username_exists')]);
+            response()->json(["status" => "error", "inputField" => "username", "message" => LocaleService::get('register/username_exists')]);
         }
 
         if (Player::mailTaken(input()->post('email')->value)) {
-            response()->json(["status" => "error", "message" => LocaleService::get('register/email_exists')]);
+            response()->json(["status" => "error", "inputField" => "email", "message" => LocaleService::get('register/email_exists')]);
         }
       
           
         if ($getMaxIp != 0 && $getMaxIp >= $settings->registration_max_ip) {
-            response()->json(["status" => "error", "message" => LocaleService::get('register/too_many_accounts')]);
+            response()->json(["status" => "error", "inputField" => "username", "message" => LocaleService::get('register/too_many_accounts')]);
         }
 
         if (!Player::create($playerData)) {
@@ -95,7 +95,7 @@ class Registration
         }
 
         Auth::login($player);
-        response()->json(["status" => "success", "location" => "/hotel"]);
+        response()->json(["status" => "success", "location" => "/home"]);
     }
 
     public function index($referral = false)

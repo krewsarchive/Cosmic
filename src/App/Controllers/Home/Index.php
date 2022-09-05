@@ -22,7 +22,15 @@ class Index
     {              
       
         $news = Community::getNews(6);
+        foreach($news as $article) {
+            $article->player = Player::getDataById($article->author, ['username', 'look']);    
+        }
+      
         $rooms = Community::getPopularRooms(5);
+        foreach($rooms as $room) {
+            $room->player = Player::getDataById($room->owner_id, ['username', 'look']);   
+        }
+      
         $groups = Community::getPopularGroups(7);
 
         if(isset(request()->player->id)) {
@@ -31,7 +39,7 @@ class Index
         }
       
         $oftw_userid = Core::Settings()->user_of_the_week ?? null;
-        $oftw = Player::getDataByUsername($oftw_userid, ['username', 'look', 'motto']);
+        $oftw = Player::getDataById($oftw_userid, ['username', 'look', 'motto']);
 
         ViewService::renderTemplate('Home/home.html', [
             'title'     => !request()->player ? LocaleService::get('core/title/home') : request()->player->username,

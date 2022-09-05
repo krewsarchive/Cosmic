@@ -253,6 +253,7 @@ function WebPageArticleInterface(main_page) {
             }
         });
 
+
         page_container.find(".article-reply").click(function() {
             if (User.is_logged == true) {
                 var id = $(this).attr("data-id");
@@ -263,18 +264,7 @@ function WebPageArticleInterface(main_page) {
                     articleid: id,
                     message: reply,
                     csrftoken: csrftoken
-                }, function(result) {
-                    if (result.status === "success") {
-                        var reaction = urlReplace(result.bericht);
-                        var reactions_template = $(self.reaction_tmp.replace(/{{figure}}/g, result.figure).replace(/{{message}}/g, reaction));
-
-                        page_container.find(".nano-pane").append(reactions_template);
-                        page_container.find(".reaction-reply").remove();
-                        page_container.find(".nopost").remove();
-                    }
                 });
-            } else {
-                Web.notifications_manager.create("info", Locale.web_page_article_login);
             }
         });
     };
@@ -288,7 +278,8 @@ function WebPageSettingsNamechangeInterface(main_page) {
     this.init = function() {
         var self = this;
         var page_container = this.main_page.get_page_container();
-
+     
+      
         page_container.find("#username").keyup(function() {
 
             var namechange = page_container.find("#username");
@@ -331,17 +322,40 @@ function WebPageSettingsInterface(main_page) {
         var self = this;
         var page_container = this.main_page.get_page_container();
 
+        page_container.find(".tab-item").click(function(evt) {
+
+            var i, tabcontent, tablinks;
+            tabcontent = page_container.find(".tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+            }
+          
+            tablinks = page_container.find(".tab-item");
+            for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+           
+            $("#" + $(this).attr("id") + "_content").css({ display: "block" });
+            evt.currentTarget.className += " active";
+        });
+      
         // Checkbox change event
         page_container.find(".settings").change(function() {
+   
             var post = $(this).attr("data-id");
-            var type = this.checked;
-            var csrftoken = $("[name=csrftoken]").val();
 
+            var type = this.checked;
+            if(type === undefined) {
+                type = $(this).find('option:selected').attr("value")
+            }
+
+            var csrftoken = $("[name=csrftoken]").val();
             var array = ["hide_inroom", "hide_staff", "hide_online", "hide_last_online", "hide_home"]
 
             if (jQuery.inArray(post, array) !== -1) {
                 type = type ? false : true;
             }
+          
             var dataString = {
                 post: post,
                 type: type,
@@ -1105,6 +1119,111 @@ function WebPageHomeInterface(main_page) {
     this.init = function() {
         var self = this;
         var page_container = this.main_page.get_page_container();
+  
+        $(".languageSwitcher").click(function() {
+            Web.ajax_manager.post("/settings/preferences/lang", { language: $(this).attr("name") });
+        });
+      
+        page_container.find("#ares-login-form .login-request").click(function() {
+            var verification_data = {
+                username: $("#ares-login-form [name=username]").val(),
+                password: $("#ares-login-form [name=password]").val(),
+            };
+
+            Web.ajax_manager.post("/auth/login/request", verification_data, function (result) {
+                if (result.status == "pincode_required") {
+                    setTimeout(function () {
+                        Web.dialog_manager.create("confirm", Locale.web_fill_pincode, Locale.web_twostep, null, "pincode", function (result) {
+                            verification_data.pincode = result.toString();
+                            Web.ajax_manager.post("/auth/login/request", verification_data);
+
+                            $.magnificPopup.close();
+                        });
+                    }, 500);
+                }
+            });
+        });
+      
+        page_container.find(".back-login-form").click(function() {
+            page_container.find("#ares-login-form").show();
+            page_container.find("#ares-registration-form").hide();
+        });
+      
+        /*
+        *   Switch from login to registration form
+        */
+      
+        page_container.find(".registration-form-ares").click(function() {
+            page_container.find("#ares-login-form").hide();
+            page_container.find("#ares-registration-form").show();
+        });
+      
+        page_container.find(".back").click(function() {
+            var stepButton = $(this);
+            var step = $("[class*='step-form-']");
+            $('.active:last').removeClass("active");
+            stepButton.closest(step).hide().prev(step).show();
+        });
+      
+        function nextStep(object) {
+            var stepButton = $(object);
+            var step = $("[class*='step-form-']");
+            //$('.step').closest(step).addClass('active')
+            stepButton.closest(step).hide().next(step).show();
+        }
+      
+        page_container.find(".next").click(function(event) {
+            event.preventDefault();
+            var submitButton = this;
+          
+            if ($('#usernameForm').is(':visible')) {
+                const username = page_container.find("#username [name=username]").val();
+                Web.ajax_manager.post("/settings/namechange/availability", { username: username }, function(result) {
+                      if(result.status == "available") {
+                          nextStep(submitButton)
+                      }
+                });
+            }
+          
+            if ($('#emailForm').is(':visible')) {
+                nextStep(submitButton)
+            }
+          
+            if ($('#passwordForm').is(':visible')) {
+                nextStep(submitButton)
+            }
+          
+            if ($('#birthdayForm').is(':visible')) {
+                nextStep(submitButton)
+            }
+          
+            if ($('#createForm').is(':visible')) {
+                page_container.find(".next").click(function(event) {
+                    var formInput = {};
+                    page_container.find('#ares-registration-form *').filter(':input').each(function () {
+                        if($(this).attr('name') !== undefined) {
+                            formInput[$(this).attr('name')] = $(this).val()
+                        }
+                    });
+
+                    if(formInput.gender == "male") {
+                        formInput["figure"] = 'hr-100-39.hd-180-1.ch-210-66.lg-270-1338.sh-290-140';    
+                    } 
+                  
+                    if(formInput.gender == "female") {
+                        formInput["figure"] = 'hr-515-33.hd-600-1.ch-635-70.lg-716-66-62.sh-735-68';    
+                    }   
+                  
+                    Web.ajax_manager.post("/auth/registration/request", formInput, function(result) {
+                        if(result.status == "error") {
+                            $(".form [class*='step-form-']").hide();
+                            $(".form ." + result.inputField + "").show();
+                        }
+                    });
+                });
+            }
+        });
+          
 
         function mouseoverTitle() {
             $('.article-container').mouseenter(function() {
@@ -1316,6 +1435,23 @@ function WebPageShopInterface(main_page) {
         var self = this;
         var page_container = this.main_page.get_page_container();
 
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var payment = this.nextElementSibling;
+            if (payment.style.display === "block") {
+              payment.style.display = "none";
+            } 
+
+            else {
+              payment.style.display = "block";
+            }
+          });
+        }
+      
         // Init type select
         page_container.find(".filter-content .selectric").selectric({
             theme: "web"

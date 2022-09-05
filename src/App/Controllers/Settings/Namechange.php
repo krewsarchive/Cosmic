@@ -42,13 +42,16 @@ class Namechange
 
     public function availability()
     {
-        $username = input('username');
+        $dataset = [
+            'username' => 'required|min:2|pattern:[a-zA-Z0-9-=?!@:.]+'
+        ];
+      
+        ValidationService::validate($dataset);
 
-        $userCheck = preg_replace('/[^a-zA-Z0-9\d\-\?!@:\.,]/i', '', $username);
-        $player = Player::getDataByUsername($username, array('id'));
+        $player = Player::getDataByUsername(input('username'), array('id'));
 
-        if ($userCheck != $username || !empty($player)) {
-            response()->json(["status" => "unavailable"]);
+        if (!empty($player)) {
+            response()->json(["status" => "error", "message" => "Username is already been used!"]);
         }
     
         response()->json(["status" => "available"]);

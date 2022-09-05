@@ -525,7 +525,8 @@ $GLOBALS['language'] = array (
             'content_2'           => 'Aarzel niet om contact op te nemen met de klantenservice via de',
             'help_tool'           =>  Config::site['shortname'] . ' Help Tool',
             'random_club_users'   => 'Willekeurige '. Config::site['shortname'] . ' Club leden',
-            'desc'                => 'Hier kun je club kopen voor echt geld. Met club heb je voordelen en kun je exclusieve items kopen.'
+            'desc'                => 'Hier kun je club kopen voor echt geld. Met club heb je voordelen en kun je exclusieve items kopen.',
+            'submit'              => 'Koop club!'
         ),
         'shop_history' => array (
             'buy_history'         => 'Aankoopgeschiedenis',

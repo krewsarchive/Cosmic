@@ -6,6 +6,7 @@ use Cosmic\App\Models\Player;
 
 use Cosmic\System\LocaleService;
 use Cosmic\System\ViewService;
+use Cosmic\System\ValidationService;
 
 use Cosmic\App\Library\HotelApi;
 
@@ -45,6 +46,18 @@ class Preferences
         }
 
         response()->json(["status" => "success", "message" => LocaleService::get('settings/preferences_saved')]);
+    }
+  
+    public function lang() 
+    {
+        $dataset = [
+            'language' => 'required|min:2'
+        ];
+      
+        ValidationService::validate($dataset);
+      
+        Player::update(request()->player->id, ['lang' => input('language')]);
+        response()->json(["status" => "success", "location" => "/home"]);
     }
 
     public function index()

@@ -1,0 +1,10 @@
+$(document).ready(function(){
+  $(document).on('click','#clickable-dropdown-toggle',function(){
+      $('#clickable-dropdown-toggle').not(this).next().removeClass('show-element');
+      $(this).next().toggleClass('show-element');
+  });
+  $(document).on('click',function(e){
+      if(!$(e.target).closest('#clickable-dropdown-toggle').length)
+          $('#clickable-dropdown-toggle').next().removeClass('show-element');
+  });    
+});

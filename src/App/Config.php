@@ -12,7 +12,7 @@ class Config
     const client = [
       'client_radio'                => "https://21253.live.streamtheworld.com/WEB13_AAC.aac",
       'client_radio_play_seconds'   => 10000,
-      "nitro_path"                  => "https://client.devraizer.nl"
+      "nitro_path"                  => "https://client.habbo.ng"
     ];
   
     /**
@@ -22,8 +22,8 @@ class Config
      */
 
     const site = [
-      "domain"      => "https://cosmic.devraizer.nl",
-      "cpath"       => "https://client.devraizer.nl/assets",
+      "domain"      => "https://cosmic.habbo.ng",
+      "cpath"       => "https://cosmic.habbo.ng/assets",
       "fpath"       => "https://cdn.leet.ws/imaging/avatarimage",
       "shortname"   => "Cosmic",
       "sitename"    => "Cosmic"

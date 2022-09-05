@@ -20,7 +20,8 @@ class ValidationService
         $validation = $validator->validate(($post != null) ? $post : $_POST, $array);
         ($validation->fails()) ? response()->json([
             'status'   => 'error',
-            'message' => $validation->errors()->all()[0]
+            'message' => $validation->errors()->all()[0],
+            'inputField' => array_key_first($validation->errors()->firstOfAll()) ?? 'empty'
         ]) : true;
     }
 }

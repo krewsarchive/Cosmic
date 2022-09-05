@@ -2,6 +2,8 @@
 namespace Cosmic\System;
 
 use Cosmic\App\Config;
+use Cosmic\App\Models\Player;
+use Cosmic\System\SessionService;
 
 class LocaleService
 {
@@ -14,7 +16,8 @@ class LocaleService
      */
     public static function get($path = null, $all = false)
     {
-        require_once __DIR__.'/../App/Locale/'.Config::language.'.php';
+        $language = request()->player->lang ?? SessionService::get('lang');
+        require_once __DIR__.'/../App/Locale/'. strtoupper($language ?? Config::language) .'.php';
 
         if ($path) {
             $locale = $GLOBALS['language'];

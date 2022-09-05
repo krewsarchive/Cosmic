@@ -80,7 +80,7 @@ class Articles
         }
 
         Community::addNewsReaction($article->id, request()->player->id, $message);
-        response()->json(["status" => "success", "message" => LocaleService::get('core/notification/message_placed'), "bericht" => $message, "figure" => request()->player->look]);
+        response()->json(["status" => "success", "replacepage" => "/article/{$article->id}-{$article->slug}", "message" => LocaleService::get('core/notification/message_placed')]);
     }
 
     public function index($slug = null)
