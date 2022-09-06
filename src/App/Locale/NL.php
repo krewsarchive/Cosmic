@@ -65,7 +65,12 @@ $GLOBALS['language'] = array (
             'footer_terms'          => 'Algemene voorwaarden',
             'footer_privacy'        => 'Privacyverklaring',
             'footer_cookies'        => 'Cookie-beleid',
-            'footer_guide'          => 'Gids voor ouders'
+            'footer_guide'          => 'Gids voor ouders',
+          
+            'hotel_selector_flash_installed' => 'spelen op Flash? download nu de Flash desktop applicatie. Je zal dan de knop "Speel op Flash" zien!',
+            'hotel_selector_download_pc' => 'Download voor PC',
+            'hotel_selector_go_flash' => 'Go to Flash',
+            'hotel_selector_go_nitro' => 'Go to Ntiro'
         ),
 
         /*     public/assets/js/web     */

@@ -121,6 +121,8 @@
         <h5>{{locale_base.and_all}} {{site.shortname}}'s ♥</h5>
     </div>
 
+    
+  
     {% if player is empty %}
     <div id="login-dialog" class="login-popup zoom-anim-dialog mfp-hide">
         <h3 class="aside-title">Log in {{site.sitename}}</h3>
@@ -144,20 +146,22 @@
     </div>
     {% endif %}
     {% if player %}
-    <div id="report-item" class="payment-popup zoom-anim-dialog mfp-hide">
-        <button title="{{locale_base.close}}" type="button" class="mfp-close" style="color:#000">&#215;</button>
-        <h3 class="aside-title">{{locale_base.report_message}}</h3>
-        <p>
-            {{locale_base.report_certainty}}
-        </p>
-        <form action="/ajax/report/add" method="post" class="login-form" id="reportForm">
-
-            <p>
-                <button type="submit" class="rounded-button blue plain"
-                    id="reportItem">{{locale_base.report_inappropriate}}</button>
-                <input type="hidden" id="reportItemid" name="itemId" value="">
-            </p>
-        </form>
+    <div id="hotel-dialog" class="payment-popup zoom-anim-dialog mfp-hide">
+         {% for name,nitro in client.nitro %}
+         <div id="hotelbtn" class="nitro">
+            <a type="submit" id="hotelbtn" href="/hotel" data-link="{{name}}"  style="width: 100%;margin-bottom:10px" class="rounded-button blue plain hotel-button">{{nitro}}</a>
+          </div>
+         {% endfor %}
+         {% if client.flash.enabled %}
+      
+         <div class="native-hotel-launch__group">
+            <p class="native-hotel-launch__group__desc" translate="NATIVE_HOTEL_LAUNCH_DESCRIPTION">{{site.sitename}} {{locale_base.hotel_selector_flash_installed}}</p>
+         </div>
+      
+         <div id="hotelbtn" class="hotel-login-flash">
+            <a href="/flash" class="rounded-button blue plain" style="width: 100%;">{{locale_base.hotel_selector_go_flash}}</a>
+        </div>
+         {% endif %}
     </div>
     {% endif %}
 
@@ -176,7 +180,7 @@
                     <span>of</span>
                     <a href="/registration" class="rounded-button white plain">{{locale_base.header_register}}</a>
                     {% else %}
-                    <a href="/hotel" class="rounded-button white plain hotel-button nitroButton">{{locale_base.header_to}} {{site.sitename}}</a>
+                    <button class="rounded-button white plain hotel-button hotel-dialog-button">{{locale_base.header_to}} {{site.sitename}}</button>
                     <button class="rounded-button white plain">{{online_count}} {{site.sitename}}'s online</button>
                     {% endif %}
                 </div>

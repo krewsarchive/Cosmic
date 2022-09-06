@@ -10,10 +10,10 @@ use Cosmic\App\Models\Player;
 use Cosmic\App\Models\Room;
 
 use Cosmic\System\LocaleService;
-use Cosmic\System\ViewService;
 use Cosmic\System\TokenService;
 
 use Cosmic\App\Library\HotelApi;
+use Cosmic\System\ViewService;
 
 use GeoIp2\Database\Reader;
 use GeoIp2\Exception\AddressNotFoundException;
@@ -72,8 +72,13 @@ class Client
             $user->deleteMembership();
         }
 
-        ViewService::renderTemplate('base.html', [
-            'title' => LocaleService::get('core/title/hotel')
+        ViewService::renderTemplate('Client/hotel.html', [
+            'title' => LocaleService::get('core/title/hotel'),
+            'room' => explode("=", url()->getOriginalUrl())[1] ?? null,
+            'data'  => $this->data,
+            'client' => Config::client,
+            'site' => Config::site,
+            'page' => 'hotel'
         ]);
     }
 

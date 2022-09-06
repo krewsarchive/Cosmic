@@ -65,7 +65,12 @@ $GLOBALS['language'] = array (
             'footer_terms'          => 'Terms and Conditions',
             'footer_privacy'        => 'Privacy declaration',
             'footer_cookies'        => 'Cookie policy',
-            'footer_guide'          => 'Parents guide'
+            'footer_guide'          => 'Parents guide',
+          
+            'hotel_selector_flash_installed' => 'play on Flash? download now our Flash desktop application. You should see the "Play on Flash" button!',
+            'hotel_selector_download_pc' => 'Download voor PC',
+            'hotel_selector_go_flash' => 'Go to Flash',
+            'hotel_selector_go_nitro' => 'Go to Ntiro'
         ),
 
         /*     public/assets/js/web     */

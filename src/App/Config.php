@@ -12,7 +12,26 @@ class Config
     const client = [
       'client_radio'                => "https://21253.live.streamtheworld.com/WEB13_AAC.aac",
       'client_radio_play_seconds'   => 10000,
-      "nitro_path"                  => "https://client.habbo.ng"
+      "nitro" => [
+          "https://client.habbo.ng" => "Flash UI",
+          "https://test.habbo.ng" => "Modern UI"
+      ],
+      "flash" => [
+          'enabled' => true,
+          'pc_download_button'          => 'https://link',
+          'external_override_variables' => 'gamedata/override/external_override_variables.txt?v=4',
+          'external_override_texts'     => 'gamedata/override/external_flash_override_texts.txt?v=9',
+          'external_variables'          => 'gamedata/external_variables.txt?v=11',
+          'external_texts'              => 'gamedata/external_flash_texts.txt',
+          'external_figurepartlist'     => 'gamedata/figuredata.xml',
+          'external_figuremap'          => 'gordon/PRODUCTION-201904011212-888653470/figuremap.xml',
+          'external_productdata'        => 'gamedata/productdata.txt',
+          'external_figuredata'         => 'gamedata/furnidata.xml?v=5',
+          'external_base'               => 'gordon/PRODUCTION-201904011212-888653470',
+          'client_swf'                  => 'Habbo.swf',
+          'client_host'                 => '151.80.54.177',
+          'client_port'                 => 3000
+        ]
     ];
   
     /**
@@ -22,8 +41,8 @@ class Config
      */
 
     const site = [
-      "domain"      => "https://cosmic.habbo.ng",
-      "cpath"       => "https://cosmic.habbo.ng/assets",
+      "domain"      => "https://client.habbo.ng",
+      "cpath"       => "https://client.habbo.ng/assets",
       "fpath"       => "https://cdn.leet.ws/imaging/avatarimage",
       "shortname"   => "Cosmic",
       "sitename"    => "Cosmic"

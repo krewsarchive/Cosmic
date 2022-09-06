@@ -18,6 +18,7 @@ function WebHotelManagerInterface() {
         setInterval(function() {
             $("body").find(".client-buttons .client-count #count").load("/api/online");
         }, 120000);
+      
     };
 
     /*
@@ -46,8 +47,8 @@ function WebHotelManagerInterface() {
         this.hotel_url = argument;  
       
         body.find(".header-container .header-content .account-container .account-buttons .flashButton").text(Locale.web_hotel_backto);
-      
-        if (!body.hasClass("hotel-visible")) {
+        
+        if (!body.hasClass("hotel-svisible")) {
             Web.ajax_manager.get("/api/vote", function(result) {
                 
                 if (result.status != "voted" && Configuration.findretros === true) {
@@ -61,8 +62,8 @@ function WebHotelManagerInterface() {
                         if(argument != "") {
                             let argumentAction = argument.replace("hotel?room=", "&room=");
                         }
-                      
-                        container.prepend('<iframe id="nitro" class="client-frame" src="' + Client.nitro_path + '/?sso=' + result.ticket + argumentAction  + '"></iframe>');
+                     
+                        container.prepend('<iframe id="nitro" class="client-frame" src="' + $(".activeHotel").find(".hotel-button").data("link") + '/?sso=' + result.ticket + argumentAction  + '"></iframe>');
 
                         let frame = document.getElementById('nitro');
 

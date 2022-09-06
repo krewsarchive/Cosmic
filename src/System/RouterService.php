@@ -116,6 +116,7 @@ class RouterService extends Router
                     parent::get('/disconnect', 'Home\Lost@index')->setName('index.home');
 
                     parent::get('/hotel', 'Client\Client@hotel');
+                    parent::get('/flash', 'Client\Client@client');
                     parent::get('/client', 'Client\Client@client');
 
                     parent::get('/logout', 'Auth\Login@logout');
