@@ -49,6 +49,7 @@ function WebInterface() {
     };
 
     this.cosmic_theme = function () {
+        
         $("#hotelbtn").click(function() {
             $(this).addClass("activeHotel")
             $.magnificPopup.close();
@@ -57,8 +58,9 @@ function WebInterface() {
   
     this.ares_theme = function () {
       
-        $("#hotelbtn").click(function() {
+        $(".hotelbtn").click(function() {
             $(this).addClass("activeHotel")
+            $(".hotel-selector").hide();
         })
       
         $(".modal-hotel-button").click(function() {
