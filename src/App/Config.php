@@ -14,7 +14,7 @@ class Config
       'client_radio_play_seconds'   => 10000,
       "nitro" => [
           "https://client.habbo.ng" => "Flash UI",
-          "https://client2.habbo.ng" => "Modern UI"
+          "https://images.habtab.me/nitro-react" => "Modern UI"
       ],
       "flash" => [
           'enabled' => true,

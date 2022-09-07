@@ -50,7 +50,7 @@ function WebInterface() {
 
     this.cosmic_theme = function () {
         
-        $("#hotelbtn").click(function() {
+        $(".hotelbtn").click(function() {
             $(this).addClass("activeHotel")
             $.magnificPopup.close();
         }) 
