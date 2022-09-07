@@ -48,7 +48,7 @@ function WebHotelManagerInterface() {
       
         body.find(".header-container .header-content .account-container .account-buttons .flashButton").text(Locale.web_hotel_backto);
         
-        if (!body.hasClass("hotel-svisible")) {
+        if (!body.hasClass("hotel-visible")) {
             Web.ajax_manager.get("/api/vote", function(result) {
                 
                 if (result.status != "voted" && Configuration.findretros === true) {
