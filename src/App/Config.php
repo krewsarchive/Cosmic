@@ -41,8 +41,8 @@ class Config
      */
 
     const site = [
-      "domain"      => "https://client.habbo.ng",
-      "cpath"       => "https://client.habbo.ng/assets",
+      "domain"      => "https://cosmic.habbo.ng",
+      "cpath"       => "https://cosmic.habbo.ng/assets",
       "fpath"       => "https://cdn.leet.ws/imaging/avatarimage",
       "shortname"   => "Cosmic",
       "sitename"    => "Cosmic"
