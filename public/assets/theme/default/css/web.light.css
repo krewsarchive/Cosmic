@@ -2465,7 +2465,7 @@ input:-webkit-autofill {
 }
 
 .page-container[data-page="home"] .page-content .user_of_the_week {
-    background: url('/assets/images/web/pages/home/oftw_background.png');
+    background: url('/assets/theme/default/images/web/pages/home/oftw_background.png');
     background-size: cover;
     width: 60px;
     height: 60px;
