@@ -148,9 +148,9 @@
     {% if player %}
     <div id="hotel-dialog" class="payment-popup zoom-anim-dialog mfp-hide">
          {% for name,nitro in client.nitro %}
-           <div id="hotelbtn" class="hotelbtn {{nitro}}">
-              <a href="/hotel" data-link="{{name}}" class="button btn-success modal-btn-select-avatar hotel-button" texttransform="uppercase" style="padding: 20px 90px;width: 282px;">{{nitro}}</a>
-           </div>
+         <div id="hotelbtn" class="hotelbtn">
+            <a type="submit" id="hotelbtn" href="/hotel" data-link="{{name}}"  style="width: 100%;margin-bottom:10px" class="rounded-button blue plain hotel-button">{{nitro}}</a>
+          </div>
          {% endfor %}
          {% if client.flash.enabled %}
       
