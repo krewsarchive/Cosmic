@@ -1,0 +1,121 @@
+/* Login popup */
+h1 {
+  color: grey;
+}
+
+h4 {
+  color: grey;
+}
+
+h5 {
+  color: grey;
+}
+h6 {
+  color: grey;
+}
+
+.login-popup {
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    background-color: #fff;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    position: relative;
+    padding: 37px 50px 50px 325px;
+    width: auto;
+    max-width: 645px;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.login-popup:before,
+.login-popup:after {
+    -webkit-border-radius: 192px / 290px;
+    -moz-border-radius: 192px / 290px;
+    border-radius: 192px / 290px;
+    width: 385px;
+    height: 580px;
+    position: absolute;
+    content: "";
+    top: 0;
+    display: block;
+    bottom: 0;
+    margin: auto;
+}
+
+.login-popup:before {
+    background-image: url(../images/web/big-banner.png);
+    background-position: -435px -67px;
+    left: -95px;
+}
+
+.login-popup:after {
+    background-color: rgba(99, 99, 99, 0.65);
+    background-position: 40px center;
+    background-repeat: no-repeat;
+    left: -94px;
+}
+
+.login-popup h3 {
+    margin-bottom: 30px;
+	color: #4e4e4e;
+}
+
+.login-popup .login-form .username-input,
+.login-popup .login-form .password-input,
+.login-popup .login-form .code-input {
+    position: relative;
+    display: block;
+}
+
+.login-popup .login-form .username-input i,
+.login-popup .login-form .password-input i {
+    font-size: 18px;
+    font-weight: bold;
+    color: #b4b4b4;
+    position: absolute;
+    top: 8px;
+    right: 18px;
+    cursor: text;
+    display: block;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+}
+
+.login-popup .login-form .username-input i:before,
+.login-popup .login-form .password-input i:before {
+    font-size: 18px;
+}
+
+.login-popup .login-form .code-input span.google-authenticator {
+    background-image: url(../images/web/login-google-authenticator.png);
+    width: 23px;
+    height: 23px;
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+.login-popup .login-form .rounded-input {
+    padding-right: 40px;
+    margin-bottom: 15px;
+}
+
+.login-popup .login-form .rounded-input:focus~i {
+    color: #138cc8;
+}
+
+.login-popup .login-form .claim-password {
+    display: block;
+    text-align: right;
+    font-style: italic;
+    font-size: 12px;
+    margin: -10px 0 25px;
+}
+
+.login-popup .login-form .rounded-button {
+    display: block;
+    width: 100%;
+}
