@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 {% block body %}
-<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-
-<header class="page-header flex-container flex-vertical-center">
-   <div class="page-header-content">
-        <h1>{{locale.title_draw}}</h1>
-        {{locale.draw_desc}}
-   </div>
-</header>
-<div class="page-content">
-   <div class="left-side">
-      <article class="default-section" style="min-height: 456px;">
-         <div class="aside-title-content">Draw something</div>
-         <div class="aside-content">
-            <div id="avatarbox">
-               <div class="uusername" style="font-size: 12px;margin-top: 13px;margin-left: 30px;color: #FFF;">{{player.username}}</div>
-               <div class="aavatara" style="float: left;background: url('{{site.fpath}}?figure={{player.look}}&amp;action=wav&amp;gesture=sml&amp;direction=4&amp;head_direction=3&amp;size=n&amp;headonly=0&amp;img_format=png') no-repeat;width: 60px;height: 120px;margin-left: 15px;margin-top: 10px;"></div>
-               <div class="preview" style="float: left; margin-left: 15px; margin-top: 7px; width: 42px; height: 42px;"></div>
-               <div class="tip-container">
+<div id="me" class="page-me animate__animated animate__fadeIn" style="display: flex;">
+   <div class="d-flex" justifycontent="center" alignitems="center" width="100">
+      <div class="d-flex" justifycontent="space-between" width="responsive">
+         <div class="left-side d-flex" flexdirection="column">
+            <div class="page-header d-flex" alignitems="center">
+               <div class="page-icon d-flex" justifycontent="center" alignitems="center">
+                  <i class="icon --home"></i>
+               </div>
+               <div class="d-flex" flexdirection="column">
+                  <span class="page-title" weight="500">{{locale.title_draw}}</span>
+                  <p class="page-description">{{locale.draw_desc}}</p>
+               </div>
+            </div>
+          <div id="avatarbox">
+                  <div class="uusername" style="font-size: 12px;margin-top: 13px;margin-left: 30px;color: #FFF;">{{player.username}}</div>
+                  <div class="aavatara" style="float: left;background: url('{{site.fpath}}?figure={{player.look}}&amp;action=wav&amp;gesture=sml&amp;direction=4&amp;head_direction=3&amp;size=n&amp;headonly=0&amp;img_format=png') no-repeat;width: 65px;height: 120px;margin-left: 15px;margin-top: 10px;"></div>
+                  <div class="preview" style="float: left; margin-left: 15px; margin-top: 4px; width: 241px; height: 241px;"></div>
+                  <div class="tip-container">
                      <div class="icon-eraser">
                         <svg width="42px" height="42px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -83,22 +83,28 @@
                            </g>
                         </svg>
                      </div>
-                     <div class="tip">Shift + Click to Erase</div>
                   </div>
-           </div>
-            <div class="table-container">
-               <table style="margin: 0 auto;border-collapse: collapse;background-color: white;border: 4px solid black;box-shadow: 7px 7px 0 0;" id="pixelCanvas"></table>
+               </div>
+               <div class="table-container">
+                  <table style="margin: 0 auto;border-collapse: collapse;background-color: white;border: 4px solid black;box-shadow: 7px 7px 0 0;" id="pixelCanvas"></table>
+               </div>
             </div>
-         </div>
-      </article>
-   </div>
-   <div class="right-side">
-      <aside class="default-section">
-         <div class="aside-title-content">Draw tools</div>
-         <div class="aside-content">
+         
+         <div class="right-side d-flex" flexdirection="column">
+            <div class="updates col-lg d-flex" flexdirection="column">
+               <div class="page-header d-flex" alignitems="center">
+                  <div class="page-icon d-flex" justifycontent="center" alignitems="center">
+                     <i class="icon --cannon"></i>
+                  </div>
+                  <div class="d-flex" flexdirection="column">
+                     <span class="page-title" weight="500">Kies je kleur</span>
+                     <p class="page-description">Kies hier de kleur van het potlood waarmee je de badge kan kleuren</p>
+                  </div>
+               </div>
+              
             <div class="clearfix">
-               <div class="menu-container" >
-                  <div class="menu"style="padding-top:10px">
+               <div class="menu-container-drawbadge" >
+                  <div class="menu-drawbadge"style="padding-top:10px">
                      <div class="color-selector">
                         <div class="palette">
                            <div class="palette-color pink"></div>
@@ -119,7 +125,7 @@
                            <div class="color-icon">
                               <svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="color" fill="#000000">
+                                    <g id="color" fill="#fff">
                                        <rect id="Rectangle-4" x="12" y="3" width="3" height="15"></rect>
                                        <rect id="Rectangle-4" x="24" y="3" width="3" height="18"></rect>
                                        <rect id="Rectangle-4" x="15" y="0" width="3" height="3"></rect>
@@ -159,8 +165,8 @@
                                  </g>
                               </svg>
                            </div>
-                           <input type="color" id="colorPicker" value="#F5EC9D">
-                           <input type="submit" value="add" id="colorPickerSubmit">
+                           <input type="color" id="colorPicker" value="#BBBBBB">
+                           <input type="submit" value="Toevoegen" id="colorPickerSubmit">
                         </div>
                      </div>
                      <div class="grid-toggle">
@@ -170,22 +176,26 @@
                      </div>
                   </div>
                </div>
-              <section style="display:none" id="img"><img /></section>
-              <section id="canvas" style="display:none"><canvas /></section>
+               <section style="display:none" id="img"><img /></section>
+               <section id="canvas" style="display:none">
+                  <canvas />
+               </section>
                <style>
                   #preview td {
                   border: 0;
                   }
                </style>
             </div>
+               
          </div>
-      </aside>
+      </div>
    </div>
 </div>
 <style>
    #avatarbox {
-   background: url('/assets/theme/default/images/avatarbox.png');
-   width: 199px;
+   margin-top: 16px;
+   background: url('/assets/theme/default/images/web/avatarbox.png') no-repeat;
+   width: 400px;
    height: 180px;
    float: right;
    }
@@ -232,19 +242,18 @@
    .nude2 {
    background-color: #ffc890;
    }
-   .menu-container {
+   .menu-container-drawbadge {
    position:relative;
    }
-   .menu {
+   .menu-drawbadge {
    margin: 0 auto;
    margin-bottom: 1.2em;
    min-width: 100px;
    width: 95%;
    min-height: 300px;
-   background-color: white;
+   background-color: #373737;
    border: 4px solid black;
    box-shadow: 7px 7px 0 0;
-   font-family: "Press Start 2P", monospace; 
    font-size: 11px;
    }
    .clearfix::after {
@@ -264,17 +273,18 @@
    background-color: #fff;
    }
    #pixelCanvas td.pixel:hover {
-   box-shadow: 38px 38px rgba(0,0,0,0.1) inset;
+   box-shadow: 38px 38px rgba(0,0,0,0.35) inset;
    }
    .table-container {
-   position: relative;
-   width:70%;
+    position: absolute;
+    margin-top: 100px;
+    width: 50%;
    }
    #pixelCanvas tr {
-   height: 20px;
+   height: 18px;
    }
    #pixelCanvas td {
-   width: 19px;
+   width: 18px;
    }
    table.pixel-canvas-nogrid td {
    border-color: transparent !important;
@@ -293,11 +303,13 @@
    vertical-align: middle;
    }
    #colorPicker {
-   width: 5em;
+   width: 35px;
+   height: 35px;
    display: inline-block;
    }
    #colorPickerSubmit {
-   width: 6em;
+   width: 100px;
+   height: 30px;
    display: inline-block;
    }
    .color-icon {
@@ -309,16 +321,15 @@
    input[type=submit] {
    width: 88%;
    height: 42px;
-   background-color: #F5EC9D;
+   background-color: #5b5b5b;
    border: 3px solid #000;
    box-shadow: 4px 4px 0 0;
-   font-family: 'Press Start 2P', monospace;
    font-size: 0.9em;
    text-transform: lowercase;
    margin-bottom: 10px;
    }
    input[type=submit]:hover {
-   background-color: #fcf5c1;
+   background-color: #282828;
    }
    input[type=submit]:focus {
    outline: none;
@@ -334,7 +345,6 @@
    margin:0;
    margin-bottom: 12px;
    padding-left: 4px;
-   font-family: 'VT323', monospace;
    font-size: 1.5em;
    }
    .grid-input {
@@ -354,7 +364,6 @@
    width: 20%;
    }
    .small-text {
-   font-family: 'Press Start 2P', monospace;
    font-size: 1em;
    line-height: 30px;
    }
@@ -367,7 +376,6 @@
    }
    .tip {
    display: inline-block;
-   font-family: 'Press Start 2P', monospace;
    font-size: 0.7em;
    line-height: 1.6em;
    width: 65%;
@@ -400,7 +408,6 @@
    margin-left:20px;
    margin-bottom: 25px;
    }
-   /*modified checkbox styling from https://www.w3schools.com/howto/howto_css_custom_checkbox.asp*/
    .label-container {
    display: block;
    position: relative;
@@ -414,13 +421,11 @@
    -ms-user-select: none;
    user-select: none;
    }
-   /* Hide the browser's default checkbox */
    .label-container input {
    position: absolute;
    opacity: 0;
    cursor: pointer;
    }
-   /* Create a custom checkbox */
    .checkmark {
    position: absolute;
    top: 0;
@@ -429,21 +434,17 @@
    width: 25px;
    border: 3px solid black;
    }
-   /* On mouse-over, add a yellow background color */
    .label-container:hover input ~ .checkmark {
    background-color: #F5EC9D;
    }
-   /* Create the checkmark/indicator (hidden when not checked) */
    .checkmark:after {
    content: "";
    position: absolute;
    display: none;
    }
-   /* Show the checkmark when checked */
    .label-container input:checked ~ .checkmark:after {
    display: block;
    }
-   /* Style the checkmark/indicator */
    .label-container .checkmark:after {
    left: 9px;
    top: 5px;
@@ -455,21 +456,18 @@
    -ms-transform: rotate(45deg);
    transform: rotate(45deg);
    }
-   /*Add some responsivness */
    @media screen and (max-width: 720px) {
-   .table-container, .menu-container {
+   .table-container, .menu-container-drawbadge {
    float: none;
    width: 100%;
    margin-bottom: 2em;
    }
-   .menu {
+   .menu-drawbadge {
    width: 90%;
    }
    .tip-container {
    width: 90%;
    }
 </style>
-<script>
 
-</script>
 {% endblock %}
