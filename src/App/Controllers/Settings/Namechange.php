@@ -37,7 +37,7 @@ class Namechange
         HotelApi::execute('changeusername', array('user_id' => request()->player->id));
         HotelApi::execute('givepoints', array('user_id' => request()->player->id, 'points' => - $amount + $amount - $this->settings->namechange_price, 'type' => $this->settings->namechange_currency_type));
       
-        response()->json(["status" => "success", "replacepage" => "/client"]);
+        response()->json(["status" => "success", "message" => "Success!"]);
     }
 
     public function availability()
