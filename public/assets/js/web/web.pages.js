@@ -523,6 +523,24 @@ function WebPageHelpRequestsInterface(main_page) {
     this.init = function() {
         var page_container = this.main_page.get_page_container();
 
+        page_container.find(".open-ticket").click(function() {
+            $(".ticket-selector").addClass("is-visible");
+        })
+      
+        page_container.find(".modal-close").click(function() {
+            $("#ticket-selector").removeClass("is-visible")
+        });
+      
+        page_container.find(".openTicket").click(function() {
+          
+            const form = {
+                subject: $(".modal-body #title").val(),
+                message:  $(".modal-body #message").val()
+            };
+            
+            Web.ajax_manager.post("/help/requests/create", form);
+        });
+      
         // Init type select
         page_container.find(".selectric").selectric({
             theme: "web"
