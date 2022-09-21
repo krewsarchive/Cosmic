@@ -87,7 +87,7 @@ class Requests
         $this->data->message = Helper::filterString(input('message'));
 
         Help::createTicket($this->data, request()->player->id, getIpAddress());
-        response()->json(["status" => "success", "message" => LocaleService::get('help/ticket_created'), "replacepage" => "help/requests/view"]);
+        response()->json(["status" => "success", "message" => LocaleService::get('core/notification/message_placed'), "replacepage" => "help/requests/" . $ticket->id . "/view"]);
     }
 
     public function index()
