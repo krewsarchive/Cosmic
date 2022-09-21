@@ -28,7 +28,6 @@
 }
 #hoverable-dropdown:hover #hoverable-dropdown-content
 {
-	z-index: 1000;
 	opacity: 1;
 	visibility: visible!important;
 }
