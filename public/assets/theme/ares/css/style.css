@@ -12,7 +12,6 @@
 }
 #clickable-dropdown,#hoverable-dropdown
 {
-	z-index: 2;
 }
 #clickable-dropdown #clickable-dropdown-content,.d-none
 {
