@@ -12,6 +12,8 @@
 }
 #clickable-dropdown,#hoverable-dropdown
 {
+	position: relative;
+	display: inline-block;
 }
 #clickable-dropdown #clickable-dropdown-content,.d-none
 {
@@ -25,6 +27,7 @@
 {
 	opacity: 0;
 	visibility: hidden!important;
+	z-index: 1;
 }
 #hoverable-dropdown:hover #hoverable-dropdown-content
 {
