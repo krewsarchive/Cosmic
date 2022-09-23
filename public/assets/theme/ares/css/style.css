@@ -14,6 +14,7 @@
 {
 	position: relative;
 	display: inline-block;
+	z-index: 5;
 }
 #clickable-dropdown #clickable-dropdown-content,.d-none
 {
