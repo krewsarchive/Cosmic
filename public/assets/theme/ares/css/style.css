@@ -14,7 +14,6 @@
 {
 	position: relative;
 	display: inline-block;
-	z-index: 5;
 }
 #clickable-dropdown #clickable-dropdown-content,.d-none
 {
@@ -2989,6 +2988,7 @@ header nav .right-nav .user-menu .user-menu-list
 	left: -1px;
 	padding: 10px;
 	width: 101%;
+	z-index: 5;
 }
 header nav .right-nav .user-menu .user-menu-list a
 {
@@ -3197,6 +3197,7 @@ header nav .right-nav .user-menu .user-menu-list a
 	right: 8px;
 	top: 13px;
 	width: 65px;
+	z-index: 5;
 }
 .select-language .other-languages
 {
