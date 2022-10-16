@@ -63,7 +63,12 @@ function WebHotelManagerInterface() {
                             let argumentAction = argument.replace("hotel?room=", "&room=");
                         }
                      
-                        container.prepend('<iframe id="nitro" class="client-frame" src="' + $(".activeHotel").find(".hotel-button").data("link") + '/?sso=' + result.ticket + argumentAction  + '"></iframe>');
+                        if($(".activeHotel").is("div")) {
+                            container.prepend('<iframe id="nitro" class="client-frame" src="' + $(".activeHotel").find(".hotel-button").data("link") + '/?sso=' + result.ticket + argumentAction  + '"></iframe>');
+                            localStorage.setItem('client', $(".activeHotel").find(".hotel-button").data("link") + '/?sso=' + result.ticket + argumentAction);
+                        } else {
+                            container.prepend('<iframe id="nitro" class="client-frame" src="' + localStorage.getItem('client')  + '"></iframe>');
+                        }
 
                         let frame = document.getElementById('nitro');
 
