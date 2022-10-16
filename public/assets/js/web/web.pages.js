@@ -64,11 +64,10 @@ function WebHotelManagerInterface() {
                         }
                      
                         if($(".activeHotel").is("div")) {
-                            container.prepend('<iframe id="nitro" class="client-frame" src="' + $(".activeHotel").find(".hotel-button").data("link") + '/?sso=' + result.ticket + argumentAction  + '"></iframe>');
                             localStorage.setItem('client', $(".activeHotel").find(".hotel-button").data("link") + '/?sso=' + result.ticket + argumentAction);
-                        } else {
-                            container.prepend('<iframe id="nitro" class="client-frame" src="' + localStorage.getItem('client')  + '"></iframe>');
                         }
+                      
+                        container.prepend('<iframe id="nitro" class="client-frame" src="' + localStorage.getItem('client') + '/?sso=' + result.ticket + argumentAction  + '"></iframe>');
 
                         let frame = document.getElementById('nitro');
 
