@@ -64,7 +64,7 @@ function WebHotelManagerInterface() {
                         }
                      
                         if($(".activeHotel").is("div")) {
-                            localStorage.setItem('client', $(".activeHotel").find(".hotel-button").data("link") + '/?sso=' + result.ticket + argumentAction);
+                            localStorage.setItem('client', $(".activeHotel").find(".hotel-button").data("link"));
                         }
                       
                         container.prepend('<iframe id="nitro" class="client-frame" src="' + localStorage.getItem('client') + '/?sso=' + result.ticket + argumentAction  + '"></iframe>');
